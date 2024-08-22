@@ -1,34 +1,100 @@
 package puj.desarrolloweb.proyecto.model;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.*;
 
 @Entity
 public class Conductor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany (mappedBy = "conductorRel")
+    @OneToMany(mappedBy = "conductorRel")
     private List<RelacionBusRutaConductor> relacionBusRutaConductorLista;
 
     @Column(name = "cedula", nullable = false, unique = true)
     private Long cedula;
 
     @Column(name = "nombre", nullable = false)
-    //@NotBlank(message = "no puede estar en blanco")
     private String nombre;
 
     @Column(name = "telefono", nullable = false)
-    //@NotBlank(message = "no puede estar en blanco")
     private Long telefono;
 
     @Column(name = "direccion", nullable = false)
-    //@NotBlank(message = "no puede estar en blanco")
     private String direccion;
 
     @Column(name = "buses_asignados", nullable = false)
-    //@NotBlank(message = "no puede estar en blanco")
     private int buses_asignados;
+
+    public Conductor() {
+        // Constructor vacío necesario para JPA
+    }
+
+    public Conductor(Long cedula, String nombre, Long telefono, String direccion) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.relacionBusRutaConductorLista = new ArrayList<>();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<RelacionBusRutaConductor> getRelacionBusRutaConductorLista() {
+        return relacionBusRutaConductorLista;
+    }
+
+    public void setRelacionBusRutaConductorLista(List<RelacionBusRutaConductor> relacionBusRutaConductorLista) {
+        this.relacionBusRutaConductorLista = relacionBusRutaConductorLista;
+    }
+
+    public Long getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(Long cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Long getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(Long telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public int getBuses_asignados() {
+        return buses_asignados;
+    }
+
+    public void setBuses_asignados(int buses_asignados) {
+        this.buses_asignados = buses_asignados;
+    }
 }
