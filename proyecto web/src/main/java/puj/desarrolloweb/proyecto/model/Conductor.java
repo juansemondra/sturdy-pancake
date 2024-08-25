@@ -30,8 +30,8 @@ public class Conductor {
     @Column(name = "buses_asignados", nullable = false)
     private int buses_asignados;
 
+      // Constructor vacío necesario para JPA
     public Conductor() {
-        // Constructor vacío necesario para JPA
     }
 
     public Conductor(Long cedula, String nombre, Long telefono, String direccion) {
@@ -41,7 +41,7 @@ public class Conductor {
         this.direccion = direccion;
         this.relacionBusRutaConductorLista = new ArrayList<>();
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -97,4 +97,10 @@ public class Conductor {
     public void setBuses_asignados(int buses_asignados) {
         this.buses_asignados = buses_asignados;
     }
+        // Método addBRC para agregar una nueva relación a la lista
+        public void addBRC(RelacionBusRutaConductor relacion) {
+            this.relacionBusRutaConductorLista.add(relacion);
+            relacion.setConductorRel(this); // Esto asegura que la relación esté correctamente enlazada al conductor
+        }
+
 }

@@ -67,4 +67,5 @@ public class RelacionBusRutaConductor {
     public void setFecha_disponible(String fecha_disponible) {
         this.fecha_disponible = fecha_disponible;
     }
+
 }
