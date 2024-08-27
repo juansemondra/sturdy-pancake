@@ -1,66 +1,114 @@
-package puj.desarrolloweb.proyecto.Controller;
+package puj.desarrolloweb.proyecto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import puj.desarrolloweb.proyecto.model.Conductor;
 import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
-import puj.desarrolloweb.proyecto.Service.ConductorService;
+import puj.desarrolloweb.proyecto.service.ConductorService;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/conductores")
+@Controller
+@RequestMapping("/conductores")
 public class ConductorController {
 
     @Autowired
     private ConductorService conductorService;
 
-    // Obtener todos los conductores
+    // Métodos para manejar vistas
     @GetMapping
-    public List<Conductor> getAllConductores() {
+    public String getAllConductores(Model model) {
+        List<Conductor> conductores = conductorService.findAll();
+        model.addAttribute("conductores", conductores);
+        return "conductores";
+    }
+
+    @GetMapping("/nuevo")
+    public String showCreateForm(Model model) {
+        Conductor conductor = new Conductor();
+        model.addAttribute("conductor", conductor);
+        return "crear_conductor";
+    }
+
+    @PostMapping("/guardar")
+    public String saveConductor(@ModelAttribute("conductor") Conductor conductor) {
+        conductorService.save(conductor);
+        return "redirect:/conductores";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Optional<Conductor> conductorOpt = conductorService.findById(id);
+        if (conductorOpt.isPresent()) {
+            model.addAttribute("conductor", conductorOpt.get());
+            return "editar_conductor";
+        } else {
+            return "redirect:/conductores";
+        }
+    }
+
+    @PostMapping("/actualizar/{id}")
+    public String updateConductorView(@PathVariable Long id, @ModelAttribute("conductor") Conductor conductor) {
+        conductor.setId(id);
+        conductorService.updateConductor(conductor);
+        return "redirect:/conductores";
+    }
+
+    @PostMapping("/eliminar/{id}")
+    public String deleteConductorView(@PathVariable Long id) {
+        conductorService.deleteById(id);
+        return "redirect:/conductores";
+    }
+
+    // Métodos para manejar APIs RESTful
+    @GetMapping("/api")
+    @ResponseBody
+    public List<Conductor> getAllConductoresApi() {
         return conductorService.findAll();
     }
 
-    // Obtener un conductor por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Conductor> getConductorById(@PathVariable Long id) {
+    @GetMapping("/api/{id}")
+    @ResponseBody
+    public ResponseEntity<Conductor> getConductorByIdApi(@PathVariable Long id) {
         Optional<Conductor> conductorOpt = conductorService.findById(id);
         return conductorOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Crear un nuevo conductor
-    @PostMapping
-    public Conductor createConductor(@RequestBody Conductor conductor) {
+    @PostMapping("/api")
+    @ResponseBody
+    public Conductor createConductorApi(@RequestBody Conductor conductor) {
         return conductorService.save(conductor);
     }
 
-    // Actualizar un conductor existente
-    @PutMapping("/{id}")
-    public ResponseEntity<Conductor> updateConductor(@PathVariable Long id, @RequestBody Conductor conductor) {
+    @PutMapping("/api/{id}")
+    @ResponseBody
+    public ResponseEntity<Conductor> updateConductorApi(@PathVariable Long id, @RequestBody Conductor conductor) {
         conductor.setId(id);
         Conductor updatedConductor = conductorService.updateConductor(conductor);
         return ResponseEntity.ok(updatedConductor);
     }
 
-    // Eliminar un conductor
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteConductor(@PathVariable Long id) {
+    @DeleteMapping("/api/{id}")
+    @ResponseBody
+    public ResponseEntity<Void> deleteConductorApi(@PathVariable Long id) {
         conductorService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-    // Asignar un bus a un conductor con días específicos
-    @PostMapping("/{id}/asignar-bus")
-    public ResponseEntity<Conductor> asignarBus(@PathVariable Long id, @RequestParam Long busId, @RequestParam String diasAsignados) {
+    @PostMapping("/api/{id}/asignar-bus")
+    @ResponseBody
+    public ResponseEntity<Conductor> asignarBusApi(@PathVariable Long id, @RequestParam Long busId, @RequestParam String diasAsignados) {
         Conductor conductor = conductorService.asignarBus(id, busId, diasAsignados);
         return ResponseEntity.ok(conductor);
     }
 
-    // Obtener todos los buses, rutas y horarios asignados a un conductor
-    @GetMapping("/{id}/buses-rutas-horarios")
-    public List<RelacionBusRutaConductor> getBusesRutasHorarios(@PathVariable Long id) {
+    @GetMapping("/api/{id}/buses-rutas-horarios")
+    @ResponseBody
+    public List<RelacionBusRutaConductor> getBusesRutasHorariosApi(@PathVariable Long id) {
         return conductorService.findBusesRutasHorariosByConductor(id);
     }
 }

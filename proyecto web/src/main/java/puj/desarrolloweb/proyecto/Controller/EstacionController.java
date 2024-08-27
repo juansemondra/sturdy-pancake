@@ -1,10 +1,10 @@
-package puj.desarrolloweb.proyecto.Controller;
+package puj.desarrolloweb.proyecto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import puj.desarrolloweb.proyecto.model.Estacion;
-import puj.desarrolloweb.proyecto.Service.EstacionService;
+import puj.desarrolloweb.proyecto.service.EstacionService;
 
 import java.util.List;
 import java.util.Optional;

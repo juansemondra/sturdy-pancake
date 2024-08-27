@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Editar Conductor</title>
+  </head>
+  <body>
+    <h1>Editar Conductor</h1>
+    <form
+      th:action="@{/conductores/actualizar/{id}(id=${conductor.id})}"
+      method="post"
+    >
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          th:value="${conductor.nombre}"
+        />
+      </div>
+      <div>
+        <label for="cedula">Cédula:</label>
+        <input
+          type="text"
+          id="cedula"
+          name="cedula"
+          th:value="${conductor.cedula}"
+        />
+      </div>
+      <div>
+        <label for="telefono">Teléfono:</label>
+        <input
+          type="text"
+          id="telefono"
+          name="telefono"
+          th:value="${conductor.telefono}"
+        />
+      </div>
+      <div>
+        <label for="direccion">Dirección:</label>
+        <input
+          type="text"
+          id="direccion"
+          name="direccion"
+          th:value="${conductor.direccion}"
+        />
+      </div>
+      <div>
+        <button type="submit">Guardar</button>
+      </div>
+    </form>
+  </body>
+</html>

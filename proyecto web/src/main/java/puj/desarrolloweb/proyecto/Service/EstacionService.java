@@ -1,4 +1,4 @@
-package puj.desarrolloweb.proyecto.Service;
+package puj.desarrolloweb.proyecto.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
