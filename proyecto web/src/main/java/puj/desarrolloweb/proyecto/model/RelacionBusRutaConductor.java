@@ -28,6 +28,13 @@ public class RelacionBusRutaConductor {
         // Constructor vacío necesario para JPA
     }
 
+    public RelacionBusRutaConductor (Bus bus, Ruta rut, Conductor con){
+        this.rutaRel = rut;
+        this.busRel = bus;
+        this.conductorRel = con;
+        this.fecha_disponible = rut.getDias_disponibles();
+    }
+
     public Long getId() {
         return id;
     }

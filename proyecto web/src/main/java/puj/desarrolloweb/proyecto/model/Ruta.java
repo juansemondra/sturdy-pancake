@@ -102,7 +102,7 @@ public class Ruta {
         this.estaciones.add(estacion);
     }
 
-    public void addRelBRC(RelacionBusRutaConductor BRC) {
+    public void addBRC(RelacionBusRutaConductor BRC) {
         this.relacionBusRutaConductorLista.add(BRC);
     }
 }

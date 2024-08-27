@@ -1,6 +1,7 @@
 package puj.desarrolloweb.proyecto.init;
 
 import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -92,6 +93,7 @@ public class DBInitializer implements CommandLineRunner {
         Ruta ruta_F61 = new Ruta("F61", "LMXJVSD");
         Ruta ruta_G11 = new Ruta("G11", "LMXJVSD");
         Ruta ruta_G12 = new Ruta("G12", "LMXJVSD");
+        Ruta ruta_G15 = new Ruta("G15", "LMXJVSD");
         Ruta ruta_G22 = new Ruta("G22", "LMXJVSD");
         Ruta ruta_G30 = new Ruta("G30", "LMXJVSD");
         Ruta ruta_G41 = new Ruta("G41", "LMXJVSD");
@@ -150,6 +152,7 @@ public class DBInitializer implements CommandLineRunner {
             Estacion calle34 = new Estacion("Calle 34", "A");
             Estacion calle26 = new Estacion("Calle 26", "A");
             Estacion calle22 = new Estacion("Calle 22", "A");
+            Estacion calle19 = new Estacion("Calle 19", "A");
             Estacion tercerMilenio = new Estacion("Tercer Milenio", "A");
 
             //Zona B
@@ -418,154 +421,6 @@ public class DBInitializer implements CommandLineRunner {
         Bus bus98 = new Bus("XYZ234", "Volvo 7900");
         Bus bus99 = new Bus("ABD567", "Scania K320");
         Bus bus100 = new Bus("CDE890", "Mercedes-Benz O500");
-        Bus bus101 = new Bus("FGH123", "BRT");
-        Bus bus102 = new Bus("IJK456", "Volvo 7900");
-        Bus bus103 = new Bus("LMN789", "Scania K320");
-        Bus bus104 = new Bus("OPQ012", "Mercedes-Benz O500");
-        Bus bus105 = new Bus("RST345", "BRT");
-        Bus bus106 = new Bus("UVW678", "Volvo 7900");
-        Bus bus107 = new Bus("XYZ901", "Scania K320");
-        Bus bus108 = new Bus("ABD234", "Mercedes-Benz O500");
-        Bus bus109 = new Bus("CDE567", "BRT");
-        Bus bus110 = new Bus("FGH890", "Volvo 7900");
-        Bus bus111 = new Bus("IJK123", "Scania K320");
-        Bus bus112 = new Bus("LMN456", "Mercedes-Benz O500");
-        Bus bus113 = new Bus("OPQ789", "BRT");
-        Bus bus114 = new Bus("RST012", "Volvo 7900");
-        Bus bus115 = new Bus("UVW345", "Scania K320");
-        Bus bus116 = new Bus("XYZ678", "Mercedes-Benz O500");
-        Bus bus117 = new Bus("ABD901", "BRT");
-        Bus bus118 = new Bus("CDE234", "Volvo 7900");
-        Bus bus119 = new Bus("FGH567", "Scania K320");
-        Bus bus120 = new Bus("IJK890", "Mercedes-Benz O500");
-        Bus bus121 = new Bus("LMN123", "BRT");
-        Bus bus122 = new Bus("OPQ456", "Volvo 7900");
-        Bus bus123 = new Bus("RST789", "Scania K320");
-        Bus bus124 = new Bus("UVW012", "Mercedes-Benz O500");
-        Bus bus125 = new Bus("XYZ345", "BRT");
-        Bus bus126 = new Bus("ABD678", "Volvo 7900");
-        Bus bus127 = new Bus("CDE901", "Scania K320");
-        Bus bus128 = new Bus("FGH234", "Mercedes-Benz O500");
-        Bus bus129 = new Bus("IJK567", "BRT");
-        Bus bus130 = new Bus("LMN890", "Volvo 7900");
-        Bus bus131 = new Bus("OPQ123", "Scania K320");
-        Bus bus132 = new Bus("RST456", "Mercedes-Benz O500");
-        Bus bus133 = new Bus("UVW789", "BRT");
-        Bus bus134 = new Bus("XYZ012", "Volvo 7900");
-        Bus bus135 = new Bus("ABD345", "Scania K320");
-        Bus bus136 = new Bus("CDE678", "Mercedes-Benz O500");
-        Bus bus137 = new Bus("FGH901", "BRT");
-        Bus bus138 = new Bus("IJK234", "Volvo 7900");
-        Bus bus139 = new Bus("LMN567", "Scania K320");
-        Bus bus140 = new Bus("OPQ890", "Mercedes-Benz O500");
-        Bus bus141 = new Bus("RST123", "BRT");
-        Bus bus142 = new Bus("UVW456", "Volvo 7900");
-        Bus bus143 = new Bus("XYZ789", "Scania K320");
-        Bus bus144 = new Bus("ABD012", "Mercedes-Benz O500");
-        Bus bus145 = new Bus("CDE345", "BRT");
-        Bus bus146 = new Bus("FGH678", "Volvo 7900");
-        Bus bus147 = new Bus("IJK901", "Scania K320");
-        Bus bus148 = new Bus("LMN234", "Mercedes-Benz O500");
-        Bus bus149 = new Bus("OPQ567", "BRT");
-        Bus bus150 = new Bus("RST890", "Volvo 7900");
-        Bus bus151 = new Bus("UVW123", "Scania K320");
-        Bus bus152 = new Bus("XYZ456", "Mercedes-Benz O500");
-        Bus bus153 = new Bus("ABD789", "BRT");
-        Bus bus154 = new Bus("CDE012", "Volvo 7900");
-        Bus bus155 = new Bus("FGH345", "Scania K320");
-        Bus bus156 = new Bus("IJK678", "Mercedes-Benz O500");
-        Bus bus157 = new Bus("LMN901", "BRT");
-        Bus bus158 = new Bus("OPQ234", "Volvo 7900");
-        Bus bus159 = new Bus("RST567", "Scania K320");
-        Bus bus160 = new Bus("UVW890", "Mercedes-Benz O500");
-        Bus bus161 = new Bus("XYZ123", "BRT");
-        Bus bus162 = new Bus("ABD456", "Volvo 7900");
-        Bus bus163 = new Bus("CDE789", "Scania K320");
-        Bus bus164 = new Bus("FGH012", "Mercedes-Benz O500");
-        Bus bus165 = new Bus("IJK345", "BRT");
-        Bus bus166 = new Bus("LMN678", "Volvo 7900");
-        Bus bus167 = new Bus("OPQ901", "Scania K320");
-        Bus bus168 = new Bus("RST234", "Mercedes-Benz O500");
-        Bus bus169 = new Bus("UVW567", "BRT");
-        Bus bus170 = new Bus("XYZ890", "Volvo 7900");
-        Bus bus171 = new Bus("ABD123", "Scania K320");
-        Bus bus172 = new Bus("CDE456", "Mercedes-Benz O500");
-        Bus bus173 = new Bus("FGH789", "BRT");
-        Bus bus174 = new Bus("IJK012", "Volvo 7900");
-        Bus bus175 = new Bus("LMN345", "Scania K320");
-        Bus bus176 = new Bus("OPQ678", "Mercedes-Benz O500");
-        Bus bus177 = new Bus("RST901", "BRT");
-        Bus bus178 = new Bus("UVW234", "Volvo 7900");
-        Bus bus179 = new Bus("XYZ567", "Scania K320");
-        Bus bus180 = new Bus("ABD890", "Mercedes-Benz O500");
-        Bus bus181 = new Bus("CDE123", "BRT");
-        Bus bus182 = new Bus("FGH456", "Volvo 7900");
-        Bus bus183 = new Bus("IJK789", "Scania K320");
-        Bus bus184 = new Bus("LMN012", "Mercedes-Benz O500");
-        Bus bus185 = new Bus("OPQ345", "BRT");
-        Bus bus186 = new Bus("RST678", "Volvo 7900");
-        Bus bus187 = new Bus("UVW901", "Scania K320");
-        Bus bus188 = new Bus("XYZ234", "Mercedes-Benz O500");
-        Bus bus189 = new Bus("ABD567", "BRT");
-        Bus bus190 = new Bus("CDE890", "Volvo 7900");
-        Bus bus191 = new Bus("FGH123", "Scania K320");
-        Bus bus192 = new Bus("IJK456", "Mercedes-Benz O500");
-        Bus bus193 = new Bus("LMN789", "BRT");
-        Bus bus194 = new Bus("OPQ012", "Volvo 7900");
-        Bus bus195 = new Bus("RST345", "Scania K320");
-        Bus bus196 = new Bus("UVW678", "Mercedes-Benz O500");
-        Bus bus197 = new Bus("XYZ901", "BRT");
-        Bus bus198 = new Bus("ABD234", "Volvo 7900");
-        Bus bus199 = new Bus("CDE567", "Scania K320");
-        Bus bus200 = new Bus("FGH890", "Mercedes-Benz O500");
-        Bus bus201 = new Bus("IJK123", "BRT");
-        Bus bus202 = new Bus("LMN456", "Volvo 7900");
-        Bus bus203 = new Bus("OPQ789", "Scania K320");
-        Bus bus204 = new Bus("RST012", "Mercedes-Benz O500");
-        Bus bus205 = new Bus("UVW345", "BRT");
-        Bus bus206 = new Bus("XYZ678", "Volvo 7900");
-        Bus bus207 = new Bus("ABD901", "Scania K320");
-        Bus bus208 = new Bus("CDE234", "Mercedes-Benz O500");
-        Bus bus209 = new Bus("FGH567", "BRT");
-        Bus bus210 = new Bus("IJK890", "Volvo 7900");
-        Bus bus211 = new Bus("LMN123", "Scania K320");
-        Bus bus212 = new Bus("OPQ456", "Mercedes-Benz O500");
-        Bus bus213 = new Bus("RST789", "BRT");
-        Bus bus214 = new Bus("UVW012", "Volvo 7900");
-        Bus bus215 = new Bus("XYZ345", "Scania K320");
-        Bus bus216 = new Bus("ABD678", "Mercedes-Benz O500");
-        Bus bus217 = new Bus("CDE901", "BRT");
-        Bus bus218 = new Bus("FGH234", "Volvo 7900");
-        Bus bus219 = new Bus("IJK567", "Scania K320");
-        Bus bus220 = new Bus("LMN890", "Mercedes-Benz O500");
-        Bus bus221 = new Bus("OPQ123", "BRT");
-        Bus bus222 = new Bus("RST456", "Volvo 7900");
-        Bus bus223 = new Bus("UVW789", "Scania K320");
-        Bus bus224 = new Bus("XYZ012", "Mercedes-Benz O500");
-        Bus bus225 = new Bus("ABD345", "BRT");
-        Bus bus226 = new Bus("CDE678", "Volvo 7900");
-        Bus bus227 = new Bus("FGH901", "Scania K320");
-        Bus bus228 = new Bus("IJK234", "Mercedes-Benz O500");
-        Bus bus229 = new Bus("LMN567", "BRT");
-        Bus bus230 = new Bus("OPQ890", "Volvo 7900");
-        Bus bus231 = new Bus("RST123", "Scania K320");
-        Bus bus232 = new Bus("UVW456", "Mercedes-Benz O500");
-        Bus bus233 = new Bus("XYZ789", "BRT");
-        Bus bus234 = new Bus("ABD012", "Volvo 7900");
-        Bus bus235 = new Bus("CDE345", "Scania K320");
-        Bus bus236 = new Bus("FGH678", "Mercedes-Benz O500");
-        Bus bus237 = new Bus("IJK901", "BRT");
-        Bus bus238 = new Bus("LMN234", "Volvo 7900");
-        Bus bus239 = new Bus("OPQ567", "Scania K320");
-        Bus bus240 = new Bus("RST890", "Mercedes-Benz O500");
-        Bus bus241 = new Bus("UVW123", "BRT");
-        Bus bus242 = new Bus("XYZ456", "Volvo 7900");
-        Bus bus243 = new Bus("ABD789", "Scania K320");
-        Bus bus244 = new Bus("CDE012", "Mercedes-Benz O500");
-        Bus bus245 = new Bus("FGH345", "BRT");
-        Bus bus246 = new Bus("IJK678", "Volvo 7900");
-        Bus bus247 = new Bus("LMN901", "Scania");
-
 
         //Init Conductores
 
@@ -1046,20 +901,1904 @@ ruta_B75.addEstacion(calle146);
 ruta_B75.addEstacion(calle161);
 ruta_B75.addEstacion(portalNorte);
 
+ruta_C15.addEstacion(portalTunal);
+ruta_C15.addEstacion(parque);
+ruta_C15.addEstacion(calle40Sur);
+ruta_C15.addEstacion(nariño);
+ruta_C15.addEstacion(tercerMilenio);
+ruta_C15.addEstacion(avJimenez_F);
+ruta_C15.addEstacion(calle19);
+ruta_C15.addEstacion(calle22);
+ruta_C15.addEstacion(calle45);
+ruta_C15.addEstacion(calle57);
+ruta_C15.addEstacion(calle76);
+ruta_C15.addEstacion(rionegro);
+ruta_C15.addEstacion(subaCl116);
+ruta_C15.addEstacion(humedalCordoba);
+ruta_C15.addEstacion(nizaCl127);
+ruta_C15.addEstacion(gratamira);
+ruta_C15.addEstacion(subaTV91);
+ruta_C15.addEstacion(portalSuba);
+
+ruta_C17.addEstacion(portalUsme);
+ruta_C17.addEstacion(consuelo);
+ruta_C17.addEstacion(santaLucia);
+ruta_C17.addEstacion(quiroga);
+ruta_C17.addEstacion(restrepo);
+ruta_C17.addEstacion(hortua);
+ruta_C17.addEstacion(calle72);
+ruta_C17.addEstacion(calle85);
+ruta_C17.addEstacion(virrey);
+ruta_C17.addEstacion(calle100);
+ruta_C17.addEstacion(heroes);
+ruta_C17.addEstacion(puenteLargo);
+ruta_C17.addEstacion(portalSuba);
+
+ruta_C19.addEstacion(banderas);
+ruta_C19.addEstacion(mandalay);
+ruta_C19.addEstacion(marsella);
+ruta_C19.addEstacion(distritoGrafiti);
+ruta_C19.addEstacion(zonaIndustrial);
+ruta_C19.addEstacion(ricaurte_E);
+ruta_C19.addEstacion(deLaSabana);
+ruta_C19.addEstacion(calle19);
+ruta_C19.addEstacion(calle34);
+ruta_C19.addEstacion(calle72);
+ruta_C19.addEstacion(calle85);
+ruta_C19.addEstacion(virrey);
+ruta_C19.addEstacion(puenteLargo);
+ruta_C19.addEstacion(portalSuba);
+
+ruta_C25.addEstacion(portal20Julio);
+ruta_C25.addEstacion(countrySur);
+ruta_C25.addEstacion(avenidaPrimeroMayo);
+ruta_C25.addEstacion(sanBernardo);
+ruta_C25.addEstacion(bicentenario);
+ruta_C25.addEstacion(tygua_san_jose);
+ruta_C25.addEstacion(guatoque_veraguas);
+ruta_C25.addEstacion(ricaurte_E);
+ruta_C25.addEstacion(campinUAN);
+ruta_C25.addEstacion(movistarArena);
+ruta_C25.addEstacion(avChile);
+ruta_C25.addEstacion(nqsCalle75);
+ruta_C25.addEstacion(sanMartin);
+ruta_C25.addEstacion(subaCl95);
+ruta_C25.addEstacion(nizaCl127);
+ruta_C25.addEstacion(subaAVBoyaca);
+ruta_C25.addEstacion(angeles21);
+ruta_C25.addEstacion(subaTV91);
+ruta_C25.addEstacion(portalSuba);
+
+ruta_C30.addEstacion(portalSur);
+ruta_C30.addEstacion(perdomo);
+ruta_C30.addEstacion(cCPaseoVillaDelRio);
+ruta_C30.addEstacion(sevillana);
+ruta_C30.addEstacion(venecia);
+ruta_C30.addEstacion(alqueria);
+ruta_C30.addEstacion(ricaurte_E);
+ruta_C30.addEstacion(calle26);
+ruta_C30.addEstacion(calle34);
+ruta_C30.addEstacion(virrey);
+ruta_C30.addEstacion(calle85);
+ruta_C30.addEstacion(calle100);
+ruta_C30.addEstacion(puenteLargo);
+ruta_C30.addEstacion(portalSuba);
+
+ruta_C50.addEstacion(calle161);
+ruta_C50.addEstacion(calle142);
+ruta_C50.addEstacion(virrey);
+ruta_C50.addEstacion(calle85);
+ruta_C50.addEstacion(heroes);
+ruta_C50.addEstacion(escuelaMilitar);
+ruta_C50.addEstacion(rionegro);
+ruta_C50.addEstacion(puenteLargo);
+ruta_C50.addEstacion(subaCl116);
+ruta_C50.addEstacion(angeles21);
+ruta_C50.addEstacion(subaTV91);
+ruta_C50.addEstacion(laCampina);
+ruta_C50.addEstacion(portalSuba);
+
+ruta_C73.addEstacion(portal20Julio);
+ruta_C73.addEstacion(countrySur);
+ruta_C73.addEstacion(avenidaPrimeroMayo);
+ruta_C73.addEstacion(sanBernardo);
+ruta_C73.addEstacion(bicentenario);
+ruta_C73.addEstacion(tygua_san_jose);
+ruta_C73.addEstacion(guatoque_veraguas);
+ruta_C73.addEstacion(ricaurte_E);
+ruta_C73.addEstacion(calle26);
+ruta_C73.addEstacion(calle34);
+ruta_C73.addEstacion(virrey);
+ruta_C73.addEstacion(calle85);
+ruta_C73.addEstacion(puenteLargo);
+ruta_C73.addEstacion(portalSuba);
+
+ruta_C84.addEstacion(portalEldorado);
+ruta_C84.addEstacion(avenidaRojas);
+ruta_C84.addEstacion(calle26);
+ruta_C84.addEstacion(ciudadUniversitaria);
+ruta_C84.addEstacion(calle34);
+ruta_C84.addEstacion(calle57);
+ruta_C84.addEstacion(heroes);
+ruta_C84.addEstacion(calle85);
+ruta_C84.addEstacion(virrey);
+ruta_C84.addEstacion(calle100);
+ruta_C84.addEstacion(alcala);
+ruta_C84.addEstacion(calle146);
+ruta_C84.addEstacion(portalNorte);
+
+ruta_D10.addEstacion(portalNorte);
+ruta_D10.addEstacion(calle187);
+ruta_D10.addEstacion(toberin);
+ruta_D10.addEstacion(mazuren);
+ruta_D10.addEstacion(alcala);
+ruta_D10.addEstacion(pepeSierra);
+ruta_D10.addEstacion(virrey);
+ruta_D10.addEstacion(calle85);
+ruta_D10.addEstacion(heroes);
+ruta_D10.addEstacion(avenidaCali);
+ruta_D10.addEstacion(carrera90);
+ruta_D10.addEstacion(portal80);
+
+ruta_D21.addEstacion(portalTunal);
+ruta_D21.addEstacion(olaya);
+ruta_D21.addEstacion(quiroga);
+ruta_D21.addEstacion(calle40Sur);
+ruta_D21.addEstacion(santaLucia);
+ruta_D21.addEstacion(marly);
+ruta_D21.addEstacion(calle57);
+ruta_D21.addEstacion(heroes);
+ruta_D21.addEstacion(virrey);
+ruta_D21.addEstacion(calle100);
+ruta_D21.addEstacion(avenidaCali);
+ruta_D21.addEstacion(carrera90);
+ruta_D21.addEstacion(portal80);
+
+ruta_D22.addEstacion(portalSur);
+ruta_D22.addEstacion(venecia);
+ruta_D22.addEstacion(sevillana);
+ruta_D22.addEstacion(ricaurte_E);
+ruta_D22.addEstacion(calle26);
+ruta_D22.addEstacion(heroes);
+ruta_D22.addEstacion(virrey);
+ruta_D22.addEstacion(pepeSierra);
+ruta_D22.addEstacion(calle146);
+ruta_D22.addEstacion(calle161);
+ruta_D22.addEstacion(portalNorte);
+
+ruta_D24.addEstacion(universidades_J);
+ruta_D24.addEstacion(calle76);
+ruta_D24.addEstacion(escuelaMilitar);
+ruta_D24.addEstacion(minutoDeDios);
+ruta_D24.addEstacion(avenidaCali);
+ruta_D24.addEstacion(carrera90);
+ruta_D24.addEstacion(portal80);
+
+ruta_D55.addEstacion(toberin);
+ruta_D55.addEstacion(mazuren);
+ruta_D55.addEstacion(alcala);
+ruta_D55.addEstacion(pepeSierra);
+ruta_D55.addEstacion(virrey);
+ruta_D55.addEstacion(calle85);
+ruta_D55.addEstacion(avenidaCali);
+ruta_D55.addEstacion(carrera90);
+ruta_D55.addEstacion(portal80);
+
+ruta_D81.addEstacion(portal80);
+ruta_D81.addEstacion(carrera90);
+ruta_D81.addEstacion(avenidaCali);
+ruta_D81.addEstacion(granjaCra77);
+ruta_D81.addEstacion(minutoDeDios);
+ruta_D81.addEstacion(ferias);
+ruta_D81.addEstacion(carrera53);
+ruta_D81.addEstacion(escuelaMilitar);
+ruta_D81.addEstacion(polo);
+ruta_D81.addEstacion(heroes);
+
+ruta_E32.addEstacion(portalAmericas);
+ruta_E32.addEstacion(transversal86);
+ruta_E32.addEstacion(banderas);
+ruta_E32.addEstacion(avAmericasBoyaca);
+ruta_E32.addEstacion(puenteAranda);
+ruta_E32.addEstacion(zonaIndustrial);
+ruta_E32.addEstacion(cad);
+ruta_E32.addEstacion(avElDorado);
+ruta_E32.addEstacion(uNacional);
+ruta_E32.addEstacion(avChile);
+ruta_E32.addEstacion(sieteDeAgosto);
+ruta_E32.addEstacion(nqsCalle75);
+
+ruta_E42.addEstacion(portalUsme);
+ruta_E42.addEstacion(socorro);
+ruta_E42.addEstacion(santaLucia);
+ruta_E42.addEstacion(calle40Sur);
+ruta_E42.addEstacion(olaya);
+ruta_E42.addEstacion(fucha);
+ruta_E42.addEstacion(restrepo);
+ruta_E42.addEstacion(hospital);
+ruta_E42.addEstacion(sanDiego);
+ruta_E42.addEstacion(calle26);
+ruta_E42.addEstacion(centroDeMemoria);
+
+ruta_F19.addEstacion(portalSuba);
+ruta_F19.addEstacion(nizaCl127);
+ruta_F19.addEstacion(humedalCordoba);
+ruta_F19.addEstacion(subaCl116);
+ruta_F19.addEstacion(puenteLargo);
+ruta_F19.addEstacion(calle100);
+ruta_F19.addEstacion(virrey);
+ruta_F19.addEstacion(calle85);
+ruta_F19.addEstacion(calle76);
+ruta_F19.addEstacion(calle63);
+ruta_F19.addEstacion(calle45);
+ruta_F19.addEstacion(calle39);
+ruta_F19.addEstacion(calle26);
+ruta_F19.addEstacion(ciudadUniversitaria);
+ruta_F19.addEstacion(ricaurte_F);
+ruta_F19.addEstacion(banderas);
+
+ruta_F23.addEstacion(aguas);
+ruta_F23.addEstacion(museoDelOro);
+ruta_F23.addEstacion(avJimenez_F);
+ruta_F23.addEstacion(sanFaconKR22);
+ruta_F23.addEstacion(ricaurte_F);
+ruta_F23.addEstacion(banderas);
+ruta_F23.addEstacion(patioBonito);
+ruta_F23.addEstacion(portalAmericas);
+
+ruta_F26.addEstacion(alcala);
+ruta_F26.addEstacion(pepeSierra);
+ruta_F26.addEstacion(calle106);
+ruta_F26.addEstacion(virrey);
+ruta_F26.addEstacion(calle85);
+ruta_F26.addEstacion(calle76);
+ruta_F26.addEstacion(calle63);
+ruta_F26.addEstacion(marly);
+ruta_F26.addEstacion(calle45);
+ruta_F26.addEstacion(calle26);
+ruta_F26.addEstacion(bibliotecaTintal);
+ruta_F26.addEstacion(portalAmericas);
+
+ruta_F28.addEstacion(portalSuba);
+ruta_F28.addEstacion(nizaCl127);
+ruta_F28.addEstacion(humedalCordoba);
+ruta_F28.addEstacion(subaCl116);
+ruta_F28.addEstacion(puenteLargo);
+ruta_F28.addEstacion(calle100);
+ruta_F28.addEstacion(virrey);
+ruta_F28.addEstacion(calle85);
+ruta_F28.addEstacion(calle63);
+ruta_F28.addEstacion(calle57);
+ruta_F28.addEstacion(heroes);
+
+ruta_F32.addEstacion(nqsCalle75);
+ruta_F32.addEstacion(calle57);
+ruta_F32.addEstacion(museoNacional);
+ruta_F32.addEstacion(avJimenez_F);
+ruta_F32.addEstacion(avElDorado);
+ruta_F32.addEstacion(puenteAranda);
+ruta_F32.addEstacion(distritoGrafiti);
+ruta_F32.addEstacion(pradera);
+ruta_F32.addEstacion(banderas);
+ruta_F32.addEstacion(transversal86);
+ruta_F32.addEstacion(patioBonito);
+ruta_F32.addEstacion(portalAmericas);
+
+ruta_F51.addEstacion(museoNacional);
+ruta_F51.addEstacion(sanDiego);
+ruta_F51.addEstacion(lasNieves);
+ruta_F51.addEstacion(ricaurte_F);
+ruta_F51.addEstacion(distritoGrafiti);
+ruta_F51.addEstacion(pradera);
+ruta_F51.addEstacion(marsella);
+ruta_F51.addEstacion(avAmericasBoyaca);
+ruta_F51.addEstacion(mandalay);
+ruta_F51.addEstacion(banderas);
+ruta_F51.addEstacion(bibliotecaTintal);
+ruta_F51.addEstacion(portalAmericas);
+
+ruta_F60.addEstacion(calle76);
+ruta_F60.addEstacion(calle72);
+ruta_F60.addEstacion(floresAreandina);
+ruta_F60.addEstacion(calle63);
+ruta_F60.addEstacion(marly);
+ruta_F60.addEstacion(calle45);
+ruta_F60.addEstacion(calle26);
+ruta_F60.addEstacion(bibliotecaTintal);
+ruta_F60.addEstacion(transversal86);
+ruta_F60.addEstacion(portalAmericas);
+
+ruta_F61.addEstacion(polo);
+ruta_F61.addEstacion(calle57);
+ruta_F61.addEstacion(museoNacional);
+ruta_F61.addEstacion(avJimenez_F);
+ruta_F61.addEstacion(sanFaconKR22);
+ruta_F61.addEstacion(ricaurte_F);
+ruta_F61.addEstacion(distritoGrafiti);
+ruta_F61.addEstacion(pradera);
+ruta_F61.addEstacion(transversal86);
+ruta_F61.addEstacion(portalAmericas);
+
+ruta_G11.addEstacion(terminalNorte);
+ruta_G11.addEstacion(calle187);
+ruta_G11.addEstacion(toberin);
+ruta_G11.addEstacion(mazuren);
+ruta_G11.addEstacion(calle146);
+ruta_G11.addEstacion(pepeSierra);
+ruta_G11.addEstacion(virrey);
+ruta_G11.addEstacion(calle85);
+ruta_G11.addEstacion(heroes);
+ruta_G11.addEstacion(escuelaMilitar);
+ruta_G11.addEstacion(avChile);
+ruta_G11.addEstacion(avElDorado);
+ruta_G11.addEstacion(cad);
+ruta_G11.addEstacion(ricaurte_F);
+ruta_G11.addEstacion(alqueria);
+ruta_G11.addEstacion(venecia);
+ruta_G11.addEstacion(portalSur);
+
+ruta_G12.addEstacion(portalSur);
+ruta_G12.addEstacion(alqueria);
+ruta_G12.addEstacion(venecia);
+ruta_G12.addEstacion(generalSantander);
+ruta_G12.addEstacion(ricaurte_F);
+ruta_G12.addEstacion(avElDorado);
+ruta_G12.addEstacion(uNacional);
+ruta_G12.addEstacion(campinUAN);
+ruta_G12.addEstacion(escuelaMilitar);
+ruta_G12.addEstacion(heroes);
+ruta_G12.addEstacion(calle85);
+ruta_G12.addEstacion(portalNorte);
+
+ruta_G22.addEstacion(portalSur);
+ruta_G22.addEstacion(perdomo);
+ruta_G22.addEstacion(cCPaseoVillaDelRio);
+ruta_G22.addEstacion(sevillana);
+ruta_G22.addEstacion(venecia);
+ruta_G22.addEstacion(alqueria);
+ruta_G22.addEstacion(generalSantander);
+ruta_G22.addEstacion(ricaurte_F);
+ruta_G22.addEstacion(santaIsabel);
+ruta_G22.addEstacion(comuneros);
+ruta_G22.addEstacion(calle19);
+
+ruta_G30.addEstacion(portalSuba);
+ruta_G30.addEstacion(laCampina);
+ruta_G30.addEstacion(subaTV91);
+ruta_G30.addEstacion(subaCl116);
+ruta_G30.addEstacion(puenteLargo);
+ruta_G30.addEstacion(subaCl95);
+ruta_G30.addEstacion(nqsCalle75);
+ruta_G30.addEstacion(movistarArena);
+ruta_G30.addEstacion(uNacional);
+ruta_G30.addEstacion(ricaurte_F);
+ruta_G30.addEstacion(santaIsabel);
+ruta_G30.addEstacion(generalSantander);
+ruta_G30.addEstacion(portalSur);
+
+ruta_G41.addEstacion(bicentenario);
+ruta_G41.addEstacion(tygua_san_jose);
+ruta_G41.addEstacion(guatoque_veraguas);
+ruta_G41.addEstacion(ricaurte_F);
+ruta_G41.addEstacion(santaIsabel);
+ruta_G41.addEstacion(generalSantander);
+ruta_G41.addEstacion(nqsCL30Sur);
+ruta_G41.addEstacion(alqueria);
+ruta_G41.addEstacion(bosa);
+ruta_G41.addEstacion(terrerosHospitalCV);
+ruta_G41.addEstacion(sanMateoCCUnisur);
+
+ruta_G42.addEstacion(sieteDeAgosto);
+ruta_G42.addEstacion(movistarArena);
+ruta_G42.addEstacion(cad);
+ruta_G42.addEstacion(avElDorado);
+ruta_G42.addEstacion(centroDeMemoria);
+ruta_G42.addEstacion(ciudadUniversitaria);
+ruta_G42.addEstacion(guatoque_veraguas);
+ruta_G42.addEstacion(ricaurte_F);
+ruta_G42.addEstacion(santaIsabel);
+ruta_G42.addEstacion(generalSantander);
+ruta_G42.addEstacion(portalSur);
+
+ruta_G43.addEstacion(portalSur);
+ruta_G43.addEstacion(bosa);
+ruta_G43.addEstacion(laDespensa);
+ruta_G43.addEstacion(leonXIII);
+ruta_G43.addEstacion(terrerosHospitalCV);
+ruta_G43.addEstacion(sanMateoCCUnisur);
+
+ruta_G45.addEstacion(portalSur);
+ruta_G45.addEstacion(perdomo);
+ruta_G45.addEstacion(sevillana);
+ruta_G45.addEstacion(venecia);
+ruta_G45.addEstacion(alqueria);
+ruta_G45.addEstacion(generalSantander);
+ruta_G45.addEstacion(ricaurte_F);
+ruta_G45.addEstacion(calle19);
+ruta_G45.addEstacion(ciudadUniversitaria);
+ruta_G45.addEstacion(cad);
+
+ruta_G46.addEstacion(portalSur);
+ruta_G46.addEstacion(bosa);
+ruta_G46.addEstacion(laDespensa);
+ruta_G46.addEstacion(leonXIII);
+ruta_G46.addEstacion(terrerosHospitalCV);
+ruta_G46.addEstacion(sanMateoCCUnisur);
+
+ruta_G45.addEstacion(portalSur);
+ruta_G45.addEstacion(bosa);
+ruta_G45.addEstacion(laDespensa);
+ruta_G45.addEstacion(leonXIII);
+ruta_G45.addEstacion(terrerosHospitalCV);
+ruta_G45.addEstacion(sanMateoCCUnisur);
+
+ruta_G47.addEstacion(portalSur);
+ruta_G47.addEstacion(bosa);
+ruta_G47.addEstacion(laDespensa);
+ruta_G47.addEstacion(leonXIII);
+ruta_G47.addEstacion(terrerosHospitalCV);
+
+ruta_G52.addEstacion(portalSur);
+ruta_G52.addEstacion(bosa);
+ruta_G52.addEstacion(laDespensa);
+ruta_G52.addEstacion(leonXIII);
+ruta_G52.addEstacion(terrerosHospitalCV);
+
+ruta_H13.addEstacion(portalNorte);
+ruta_H13.addEstacion(mazuren);
+ruta_H13.addEstacion(calle142);
+ruta_H13.addEstacion(calle106);
+ruta_H13.addEstacion(calle100);
+ruta_H13.addEstacion(calle85);
+ruta_H13.addEstacion(floresAreandina);
+ruta_H13.addEstacion(calle63);
+ruta_H13.addEstacion(avJimenez_F);
+ruta_H13.addEstacion(restrepo);
+ruta_H13.addEstacion(quiroga);
+ruta_H13.addEstacion(calle40Sur);
+ruta_H13.addEstacion(portalTunal);
+
+ruta_G15.addEstacion(portalSur);
+ruta_G15.addEstacion(alqueria);
+ruta_G15.addEstacion(venecia);
+ruta_G15.addEstacion(generalSantander);
+ruta_G15.addEstacion(ricaurte_F);
+ruta_G15.addEstacion(santaIsabel);
+
+ruta_H17.addEstacion(portalUsme);
+ruta_H17.addEstacion(socorro);
+ruta_H17.addEstacion(santaLucia);
+ruta_H17.addEstacion(calle40Sur);
+ruta_H17.addEstacion(quiroga);
+ruta_H17.addEstacion(restrepo);
+ruta_H17.addEstacion(hortua);
+ruta_H17.addEstacion(hospital);
+ruta_H17.addEstacion(museoNacional);
+ruta_H17.addEstacion(calle72);
+
+ruta_H20.addEstacion(portal80);
+ruta_H20.addEstacion(ferias);
+ruta_H20.addEstacion(boyaca);
+ruta_H20.addEstacion(minutoDeDios);
+ruta_H20.addEstacion(carrera90);
+ruta_H20.addEstacion(avenidaCali);
+
+ruta_H21.addEstacion(portal80);
+ruta_H21.addEstacion(calle72);
+ruta_H21.addEstacion(heroes);
+ruta_H21.addEstacion(escuelaMilitar);
+ruta_H21.addEstacion(polo);
+ruta_H21.addEstacion(hospital);
+ruta_H21.addEstacion(restrepo);
+ruta_H21.addEstacion(santaLucia);
+ruta_H21.addEstacion(socorro);
+ruta_H21.addEstacion(portalTunal);
+
+ruta_H27.addEstacion(portalTunal);
+ruta_H27.addEstacion(socorro);
+ruta_H27.addEstacion(santaLucia);
+ruta_H27.addEstacion(calle40Sur);
+ruta_H27.addEstacion(olaya);
+ruta_H27.addEstacion(fucha);
+ruta_H27.addEstacion(hospital);
+ruta_H27.addEstacion(escuelaMilitar);
+ruta_H27.addEstacion(polo);
+ruta_H27.addEstacion(calle72);
+
+ruta_H54.addEstacion(portalEldorado);
+ruta_H54.addEstacion(modelia);
+ruta_H54.addEstacion(avenidaRojas);
+ruta_H54.addEstacion(elTiempoCamaraComercio);
+ruta_H54.addEstacion(salitreElGreco);
+ruta_H54.addEstacion(can);
+ruta_H54.addEstacion(quintaParedes);
+ruta_H54.addEstacion(corferias);
+ruta_H54.addEstacion(ciudadUniversitaria);
+ruta_H54.addEstacion(hortua);
+ruta_H54.addEstacion(restrepo);
+ruta_H54.addEstacion(calle40Sur);
+ruta_H54.addEstacion(molinos);
+ruta_H54.addEstacion(portalUsme);
+
+ruta_H72.addEstacion(toberin);
+ruta_H72.addEstacion(mazuren);
+ruta_H72.addEstacion(calle142);
+ruta_H72.addEstacion(pepeSierra);
+ruta_H72.addEstacion(virrey);
+ruta_H72.addEstacion(heroes);
+ruta_H72.addEstacion(museoNacional);
+ruta_H72.addEstacion(hospital);
+ruta_H72.addEstacion(olaya);
+ruta_H72.addEstacion(molinos);
+ruta_H72.addEstacion(portalUsme);
+
+ruta_H73.addEstacion(toberin);
+ruta_H73.addEstacion(mazuren);
+ruta_H73.addEstacion(calle142);
+ruta_H73.addEstacion(pepeSierra);
+ruta_H73.addEstacion(virrey);
+ruta_H73.addEstacion(heroes);
+ruta_H73.addEstacion(museoNacional);
+ruta_H73.addEstacion(hospital);
+ruta_H73.addEstacion(olaya);
+ruta_H73.addEstacion(portalTunal);
+
+ruta_H75.addEstacion(portalUsme);
+ruta_H75.addEstacion(molinos);
+ruta_H75.addEstacion(restrepo);
+ruta_H75.addEstacion(hospital);
+ruta_H75.addEstacion(museoNacional);
+ruta_H75.addEstacion(virrey);
+ruta_H75.addEstacion(calle85);
+ruta_H75.addEstacion(heroes);
+
+ruta_H76.addEstacion(portal80);
+ruta_H76.addEstacion(granjaCra77);
+ruta_H76.addEstacion(avenidaCali);
+ruta_H76.addEstacion(minutoDeDios);
+ruta_H76.addEstacion(escuelaMilitar);
+ruta_H76.addEstacion(heroes);
+
+ruta_H83.addEstacion(portal80);
+ruta_H83.addEstacion(granjaCra77);
+ruta_H83.addEstacion(avenidaCali);
+ruta_H83.addEstacion(minutoDeDios);
+ruta_H83.addEstacion(escuelaMilitar);
+ruta_H83.addEstacion(heroes);
+
+ruta_J23.addEstacion(portalAmericas);
+ruta_J23.addEstacion(banderas);
+ruta_J23.addEstacion(marsella);
+ruta_J23.addEstacion(pradera);
+ruta_J23.addEstacion(calle19);
+ruta_J23.addEstacion(calle26);
+ruta_J23.addEstacion(ciudadUniversitaria);
+
+ruta_J24.addEstacion(portal80);
+ruta_J24.addEstacion(carrera90);
+ruta_J24.addEstacion(avenidaCali);
+ruta_J24.addEstacion(granjaCra77);
+ruta_J24.addEstacion(minutoDeDios);
+ruta_J24.addEstacion(carrera47);
+ruta_J24.addEstacion(escuelaMilitar);
+ruta_J24.addEstacion(polo);
+ruta_J24.addEstacion(calle76);
+ruta_J24.addEstacion(calle72);
+ruta_J24.addEstacion(calle57);
+ruta_J24.addEstacion(marly);
+ruta_J24.addEstacion(universidades_J);
+
+ruta_J70.addEstacion(portalNorte);
+ruta_J70.addEstacion(calle187);
+ruta_J70.addEstacion(calle161);
+ruta_J70.addEstacion(mazuren);
+ruta_J70.addEstacion(calle146);
+ruta_J70.addEstacion(pepeSierra);
+ruta_J70.addEstacion(calle100);
+ruta_J70.addEstacion(virrey);
+ruta_J70.addEstacion(calle85);
+ruta_J70.addEstacion(heroes);
+ruta_J70.addEstacion(museoDelOro);
+ruta_J70.addEstacion(aguas);
+
+ruta_J73.addEstacion(portalSuba);
+ruta_J73.addEstacion(laCampina);
+ruta_J73.addEstacion(subaTV91);
+ruta_J73.addEstacion(angeles21);
+ruta_J73.addEstacion(gratamira);
+ruta_J73.addEstacion(subaAVBoyaca);
+ruta_J73.addEstacion(ciudadUniversitaria);
+ruta_J73.addEstacion(universidades_J);
+
+ruta_J74.addEstacion(portalNorte);
+ruta_J74.addEstacion(calle187);
+ruta_J74.addEstacion(calle161);
+ruta_J74.addEstacion(mazuren);
+ruta_J74.addEstacion(calle146);
+ruta_J74.addEstacion(pepeSierra);
+ruta_J74.addEstacion(calle100);
+ruta_J74.addEstacion(virrey);
+ruta_J74.addEstacion(calle85);
+ruta_J74.addEstacion(heroes);
+ruta_J74.addEstacion(calle19);
+
+ruta_J76.addEstacion(portalNorte);
+ruta_J76.addEstacion(calle187);
+ruta_J76.addEstacion(calle161);
+ruta_J76.addEstacion(mazuren);
+ruta_J76.addEstacion(calle146);
+ruta_J76.addEstacion(pepeSierra);
+ruta_J76.addEstacion(calle100);
+ruta_J76.addEstacion(virrey);
+ruta_J76.addEstacion(calle85);
+ruta_J76.addEstacion(heroes);
+ruta_J76.addEstacion(calle26);
+ruta_J76.addEstacion(ciudadUniversitaria);
+ruta_J76.addEstacion(universidades_J);
+
+ruta_K10.addEstacion(portalEldorado);
+ruta_K10.addEstacion(modelia);
+ruta_K10.addEstacion(normandia);
+ruta_K10.addEstacion(avenidaRojas);
+ruta_K10.addEstacion(elTiempoCamaraComercio);
+ruta_K10.addEstacion(salitreElGreco);
+ruta_K10.addEstacion(can);
+ruta_K10.addEstacion(gobernacion);
+ruta_K10.addEstacion(quintaParedes);
+ruta_K10.addEstacion(corferias);
+ruta_K10.addEstacion(ciudadUniversitaria);
+ruta_K10.addEstacion(concejoDeBogota);
+ruta_K10.addEstacion(calle26);
+
+ruta_K16.addEstacion(terminalNorte);
+ruta_K16.addEstacion(calle187);
+ruta_K16.addEstacion(mazuren);
+ruta_K16.addEstacion(calle146);
+ruta_K16.addEstacion(pepeSierra);
+ruta_K16.addEstacion(calle100);
+ruta_K16.addEstacion(virrey);
+ruta_K16.addEstacion(calle85);
+ruta_K16.addEstacion(heroes);
+ruta_K16.addEstacion(escuelaMilitar);
+ruta_K16.addEstacion(salitreElGreco);
+ruta_K16.addEstacion(can);
+ruta_K16.addEstacion(quintaParedes);
+ruta_K16.addEstacion(portalEldorado);
+
+ruta_K23.addEstacion(alcala);
+ruta_K23.addEstacion(prado);
+ruta_K23.addEstacion(calle85);
+ruta_K23.addEstacion(heroes);
+ruta_K23.addEstacion(calle76);
+ruta_K23.addEstacion(salitreElGreco);
+ruta_K23.addEstacion(quintaParedes);
+ruta_K23.addEstacion(portalEldorado);
+
+ruta_K43.addEstacion(portalAmericas);
+ruta_K43.addEstacion(patioBonito);
+ruta_K43.addEstacion(transversal86);
+ruta_K43.addEstacion(banderas);
+ruta_K43.addEstacion(marsella);
+ruta_K43.addEstacion(pradera);
+ruta_K43.addEstacion(salitreElGreco);
+ruta_K43.addEstacion(quintaParedes);
+ruta_K43.addEstacion(can);
+ruta_K43.addEstacion(portalEldorado);
+
+ruta_K54.addEstacion(portalUsme);
+ruta_K54.addEstacion(molinos);
+ruta_K54.addEstacion(hortua);
+ruta_K54.addEstacion(restrepo);
+ruta_K54.addEstacion(avenidaRojas);
+ruta_K54.addEstacion(modelia);
+ruta_K54.addEstacion(portalEldorado);
+
+ruta_K86.addEstacion(calle85);
+ruta_K86.addEstacion(museoNacional);
+ruta_K86.addEstacion(quintaParedes);
+ruta_K86.addEstacion(can);
+ruta_K86.addEstacion(portalEldorado);
+
+ruta_L10.addEstacion(portal20Julio);
+ruta_L10.addEstacion(sanBernardo);
+ruta_L10.addEstacion(bicentenario);
+ruta_L10.addEstacion(sanVictorino);
+ruta_L10.addEstacion(museoNacional);
+
+ruta_L18.addEstacion(portal20Julio);
+ruta_L18.addEstacion(policarpa);
+ruta_L18.addEstacion(sanBernardo);
+ruta_L18.addEstacion(museoNacional);
+
+ruta_L25.addEstacion(portalSuba);
+ruta_L25.addEstacion(subaTV91);
+ruta_L25.addEstacion(subaAVBoyaca);
+ruta_L25.addEstacion(nizaCl127);
+ruta_L25.addEstacion(subaCl95);
+ruta_L25.addEstacion(avChile);
+ruta_L25.addEstacion(movistarArena);
+ruta_L25.addEstacion(campinUAN);
+ruta_L25.addEstacion(guatoque_veraguas);
+ruta_L25.addEstacion(tygua_san_jose);
+ruta_L25.addEstacion(bicentenario);
+ruta_L25.addEstacion(avenidaPrimeroMayo);
+ruta_L25.addEstacion(countrySur);
+ruta_L25.addEstacion(portal20Julio);
+
+ruta_L41.addEstacion(sanMateoCCUnisur);
+ruta_L41.addEstacion(socorro);
+ruta_L41.addEstacion(santaLucia);
+ruta_L41.addEstacion(olaya);
+ruta_L41.addEstacion(fucha);
+ruta_L41.addEstacion(restrepo);
+ruta_L41.addEstacion(hospital);
+ruta_L41.addEstacion(bicentenario);
+
+
+ruta_L81.addEstacion(ferias);
+ruta_L81.addEstacion(boyaca);
+ruta_L81.addEstacion(minutoDeDios);
+ruta_L81.addEstacion(escuelaMilitar);
+ruta_L81.addEstacion(museoNacional);
+ruta_L81.addEstacion(sanVictorino);
+ruta_L81.addEstacion(bicentenario);
+ruta_L81.addEstacion(avenidaPrimeroMayo);
+ruta_L81.addEstacion(countrySur);
+ruta_L81.addEstacion(portal20Julio);
+
+ruta_L82.addEstacion(portal20Julio);
+ruta_L82.addEstacion(countrySur);
+ruta_L82.addEstacion(avenidaPrimeroMayo);
+ruta_L82.addEstacion(bicentenario);
+ruta_L82.addEstacion(sanDiego);
+
+ruta_M47.addEstacion(portalSur);
+ruta_M47.addEstacion(perdomo);
+ruta_M47.addEstacion(sevillana);
+ruta_M47.addEstacion(venecia);
+ruta_M47.addEstacion(alqueria);
+ruta_M47.addEstacion(nqsCL38ASur);
+ruta_M47.addEstacion(nqsCL30Sur);
+ruta_M47.addEstacion(guatoque_veraguas);
+ruta_M47.addEstacion(tygua_san_jose);
+ruta_M47.addEstacion(sanVictorino);
+ruta_M47.addEstacion(lasNieves);
+ruta_M47.addEstacion(sanDiego);
+ruta_M47.addEstacion(museoNacional);
+
+ruta_M51.addEstacion(portalEldorado);
+ruta_M51.addEstacion(avenidaRojas);
+ruta_M51.addEstacion(elTiempoCamaraComercio);
+ruta_M51.addEstacion(salitreElGreco);
+ruta_M51.addEstacion(can);
+ruta_M51.addEstacion(gobernacion);
+ruta_M51.addEstacion(quintaParedes);
+ruta_M51.addEstacion(corferias);
+ruta_M51.addEstacion(ciudadUniversitaria);
+ruta_M51.addEstacion(concejoDeBogota);
+
+ruta_M82.addEstacion(portal20Julio);
+ruta_M82.addEstacion(countrySur);
+ruta_M82.addEstacion(avenidaPrimeroMayo);
+ruta_M82.addEstacion(bicentenario);
+ruta_M82.addEstacion(sanDiego);
+
+ruta_M83.addEstacion(portal20Julio);
+ruta_M83.addEstacion(avenidaPrimeroMayo);
+ruta_M83.addEstacion(bicentenario);
+ruta_M83.addEstacion(sanDiego);
+
+RelacionBusRutaConductor rbrcEX = new RelacionBusRutaConductor(bus1, ruta_1, conductor1);
+bus1.addBRC(rbrcEX);
+ruta_1.addBRC(rbrcEX);
+conductor1.addBRC(rbrcEX);
+
+RelacionBusRutaConductor rbrc1 = new RelacionBusRutaConductor(bus1, ruta_1, conductor1);
+RelacionBusRutaConductor rbrc2 = new RelacionBusRutaConductor(bus2, ruta_2, conductor2);
+RelacionBusRutaConductor rbrc3 = new RelacionBusRutaConductor(bus3, ruta_3, conductor3);
+RelacionBusRutaConductor rbrc4 = new RelacionBusRutaConductor(bus4, ruta_4, conductor4);
+RelacionBusRutaConductor rbrc5 = new RelacionBusRutaConductor(bus5, ruta_5, conductor5);
+
+bus1.addBRC(rbrc1);
+ruta_1.addBRC(rbrc1);
+conductor1.addBRC(rbrc1);
+
+bus2.addBRC(rbrc2);
+ruta_2.addBRC(rbrc2);
+conductor2.addBRC(rbrc2);
+
+bus3.addBRC(rbrc3);
+ruta_3.addBRC(rbrc3);
+conductor3.addBRC(rbrc3);
+
+bus4.addBRC(rbrc4);
+ruta_4.addBRC(rbrc4);
+conductor4.addBRC(rbrc4);
+
+bus5.addBRC(rbrc5);
+ruta_5.addBRC(rbrc5);
+conductor5.addBRC(rbrc5);
+
+RelacionBusRutaConductor rbrc6 = new RelacionBusRutaConductor(bus6, ruta_6, conductor6);
+RelacionBusRutaConductor rbrc7 = new RelacionBusRutaConductor(bus7, ruta_7, conductor7);
+RelacionBusRutaConductor rbrc8 = new RelacionBusRutaConductor(bus8, ruta_8, conductor8);
+RelacionBusRutaConductor rbrc9 = new RelacionBusRutaConductor(bus9, ruta_A52, conductor9);
+RelacionBusRutaConductor rbrc10 = new RelacionBusRutaConductor(bus10, ruta_A60, conductor10);
+
+bus6.addBRC(rbrc6);
+ruta_6.addBRC(rbrc6);
+conductor6.addBRC(rbrc6);
+
+bus7.addBRC(rbrc7);
+ruta_7.addBRC(rbrc7);
+conductor7.addBRC(rbrc7);
+
+bus8.addBRC(rbrc8);
+ruta_8.addBRC(rbrc8);
+conductor8.addBRC(rbrc8);
+
+bus9.addBRC(rbrc9);
+ruta_A52.addBRC(rbrc9);
+conductor9.addBRC(rbrc9);
+
+bus10.addBRC(rbrc10);
+ruta_A60.addBRC(rbrc10);
+conductor10.addBRC(rbrc10);
+
+RelacionBusRutaConductor rbrc11 = new RelacionBusRutaConductor(bus11, ruta_A61, conductor11);
+RelacionBusRutaConductor rbrc12 = new RelacionBusRutaConductor(bus12, ruta_B10, conductor12);
+RelacionBusRutaConductor rbrc13 = new RelacionBusRutaConductor(bus13, ruta_B11, conductor13);
+RelacionBusRutaConductor rbrc14 = new RelacionBusRutaConductor(bus14, ruta_B12, conductor14);
+RelacionBusRutaConductor rbrc15 = new RelacionBusRutaConductor(bus15, ruta_B13, conductor15);
+
+bus11.addBRC(rbrc11);
+ruta_A61.addBRC(rbrc11);
+conductor11.addBRC(rbrc11);
+
+bus12.addBRC(rbrc12);
+ruta_B10.addBRC(rbrc12);
+conductor12.addBRC(rbrc12);
+
+bus13.addBRC(rbrc13);
+ruta_B11.addBRC(rbrc13);
+conductor13.addBRC(rbrc13);
+
+bus14.addBRC(rbrc14);
+ruta_B12.addBRC(rbrc14);
+conductor14.addBRC(rbrc14);
+
+bus15.addBRC(rbrc15);
+ruta_B13.addBRC(rbrc15);
+conductor15.addBRC(rbrc15);
+
+RelacionBusRutaConductor rbrc16 = new RelacionBusRutaConductor(bus16, ruta_B16, conductor16);
+RelacionBusRutaConductor rbrc17 = new RelacionBusRutaConductor(bus17, ruta_B18, conductor17);
+RelacionBusRutaConductor rbrc18 = new RelacionBusRutaConductor(bus18, ruta_B23, conductor18);
+RelacionBusRutaConductor rbrc19 = new RelacionBusRutaConductor(bus19, ruta_B26, conductor19);
+RelacionBusRutaConductor rbrc20 = new RelacionBusRutaConductor(bus20, ruta_B27, conductor20);
+
+RelacionBusRutaConductor rbrc21 = new RelacionBusRutaConductor(bus21, ruta_B28, conductor21);
+RelacionBusRutaConductor rbrc22 = new RelacionBusRutaConductor(bus22, ruta_B46, conductor22);
+RelacionBusRutaConductor rbrc23 = new RelacionBusRutaConductor(bus23, ruta_B50, conductor23);
+RelacionBusRutaConductor rbrc24 = new RelacionBusRutaConductor(bus24, ruta_B55, conductor24);
+RelacionBusRutaConductor rbrc25 = new RelacionBusRutaConductor(bus25, ruta_B72, conductor25);
+
+RelacionBusRutaConductor rbrc26 = new RelacionBusRutaConductor(bus26, ruta_B74, conductor26);
+RelacionBusRutaConductor rbrc27 = new RelacionBusRutaConductor(bus27, ruta_B75, conductor27);
+RelacionBusRutaConductor rbrc28 = new RelacionBusRutaConductor(bus28, ruta_C15, conductor28);
+RelacionBusRutaConductor rbrc29 = new RelacionBusRutaConductor(bus29, ruta_C17, conductor29);
+RelacionBusRutaConductor rbrc30 = new RelacionBusRutaConductor(bus30, ruta_C19, conductor30);
+
+RelacionBusRutaConductor rbrc31 = new RelacionBusRutaConductor(bus31, ruta_C25, conductor31);
+RelacionBusRutaConductor rbrc32 = new RelacionBusRutaConductor(bus32, ruta_C30, conductor32);
+RelacionBusRutaConductor rbrc33 = new RelacionBusRutaConductor(bus33, ruta_C50, conductor33);
+RelacionBusRutaConductor rbrc34 = new RelacionBusRutaConductor(bus34, ruta_C73, conductor34);
+RelacionBusRutaConductor rbrc35 = new RelacionBusRutaConductor(bus35, ruta_C84, conductor35);
+
+RelacionBusRutaConductor rbrc36 = new RelacionBusRutaConductor(bus36, ruta_D10, conductor36);
+RelacionBusRutaConductor rbrc37 = new RelacionBusRutaConductor(bus37, ruta_D21, conductor37);
+RelacionBusRutaConductor rbrc38 = new RelacionBusRutaConductor(bus38, ruta_D22, conductor38);
+RelacionBusRutaConductor rbrc39 = new RelacionBusRutaConductor(bus39, ruta_D24, conductor39);
+RelacionBusRutaConductor rbrc40 = new RelacionBusRutaConductor(bus40, ruta_D55, conductor40);
+
+RelacionBusRutaConductor rbrc41 = new RelacionBusRutaConductor(bus41, ruta_D81, conductor41);
+RelacionBusRutaConductor rbrc42 = new RelacionBusRutaConductor(bus42, ruta_E32, conductor42);
+RelacionBusRutaConductor rbrc43 = new RelacionBusRutaConductor(bus43, ruta_E42, conductor43);
+RelacionBusRutaConductor rbrc44 = new RelacionBusRutaConductor(bus44, ruta_F19, conductor44);
+RelacionBusRutaConductor rbrc45 = new RelacionBusRutaConductor(bus45, ruta_F23, conductor45);
+
+RelacionBusRutaConductor rbrc46 = new RelacionBusRutaConductor(bus46, ruta_F26, conductor46);
+RelacionBusRutaConductor rbrc47 = new RelacionBusRutaConductor(bus47, ruta_F28, conductor47);
+RelacionBusRutaConductor rbrc48 = new RelacionBusRutaConductor(bus48, ruta_F32, conductor48);
+RelacionBusRutaConductor rbrc49 = new RelacionBusRutaConductor(bus49, ruta_F51, conductor49);
+RelacionBusRutaConductor rbrc50 = new RelacionBusRutaConductor(bus50, ruta_F60, conductor50);
+
+RelacionBusRutaConductor rbrc51 = new RelacionBusRutaConductor(bus51, ruta_F61, conductor51);
+RelacionBusRutaConductor rbrc52 = new RelacionBusRutaConductor(bus52, ruta_G11, conductor52);
+RelacionBusRutaConductor rbrc53 = new RelacionBusRutaConductor(bus53, ruta_G12, conductor53);
+RelacionBusRutaConductor rbrc54 = new RelacionBusRutaConductor(bus54, ruta_G15, conductor54);
+RelacionBusRutaConductor rbrc55 = new RelacionBusRutaConductor(bus55, ruta_G22, conductor55);
+
+RelacionBusRutaConductor rbrc56 = new RelacionBusRutaConductor(bus56, ruta_G30, conductor56);
+RelacionBusRutaConductor rbrc57 = new RelacionBusRutaConductor(bus57, ruta_G41, conductor57);
+RelacionBusRutaConductor rbrc58 = new RelacionBusRutaConductor(bus58, ruta_G42, conductor58);
+RelacionBusRutaConductor rbrc59 = new RelacionBusRutaConductor(bus59, ruta_G43, conductor59);
+RelacionBusRutaConductor rbrc60 = new RelacionBusRutaConductor(bus60, ruta_G45, conductor60);
+
+RelacionBusRutaConductor rbrc61 = new RelacionBusRutaConductor(bus61, ruta_G46, conductor61);
+RelacionBusRutaConductor rbrc62 = new RelacionBusRutaConductor(bus62, ruta_G47, conductor62);
+RelacionBusRutaConductor rbrc63 = new RelacionBusRutaConductor(bus63, ruta_G52, conductor63);
+RelacionBusRutaConductor rbrc64 = new RelacionBusRutaConductor(bus64, ruta_H13, conductor64);
+RelacionBusRutaConductor rbrc65 = new RelacionBusRutaConductor(bus65, ruta_H15, conductor65);
+
+bus16.addBRC(rbrc16);
+ruta_B16.addBRC(rbrc16);
+conductor16.addBRC(rbrc16);
+
+bus17.addBRC(rbrc17);
+ruta_B18.addBRC(rbrc17);
+conductor17.addBRC(rbrc17);
+
+// Continuación de las relaciones con la adición a las listas correspondientes
+
+bus20.addBRC(rbrc20);
+ruta_B27.addBRC(rbrc20);
+conductor20.addBRC(rbrc20);
+
+bus21.addBRC(rbrc21);
+ruta_B28.addBRC(rbrc21);
+conductor21.addBRC(rbrc21);
+
+bus22.addBRC(rbrc22);
+ruta_B46.addBRC(rbrc22);
+conductor22.addBRC(rbrc22);
+
+bus23.addBRC(rbrc23);
+ruta_B50.addBRC(rbrc23);
+conductor23.addBRC(rbrc23);
+
+bus24.addBRC(rbrc24);
+ruta_B55.addBRC(rbrc24);
+conductor24.addBRC(rbrc24);
+
+bus25.addBRC(rbrc25);
+ruta_B72.addBRC(rbrc25);
+conductor25.addBRC(rbrc25);
+
+bus26.addBRC(rbrc26);
+ruta_B74.addBRC(rbrc26);
+conductor26.addBRC(rbrc26);
+
+bus27.addBRC(rbrc27);
+ruta_B75.addBRC(rbrc27);
+conductor27.addBRC(rbrc27);
+
+bus28.addBRC(rbrc28);
+ruta_C15.addBRC(rbrc28);
+conductor28.addBRC(rbrc28);
+
+bus29.addBRC(rbrc29);
+ruta_C17.addBRC(rbrc29);
+conductor29.addBRC(rbrc29);
+
+bus30.addBRC(rbrc30);
+ruta_C19.addBRC(rbrc30);
+conductor30.addBRC(rbrc30);
+
+bus31.addBRC(rbrc31);
+ruta_C25.addBRC(rbrc31);
+conductor31.addBRC(rbrc31);
+
+bus32.addBRC(rbrc32);
+ruta_C30.addBRC(rbrc32);
+conductor32.addBRC(rbrc32);
+
+bus33.addBRC(rbrc33);
+ruta_C50.addBRC(rbrc33);
+conductor33.addBRC(rbrc33);
+
+bus34.addBRC(rbrc34);
+ruta_C73.addBRC(rbrc34);
+conductor34.addBRC(rbrc34);
+
+bus35.addBRC(rbrc35);
+ruta_C84.addBRC(rbrc35);
+conductor35.addBRC(rbrc35);
+
+bus36.addBRC(rbrc36);
+ruta_D10.addBRC(rbrc36);
+conductor36.addBRC(rbrc36);
+
+bus37.addBRC(rbrc37);
+ruta_D21.addBRC(rbrc37);
+conductor37.addBRC(rbrc37);
+
+bus38.addBRC(rbrc38);
+ruta_D22.addBRC(rbrc38);
+conductor38.addBRC(rbrc38);
+
+bus39.addBRC(rbrc39);
+ruta_D24.addBRC(rbrc39);
+conductor39.addBRC(rbrc39);
+
+bus40.addBRC(rbrc40);
+ruta_D55.addBRC(rbrc40);
+conductor40.addBRC(rbrc40);
+
+bus41.addBRC(rbrc41);
+ruta_D81.addBRC(rbrc41);
+conductor41.addBRC(rbrc41);
+
+bus42.addBRC(rbrc42);
+ruta_E32.addBRC(rbrc42);
+conductor42.addBRC(rbrc42);
+
+bus43.addBRC(rbrc43);
+ruta_E42.addBRC(rbrc43);
+conductor43.addBRC(rbrc43);
+
+bus44.addBRC(rbrc44);
+ruta_F19.addBRC(rbrc44);
+conductor44.addBRC(rbrc44);
+
+bus45.addBRC(rbrc45);
+ruta_F23.addBRC(rbrc45);
+conductor45.addBRC(rbrc45);
+
+bus46.addBRC(rbrc46);
+ruta_F26.addBRC(rbrc46);
+conductor46.addBRC(rbrc46);
+
+bus47.addBRC(rbrc47);
+ruta_F28.addBRC(rbrc47);
+conductor47.addBRC(rbrc47);
+
+bus48.addBRC(rbrc48);
+ruta_F32.addBRC(rbrc48);
+conductor48.addBRC(rbrc48);
+
+bus49.addBRC(rbrc49);
+ruta_F51.addBRC(rbrc49);
+conductor49.addBRC(rbrc49);
+
+bus50.addBRC(rbrc50);
+ruta_F60.addBRC(rbrc50);
+conductor50.addBRC(rbrc50);
+
+bus51.addBRC(rbrc51);
+ruta_F61.addBRC(rbrc51);
+conductor51.addBRC(rbrc51);
+
+bus52.addBRC(rbrc52);
+ruta_G11.addBRC(rbrc52);
+conductor52.addBRC(rbrc52);
+
+bus53.addBRC(rbrc53);
+ruta_G12.addBRC(rbrc53);
+conductor53.addBRC(rbrc53);
+
+bus54.addBRC(rbrc54);
+ruta_G15.addBRC(rbrc54);
+conductor54.addBRC(rbrc54);
+
+bus55.addBRC(rbrc55);
+ruta_G22.addBRC(rbrc55);
+conductor55.addBRC(rbrc55);
+
+bus56.addBRC(rbrc56);
+ruta_G30.addBRC(rbrc56);
+conductor56.addBRC(rbrc56);
+
+bus57.addBRC(rbrc57);
+ruta_G41.addBRC(rbrc57);
+conductor57.addBRC(rbrc57);
+
+bus58.addBRC(rbrc58);
+ruta_G42.addBRC(rbrc58);
+conductor58.addBRC(rbrc58);
+
+bus59.addBRC(rbrc59);
+ruta_G43.addBRC(rbrc59);
+conductor59.addBRC(rbrc59);
+
+bus60.addBRC(rbrc60);
+ruta_G45.addBRC(rbrc60);
+conductor60.addBRC(rbrc60);
+
+bus61.addBRC(rbrc61);
+ruta_G46.addBRC(rbrc61);
+conductor61.addBRC(rbrc61);
+
+bus62.addBRC(rbrc62);
+ruta_G47.addBRC(rbrc62);
+conductor62.addBRC(rbrc62);
+
+bus63.addBRC(rbrc63);
+ruta_G52.addBRC(rbrc63);
+conductor63.addBRC(rbrc63);
+
+bus64.addBRC(rbrc64);
+ruta_H13.addBRC(rbrc64);
+conductor64.addBRC(rbrc64);
+
+bus65.addBRC(rbrc65);
+ruta_H15.addBRC(rbrc65);
+conductor65.addBRC(rbrc65);
+
+RelacionBusRutaConductor rbrc66 = new RelacionBusRutaConductor(bus66, ruta_H17, conductor66);
+RelacionBusRutaConductor rbrc67 = new RelacionBusRutaConductor(bus67, ruta_H20, conductor67);
+RelacionBusRutaConductor rbrc68 = new RelacionBusRutaConductor(bus68, ruta_H21, conductor68);
+RelacionBusRutaConductor rbrc69 = new RelacionBusRutaConductor(bus69, ruta_H27, conductor69);
+RelacionBusRutaConductor rbrc70 = new RelacionBusRutaConductor(bus70, ruta_H54, conductor70);
+
+RelacionBusRutaConductor rbrc71 = new RelacionBusRutaConductor(bus71, ruta_H72, conductor71);
+RelacionBusRutaConductor rbrc72 = new RelacionBusRutaConductor(bus72, ruta_H73, conductor72);
+RelacionBusRutaConductor rbrc73 = new RelacionBusRutaConductor(bus73, ruta_H75, conductor73);
+RelacionBusRutaConductor rbrc74 = new RelacionBusRutaConductor(bus74, ruta_H76, conductor74);
+RelacionBusRutaConductor rbrc75 = new RelacionBusRutaConductor(bus75, ruta_H83, conductor75);
+
+RelacionBusRutaConductor rbrc76 = new RelacionBusRutaConductor(bus76, ruta_J23, conductor76);
+RelacionBusRutaConductor rbrc77 = new RelacionBusRutaConductor(bus77, ruta_J24, conductor77);
+RelacionBusRutaConductor rbrc78 = new RelacionBusRutaConductor(bus78, ruta_J70, conductor78);
+RelacionBusRutaConductor rbrc79 = new RelacionBusRutaConductor(bus79, ruta_J73, conductor79);
+RelacionBusRutaConductor rbrc80 = new RelacionBusRutaConductor(bus80, ruta_J74, conductor80);
+
+RelacionBusRutaConductor rbrc81 = new RelacionBusRutaConductor(bus81, ruta_J76, conductor81);
+RelacionBusRutaConductor rbrc82 = new RelacionBusRutaConductor(bus82, ruta_K10, conductor82);
+RelacionBusRutaConductor rbrc83 = new RelacionBusRutaConductor(bus83, ruta_K16, conductor83);
+RelacionBusRutaConductor rbrc84 = new RelacionBusRutaConductor(bus84, ruta_K23, conductor84);
+RelacionBusRutaConductor rbrc85 = new RelacionBusRutaConductor(bus85, ruta_K43, conductor85);
+
+RelacionBusRutaConductor rbrc86 = new RelacionBusRutaConductor(bus86, ruta_K54, conductor86);
+RelacionBusRutaConductor rbrc87 = new RelacionBusRutaConductor(bus87, ruta_K86, conductor87);
+RelacionBusRutaConductor rbrc88 = new RelacionBusRutaConductor(bus88, ruta_L10, conductor88);
+RelacionBusRutaConductor rbrc89 = new RelacionBusRutaConductor(bus89, ruta_L18, conductor89);
+RelacionBusRutaConductor rbrc90 = new RelacionBusRutaConductor(bus90, ruta_L25, conductor90);
+
+RelacionBusRutaConductor rbrc91 = new RelacionBusRutaConductor(bus91, ruta_L41, conductor91);
+RelacionBusRutaConductor rbrc92 = new RelacionBusRutaConductor(bus92, ruta_L81, conductor92);
+RelacionBusRutaConductor rbrc93 = new RelacionBusRutaConductor(bus93, ruta_L82, conductor93);
+RelacionBusRutaConductor rbrc94 = new RelacionBusRutaConductor(bus94, ruta_M47, conductor94);
+RelacionBusRutaConductor rbrc95 = new RelacionBusRutaConductor(bus95, ruta_M51, conductor95);
+
+RelacionBusRutaConductor rbrc96 = new RelacionBusRutaConductor(bus96, ruta_M82, conductor96);
+RelacionBusRutaConductor rbrc97 = new RelacionBusRutaConductor(bus97, ruta_M83, conductor97);
+RelacionBusRutaConductor rbrc98 = new RelacionBusRutaConductor(bus98, ruta_A52, conductor98);
+RelacionBusRutaConductor rbrc99 = new RelacionBusRutaConductor(bus99, ruta_A60, conductor99);
+RelacionBusRutaConductor rbrc100 = new RelacionBusRutaConductor(bus100, ruta_A61, conductor100);
+
+bus66.addBRC(rbrc66);
+ruta_H17.addBRC(rbrc66);
+conductor66.addBRC(rbrc66);
+
+bus67.addBRC(rbrc67);
+ruta_H20.addBRC(rbrc67);
+conductor67.addBRC(rbrc67);
+
+bus68.addBRC(rbrc68);
+ruta_H21.addBRC(rbrc68);
+conductor68.addBRC(rbrc68);
+
+bus69.addBRC(rbrc69);
+ruta_H27.addBRC(rbrc69);
+conductor69.addBRC(rbrc69);
+
+bus70.addBRC(rbrc70);
+ruta_H54.addBRC(rbrc70);
+conductor70.addBRC(rbrc70);
+
+bus71.addBRC(rbrc71);
+ruta_H72.addBRC(rbrc71);
+conductor71.addBRC(rbrc71);
+
+bus72.addBRC(rbrc72);
+ruta_H73.addBRC(rbrc72);
+conductor72.addBRC(rbrc72);
+
+bus73.addBRC(rbrc73);
+ruta_H75.addBRC(rbrc73);
+conductor73.addBRC(rbrc73);
+
+bus74.addBRC(rbrc74);
+ruta_H76.addBRC(rbrc74);
+conductor74.addBRC(rbrc74);
+
+bus75.addBRC(rbrc75);
+ruta_H83.addBRC(rbrc75);
+conductor75.addBRC(rbrc75);
+
+bus76.addBRC(rbrc76);
+ruta_J23.addBRC(rbrc76);
+conductor76.addBRC(rbrc76);
+
+bus77.addBRC(rbrc77);
+ruta_J24.addBRC(rbrc77);
+conductor77.addBRC(rbrc77);
+
+bus78.addBRC(rbrc78);
+ruta_J70.addBRC(rbrc78);
+conductor78.addBRC(rbrc78);
+
+bus79.addBRC(rbrc79);
+ruta_J73.addBRC(rbrc79);
+conductor79.addBRC(rbrc79);
+
+bus80.addBRC(rbrc80);
+ruta_J74.addBRC(rbrc80);
+conductor80.addBRC(rbrc80);
+
+bus81.addBRC(rbrc81);
+ruta_J76.addBRC(rbrc81);
+conductor81.addBRC(rbrc81);
+
+bus82.addBRC(rbrc82);
+ruta_K10.addBRC(rbrc82);
+conductor82.addBRC(rbrc82);
+
+bus83.addBRC(rbrc83);
+ruta_K16.addBRC(rbrc83);
+conductor83.addBRC(rbrc83);
+
+bus84.addBRC(rbrc84);
+ruta_K23.addBRC(rbrc84);
+conductor84.addBRC(rbrc84);
+
+bus85.addBRC(rbrc85);
+ruta_K43.addBRC(rbrc85);
+conductor85.addBRC(rbrc85);
+
+bus86.addBRC(rbrc86);
+ruta_K54.addBRC(rbrc86);
+conductor86.addBRC(rbrc86);
+
+bus87.addBRC(rbrc87);
+ruta_K86.addBRC(rbrc87);
+conductor87.addBRC(rbrc87);
+
+bus88.addBRC(rbrc88);
+ruta_L10.addBRC(rbrc88);
+conductor88.addBRC(rbrc88);
+
+bus89.addBRC(rbrc89);
+ruta_L18.addBRC(rbrc89);
+conductor89.addBRC(rbrc89);
+
+bus90.addBRC(rbrc90);
+ruta_L25.addBRC(rbrc90);
+conductor90.addBRC(rbrc90);
+
+bus91.addBRC(rbrc91);
+ruta_L41.addBRC(rbrc91);
+conductor91.addBRC(rbrc91);
+
+bus92.addBRC(rbrc92);
+ruta_L81.addBRC(rbrc92);
+conductor92.addBRC(rbrc92);
+
+bus93.addBRC(rbrc93);
+ruta_L82.addBRC(rbrc93);
+conductor93.addBRC(rbrc93);
+
+bus94.addBRC(rbrc94);
+ruta_M47.addBRC(rbrc94);
+conductor94.addBRC(rbrc94);
+
+bus95.addBRC(rbrc95);
+ruta_M51.addBRC(rbrc95);
+conductor95.addBRC(rbrc95);
+
+bus96.addBRC(rbrc96);
+ruta_M82.addBRC(rbrc96);
+conductor96.addBRC(rbrc96);
+
+bus97.addBRC(rbrc97);
+ruta_M83.addBRC(rbrc97);
+conductor97.addBRC(rbrc97);
+
+bus98.addBRC(rbrc98);
+ruta_A52.addBRC(rbrc98);
+conductor98.addBRC(rbrc98);
+
+bus99.addBRC(rbrc99);
+ruta_A60.addBRC(rbrc99);
+conductor99.addBRC(rbrc99);
+
+bus100.addBRC(rbrc100);
+ruta_A61.addBRC(rbrc100);
+conductor100.addBRC(rbrc100);
+
         //Init Rel
 
-        /*List<Bus> buses;
-        List<Conductor> conductores;
-        List<Estacion> estaciones;
-        List<Ruta> rutas;
-        List<RelacionBusRutaConductor> relacionBusRutaConductores;
+        List<Bus> buses = new ArrayList<>();
+        List<Conductor> conductores = new ArrayList<>();
+        List<Estacion> estaciones = new ArrayList<>();
+        List<Ruta> rutas = new ArrayList<>();
+        List<RelacionBusRutaConductor> relaciones = new ArrayList<>();
 
+        buses.add(bus1);
+buses.add(bus2);
+buses.add(bus3);
+buses.add(bus4);
+buses.add(bus5);
+buses.add(bus6);
+buses.add(bus7);
+buses.add(bus8);
+buses.add(bus9);
+buses.add(bus10);
+buses.add(bus11);
+buses.add(bus12);
+buses.add(bus13);
+buses.add(bus14);
+buses.add(bus15);
+buses.add(bus16);
+buses.add(bus17);
+buses.add(bus18);
+buses.add(bus19);
+buses.add(bus20);
+buses.add(bus21);
+buses.add(bus22);
+buses.add(bus23);
+buses.add(bus24);
+buses.add(bus25);
+buses.add(bus26);
+buses.add(bus27);
+buses.add(bus28);
+buses.add(bus29);
+buses.add(bus30);
+buses.add(bus31);
+buses.add(bus32);
+buses.add(bus33);
+buses.add(bus34);
+buses.add(bus35);
+buses.add(bus36);
+buses.add(bus37);
+buses.add(bus38);
+buses.add(bus39);
+buses.add(bus40);
+buses.add(bus41);
+buses.add(bus42);
+buses.add(bus43);
+buses.add(bus44);
+buses.add(bus45);
+buses.add(bus46);
+buses.add(bus47);
+buses.add(bus48);
+buses.add(bus49);
+buses.add(bus50);
+buses.add(bus51);
+buses.add(bus52);
+buses.add(bus53);
+buses.add(bus54);
+buses.add(bus55);
+buses.add(bus56);
+buses.add(bus57);
+buses.add(bus58);
+buses.add(bus59);
+buses.add(bus60);
+buses.add(bus61);
+buses.add(bus62);
+buses.add(bus63);
+buses.add(bus64);
+buses.add(bus65);
+buses.add(bus66);
+buses.add(bus67);
+buses.add(bus68);
+buses.add(bus69);
+buses.add(bus70);
+buses.add(bus71);
+buses.add(bus72);
+buses.add(bus73);
+buses.add(bus74);
+buses.add(bus75);
+buses.add(bus76);
+buses.add(bus77);
+buses.add(bus78);
+buses.add(bus79);
+buses.add(bus80);
+buses.add(bus81);
+buses.add(bus82);
+buses.add(bus83);
+buses.add(bus84);
+buses.add(bus85);
+buses.add(bus86);
+buses.add(bus87);
+buses.add(bus88);
+buses.add(bus89);
+buses.add(bus90);
+buses.add(bus91);
+buses.add(bus92);
+buses.add(bus93);
+buses.add(bus94);
+buses.add(bus95);
+buses.add(bus96);
+buses.add(bus97);
+buses.add(bus98);
+buses.add(bus99);
+buses.add(bus100);
+
+conductores.add(conductor1);
+conductores.add(conductor2);
+conductores.add(conductor3);
+conductores.add(conductor4);
+conductores.add(conductor5);
+conductores.add(conductor6);
+conductores.add(conductor7);
+conductores.add(conductor8);
+conductores.add(conductor9);
+conductores.add(conductor10);
+conductores.add(conductor11);
+conductores.add(conductor12);
+conductores.add(conductor13);
+conductores.add(conductor14);
+conductores.add(conductor15);
+conductores.add(conductor16);
+conductores.add(conductor17);
+conductores.add(conductor18);
+conductores.add(conductor19);
+conductores.add(conductor20);
+conductores.add(conductor21);
+conductores.add(conductor22);
+conductores.add(conductor23);
+conductores.add(conductor24);
+conductores.add(conductor25);
+conductores.add(conductor26);
+conductores.add(conductor27);
+conductores.add(conductor28);
+conductores.add(conductor29);
+conductores.add(conductor30);
+conductores.add(conductor31);
+conductores.add(conductor32);
+conductores.add(conductor33);
+conductores.add(conductor34);
+conductores.add(conductor35);
+conductores.add(conductor36);
+conductores.add(conductor37);
+conductores.add(conductor38);
+conductores.add(conductor39);
+conductores.add(conductor40);
+conductores.add(conductor41);
+conductores.add(conductor42);
+conductores.add(conductor43);
+conductores.add(conductor44);
+conductores.add(conductor45);
+conductores.add(conductor46);
+conductores.add(conductor47);
+conductores.add(conductor48);
+conductores.add(conductor49);
+conductores.add(conductor50);
+conductores.add(conductor51);
+conductores.add(conductor52);
+conductores.add(conductor53);
+conductores.add(conductor54);
+conductores.add(conductor55);
+conductores.add(conductor56);
+conductores.add(conductor57);
+conductores.add(conductor58);
+conductores.add(conductor59);
+conductores.add(conductor60);
+conductores.add(conductor61);
+conductores.add(conductor62);
+conductores.add(conductor63);
+conductores.add(conductor64);
+conductores.add(conductor65);
+conductores.add(conductor66);
+conductores.add(conductor67);
+conductores.add(conductor68);
+conductores.add(conductor69);
+conductores.add(conductor70);
+conductores.add(conductor71);
+conductores.add(conductor72);
+conductores.add(conductor73);
+conductores.add(conductor74);
+conductores.add(conductor75);
+conductores.add(conductor76);
+conductores.add(conductor77);
+conductores.add(conductor78);
+conductores.add(conductor79);
+conductores.add(conductor80);
+conductores.add(conductor81);
+conductores.add(conductor82);
+conductores.add(conductor83);
+conductores.add(conductor84);
+conductores.add(conductor85);
+conductores.add(conductor86);
+conductores.add(conductor87);
+conductores.add(conductor88);
+conductores.add(conductor89);
+conductores.add(conductor90);
+conductores.add(conductor91);
+conductores.add(conductor92);
+conductores.add(conductor93);
+conductores.add(conductor94);
+conductores.add(conductor95);
+conductores.add(conductor96);
+conductores.add(conductor97);
+conductores.add(conductor98);
+conductores.add(conductor99);
+conductores.add(conductor100);
+
+// Añadir estaciones de la Zona A
+estaciones.add(calle76);
+estaciones.add(calle72);
+estaciones.add(floresAreandina);
+estaciones.add(calle63);
+estaciones.add(calle57);
+estaciones.add(marly);
+estaciones.add(calle45);
+estaciones.add(calle39);
+estaciones.add(calle34);
+estaciones.add(calle26);
+estaciones.add(calle22);
+estaciones.add(calle19);
+estaciones.add(tercerMilenio);
+
+// Añadir estaciones de la Zona B
+estaciones.add(terminalNorte);
+estaciones.add(calle187);
+estaciones.add(portalNorte);
+estaciones.add(toberin);
+estaciones.add(calle161);
+estaciones.add(mazuren);
+estaciones.add(calle146);
+estaciones.add(calle142);
+estaciones.add(alcala);
+estaciones.add(prado);
+estaciones.add(calle127);
+estaciones.add(pepeSierra);
+estaciones.add(calle106);
+estaciones.add(calle100);
+estaciones.add(virrey);
+estaciones.add(calle85);
+estaciones.add(heroes);
+
+// Añadir estaciones de la Zona C
+estaciones.add(portalSuba);
+estaciones.add(laCampina);
+estaciones.add(subaTV91);
+estaciones.add(angeles21);
+estaciones.add(gratamira);
+estaciones.add(subaAVBoyaca);
+estaciones.add(nizaCl127);
+estaciones.add(humedalCordoba);
+estaciones.add(subaCl116);
+estaciones.add(puenteLargo);
+estaciones.add(subaCl100);
+estaciones.add(subaCl95);
+estaciones.add(rionegro);
+estaciones.add(sanMartin);
+
+// Añadir estaciones de la Zona D
+estaciones.add(portal80);
+estaciones.add(quirigua);
+estaciones.add(carrera90);
+estaciones.add(avenidaCali);
+estaciones.add(granjaCra77);
+estaciones.add(minutoDeDios);
+estaciones.add(boyaca);
+estaciones.add(ferias);
+estaciones.add(avenida68);
+estaciones.add(carrera53);
+estaciones.add(carrera47);
+estaciones.add(escuelaMilitar);
+estaciones.add(polo);
+
+// Añadir estaciones de la Zona E
+estaciones.add(laCastellana);
+estaciones.add(nqsCalle75);
+estaciones.add(avChile);
+estaciones.add(sieteDeAgosto);
+estaciones.add(movistarArena);
+estaciones.add(campinUAN);
+estaciones.add(uNacional);
+estaciones.add(avElDorado);
+estaciones.add(cad);
+estaciones.add(paloquemao);
+estaciones.add(ricaurte_E);
+estaciones.add(guatoque_veraguas);
+estaciones.add(tygua_san_jose);
+
+// Añadir estaciones de la Zona F
+estaciones.add(portalAmericas);
+estaciones.add(patioBonito);
+estaciones.add(bibliotecaTintal);
+estaciones.add(transversal86);
+estaciones.add(banderas);
+estaciones.add(mandalay);
+estaciones.add(avAmericasBoyaca);
+estaciones.add(marsella);
+estaciones.add(pradera);
+estaciones.add(distritoGrafiti);
+estaciones.add(puenteAranda);
+estaciones.add(americasCalle43);
+estaciones.add(zonaIndustrial);
+estaciones.add(cdsCarrera32);
+estaciones.add(ricaurte_F);
+estaciones.add(sanFaconKR22);
+estaciones.add(deLaSabana);
+estaciones.add(avJimenez_F);
+
+// Añadir estaciones de la Zona G
+estaciones.add(bosa);
+estaciones.add(laDespensa);
+estaciones.add(leonXIII);
+estaciones.add(terrerosHospitalCV);
+estaciones.add(sanMateoCCUnisur);
+estaciones.add(portalSur);
+estaciones.add(perdomo);
+estaciones.add(cCPaseoVillaDelRio);
+estaciones.add(sevillana);
+estaciones.add(venecia);
+estaciones.add(alqueria);
+estaciones.add(generalSantander);
+estaciones.add(nqsCL38ASur);
+estaciones.add(nqsCL30Sur);
+estaciones.add(sena);
+estaciones.add(santaIsabel);
+estaciones.add(comuneros);
+
+// Añadir estaciones de la Zona H
+estaciones.add(portalUsme);
+estaciones.add(molinos);
+estaciones.add(consuelo);
+estaciones.add(socorro);
+estaciones.add(santaLucia);
+estaciones.add(calle40Sur);
+estaciones.add(quiroga);
+estaciones.add(olaya);
+estaciones.add(restrepo);
+estaciones.add(fucha);
+estaciones.add(nariño);
+estaciones.add(hortua);
+estaciones.add(hospital);
+estaciones.add(biblioteca);
+estaciones.add(parque);
+estaciones.add(portalTunal);
+estaciones.add(tunal);
+estaciones.add(juanPabloII);
+estaciones.add(manitas);
+estaciones.add(miradorParaiso);
+
+// Añadir estaciones de la Zona J
+estaciones.add(universidades_J);
+estaciones.add(aguas);
+estaciones.add(museoDelOro);
+
+// Añadir estaciones de la Zona K
+estaciones.add(portalEldorado);
+estaciones.add(modelia);
+estaciones.add(normandia);
+estaciones.add(avenidaRojas);
+estaciones.add(elTiempoCamaraComercio);
+estaciones.add(salitreElGreco);
+estaciones.add(can);
+estaciones.add(gobernacion);
+estaciones.add(quintaParedes);
+estaciones.add(corferias);
+estaciones.add(ciudadUniversitaria);
+estaciones.add(concejoDeBogota);
+estaciones.add(centroDeMemoria);
+estaciones.add(universidades_K);
+
+// Añadir estaciones de la Zona L
+estaciones.add(portal20Julio);
+estaciones.add(countrySur);
+estaciones.add(avenidaPrimeroMayo);
+estaciones.add(ciudadJardinUAN);
+estaciones.add(policarpa);
+estaciones.add(sanBernardo);
+estaciones.add(bicentenario);
+estaciones.add(sanVictorino);
+estaciones.add(lasNieves);
+estaciones.add(sanDiego);
+
+// Añadir estaciones de la Zona M
+estaciones.add(museoNacional);
+
+// Añadir todas las rutas a la lista
+rutas.add(ruta_1);
+rutas.add(ruta_2);
+rutas.add(ruta_3);
+rutas.add(ruta_4);
+rutas.add(ruta_5);
+rutas.add(ruta_6);
+rutas.add(ruta_7);
+rutas.add(ruta_8);
+rutas.add(ruta_A52);
+rutas.add(ruta_A60);
+rutas.add(ruta_A61);
+rutas.add(ruta_B10);
+rutas.add(ruta_B11);
+rutas.add(ruta_B12);
+rutas.add(ruta_B13);
+rutas.add(ruta_B16);
+rutas.add(ruta_B18);
+rutas.add(ruta_B23);
+rutas.add(ruta_B26);
+rutas.add(ruta_B27);
+rutas.add(ruta_B28);
+rutas.add(ruta_B46);
+rutas.add(ruta_B50);
+rutas.add(ruta_B55);
+rutas.add(ruta_B72);
+rutas.add(ruta_B74);
+rutas.add(ruta_B75);
+rutas.add(ruta_C15);
+rutas.add(ruta_C17);
+rutas.add(ruta_C19);
+rutas.add(ruta_C25);
+rutas.add(ruta_C30);
+rutas.add(ruta_C50);
+rutas.add(ruta_C73);
+rutas.add(ruta_C84);
+rutas.add(ruta_D10);
+rutas.add(ruta_D21);
+rutas.add(ruta_D22);
+rutas.add(ruta_D24);
+rutas.add(ruta_D55);
+rutas.add(ruta_D81);
+rutas.add(ruta_E32);
+rutas.add(ruta_E42);
+rutas.add(ruta_F19);
+rutas.add(ruta_F23);
+rutas.add(ruta_F26);
+rutas.add(ruta_F28);
+rutas.add(ruta_F32);
+rutas.add(ruta_F51);
+rutas.add(ruta_F60);
+rutas.add(ruta_F61);
+rutas.add(ruta_G11);
+rutas.add(ruta_G12);
+rutas.add(ruta_G15);
+rutas.add(ruta_G22);
+rutas.add(ruta_G30);
+rutas.add(ruta_G41);
+rutas.add(ruta_G42);
+rutas.add(ruta_G43);
+rutas.add(ruta_G45);
+rutas.add(ruta_G46);
+rutas.add(ruta_G47);
+rutas.add(ruta_G52);
+rutas.add(ruta_H13);
+rutas.add(ruta_H15);
+rutas.add(ruta_H17);
+rutas.add(ruta_H20);
+rutas.add(ruta_H21);
+rutas.add(ruta_H27);
+rutas.add(ruta_H54);
+rutas.add(ruta_H72);
+rutas.add(ruta_H73);
+rutas.add(ruta_H75);
+rutas.add(ruta_H76);
+rutas.add(ruta_H83);
+rutas.add(ruta_J23);
+rutas.add(ruta_J24);
+rutas.add(ruta_J70);
+rutas.add(ruta_J73);
+rutas.add(ruta_J74);
+rutas.add(ruta_J76);
+rutas.add(ruta_K10);
+rutas.add(ruta_K16);
+rutas.add(ruta_K23);
+rutas.add(ruta_K43);
+rutas.add(ruta_K54);
+rutas.add(ruta_K86);
+rutas.add(ruta_L10);
+rutas.add(ruta_L18);
+rutas.add(ruta_L25);
+rutas.add(ruta_L41);
+rutas.add(ruta_L81);
+rutas.add(ruta_L82);
+rutas.add(ruta_M47);
+rutas.add(ruta_M51);
+rutas.add(ruta_M82);
+rutas.add(ruta_M83);
+
+relaciones.add(rbrc1);
+relaciones.add(rbrc2);
+relaciones.add(rbrc3);
+relaciones.add(rbrc4);
+relaciones.add(rbrc5);
+relaciones.add(rbrc6);
+relaciones.add(rbrc7);
+relaciones.add(rbrc8);
+relaciones.add(rbrc9);
+relaciones.add(rbrc10);
+relaciones.add(rbrc11);
+relaciones.add(rbrc12);
+relaciones.add(rbrc13);
+relaciones.add(rbrc14);
+relaciones.add(rbrc15);
+relaciones.add(rbrc16);
+relaciones.add(rbrc17);
+relaciones.add(rbrc18);
+relaciones.add(rbrc19);
+relaciones.add(rbrc20);
+relaciones.add(rbrc21);
+relaciones.add(rbrc22);
+relaciones.add(rbrc23);
+relaciones.add(rbrc24);
+relaciones.add(rbrc25);
+relaciones.add(rbrc26);
+relaciones.add(rbrc27);
+relaciones.add(rbrc28);
+relaciones.add(rbrc29);
+relaciones.add(rbrc30);
+relaciones.add(rbrc31);
+relaciones.add(rbrc32);
+relaciones.add(rbrc33);
+relaciones.add(rbrc34);
+relaciones.add(rbrc35);
+relaciones.add(rbrc36);
+relaciones.add(rbrc37);
+relaciones.add(rbrc38);
+relaciones.add(rbrc39);
+relaciones.add(rbrc40);
+relaciones.add(rbrc41);
+relaciones.add(rbrc42);
+relaciones.add(rbrc43);
+relaciones.add(rbrc44);
+relaciones.add(rbrc45);
+relaciones.add(rbrc46);
+relaciones.add(rbrc47);
+relaciones.add(rbrc48);
+relaciones.add(rbrc49);
+relaciones.add(rbrc50);
+relaciones.add(rbrc51);
+relaciones.add(rbrc52);
+relaciones.add(rbrc53);
+relaciones.add(rbrc54);
+relaciones.add(rbrc55);
+relaciones.add(rbrc56);
+relaciones.add(rbrc57);
+relaciones.add(rbrc58);
+relaciones.add(rbrc59);
+relaciones.add(rbrc60);
+relaciones.add(rbrc61);
+relaciones.add(rbrc62);
+relaciones.add(rbrc63);
+relaciones.add(rbrc64);
+relaciones.add(rbrc65);
+relaciones.add(rbrc66);
+relaciones.add(rbrc67);
+relaciones.add(rbrc68);
+relaciones.add(rbrc69);
+relaciones.add(rbrc70);
+relaciones.add(rbrc71);
+relaciones.add(rbrc72);
+relaciones.add(rbrc73);
+relaciones.add(rbrc74);
+relaciones.add(rbrc75);
+relaciones.add(rbrc76);
+relaciones.add(rbrc77);
+relaciones.add(rbrc78);
+relaciones.add(rbrc79);
+relaciones.add(rbrc80);
+relaciones.add(rbrc81);
+relaciones.add(rbrc82);
+relaciones.add(rbrc83);
+relaciones.add(rbrc84);
+relaciones.add(rbrc85);
+relaciones.add(rbrc86);
+relaciones.add(rbrc87);
+relaciones.add(rbrc88);
+relaciones.add(rbrc89);
+relaciones.add(rbrc90);
+relaciones.add(rbrc91);
+relaciones.add(rbrc92);
+relaciones.add(rbrc93);
+relaciones.add(rbrc94);
+relaciones.add(rbrc95);
+relaciones.add(rbrc96);
+relaciones.add(rbrc97);
+relaciones.add(rbrc98);
+relaciones.add(rbrc99);
+relaciones.add(rbrc100);
 
         busRepository.saveAll(buses);
         conductorRepository.saveAll(conductores);
         estacionRepository.saveAll(estaciones);
         rutaRepository.saveAll(rutas);
-        relacionBusRutaConductorRepository.saveAll(relacionBusRutaConductores);*/
+        relacionBusRutaConductorRepository.saveAll(relaciones);
 
     }
 }
