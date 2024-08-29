@@ -1,7 +1,6 @@
 package puj.desarrolloweb.proyecto.model;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class Estacion {
     @Column(name = "zona", nullable = false)
     private String zona;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
         name = "Relacion_Estacion_Ruta",
         joinColumns = @JoinColumn(name = "estacion_codigo"),
@@ -27,13 +26,13 @@ public class Estacion {
     private List<Ruta> rutas;
 
     public Estacion() {
-        // Constructor vacío necesario para JPA
+        this.rutas = new ArrayList<>();
     }
 
     public Estacion(String nombre, String zona) {
+        this();
         this.nombre = nombre;
         this.zona = zona;
-        this.rutas = new ArrayList<>();
     }
 
     public Long getId() {
@@ -72,4 +71,3 @@ public class Estacion {
         this.rutas.add(ruta);
     }
 }
-

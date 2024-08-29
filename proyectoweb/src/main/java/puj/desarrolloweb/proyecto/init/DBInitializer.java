@@ -1,13 +1,16 @@
 package puj.desarrolloweb.proyecto.init;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+
 import org.springframework.stereotype.Component;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import puj.desarrolloweb.proyecto.model.Bus;
 import puj.desarrolloweb.proyecto.model.Conductor;
@@ -25,6 +28,9 @@ import puj.desarrolloweb.proyecto.repository.RutaRepository;
 public class DBInitializer implements CommandLineRunner {
  
     @Autowired
+    private SessionFactory sessionFactory;
+
+    @Autowired
     private BusRepository busRepository;
     @Autowired
     private ConductorRepository conductorRepository;
@@ -34,6 +40,12 @@ public class DBInitializer implements CommandLineRunner {
     private RelacionBusRutaConductorRepository relacionBusRutaConductorRepository;
     @Autowired
     private RutaRepository rutaRepository;
+
+    public List<Bus> buses = new ArrayList<>();
+    public List<Conductor> conductores = new ArrayList<>();
+    public List<Estacion> estaciones = new ArrayList<>();
+    public List<Ruta> rutas = new ArrayList<>();
+    public List<RelacionBusRutaConductor> relaciones = new ArrayList<>();
 
     @Override
     public void run(String... args) throws Exception {
@@ -137,6 +149,8 @@ public class DBInitializer implements CommandLineRunner {
         Ruta ruta_M51 = new Ruta("M51", "LMXJVSD");
         Ruta ruta_M82 = new Ruta("M82", "LMXJVSD");
         Ruta ruta_M83 = new Ruta("M83", "LMXJVSD");
+
+        System.out.println("=================== Cargamos rutas");
 
         //Init Estaciones
 
@@ -319,6 +333,7 @@ public class DBInitializer implements CommandLineRunner {
             //Zona M
             Estacion museoNacional = new Estacion("Museo Nacional", "M");
 
+            System.out.println("=================== Cargamos estaciones");
 
         //Init Buses
         Bus bus1 = new Bus("ABC123", "BRT");
@@ -422,6 +437,8 @@ public class DBInitializer implements CommandLineRunner {
         Bus bus99 = new Bus("ABD567", "Scania K320");
         Bus bus100 = new Bus("CDE890", "Mercedes-Benz O500");
 
+        System.out.println(" =================== Cargamos buses");
+
         //Init Conductores
 
         Conductor conductor1 = new Conductor(1023456789L, "Carlos Pérez", 3101234567L, "Calle 100 #15-20");
@@ -524,7 +541,9 @@ public class DBInitializer implements CommandLineRunner {
         Conductor conductor98 = new Conductor(1990123456L, "Ricardo Mejía", 3130123456L, "Avenida Boyacá #75-25");
         Conductor conductor99 = new Conductor(2001234567L, "Gabriela Reyes", 3151234567L, "Calle 26 #20-45");
         Conductor conductor100 = new Conductor(2012345678L, "Sergio López", 3202345678L, "Carrera 15 #120-30");
-        
+
+        System.out.println("=================== Conductores");
+
         //Rel Ruta - Estación
 
         ruta_1.addEstacion(portalEldorado);
@@ -1365,6 +1384,13 @@ ruta_G15.addEstacion(generalSantander);
 ruta_G15.addEstacion(ricaurte_F);
 ruta_G15.addEstacion(santaIsabel);
 
+ruta_H15.addEstacion(portalSur);
+ruta_H15.addEstacion(alqueria);
+ruta_H15.addEstacion(venecia);
+ruta_H15.addEstacion(generalSantander);
+ruta_H15.addEstacion(ricaurte_F);
+ruta_H15.addEstacion(santaIsabel);
+
 ruta_H17.addEstacion(portalUsme);
 ruta_H17.addEstacion(socorro);
 ruta_H17.addEstacion(santaLucia);
@@ -1688,10 +1714,7 @@ ruta_M83.addEstacion(avenidaPrimeroMayo);
 ruta_M83.addEstacion(bicentenario);
 ruta_M83.addEstacion(sanDiego);
 
-RelacionBusRutaConductor rbrcEX = new RelacionBusRutaConductor(bus1, ruta_1, conductor1);
-bus1.addBRC(rbrcEX);
-ruta_1.addBRC(rbrcEX);
-conductor1.addBRC(rbrcEX);
+System.out.println("=================== Anadimos estaciones a rutas");
 
 RelacionBusRutaConductor rbrc1 = new RelacionBusRutaConductor(bus1, ruta_1, conductor1);
 RelacionBusRutaConductor rbrc2 = new RelacionBusRutaConductor(bus2, ruta_2, conductor2);
@@ -1699,77 +1722,17 @@ RelacionBusRutaConductor rbrc3 = new RelacionBusRutaConductor(bus3, ruta_3, cond
 RelacionBusRutaConductor rbrc4 = new RelacionBusRutaConductor(bus4, ruta_4, conductor4);
 RelacionBusRutaConductor rbrc5 = new RelacionBusRutaConductor(bus5, ruta_5, conductor5);
 
-bus1.addBRC(rbrc1);
-ruta_1.addBRC(rbrc1);
-conductor1.addBRC(rbrc1);
-
-bus2.addBRC(rbrc2);
-ruta_2.addBRC(rbrc2);
-conductor2.addBRC(rbrc2);
-
-bus3.addBRC(rbrc3);
-ruta_3.addBRC(rbrc3);
-conductor3.addBRC(rbrc3);
-
-bus4.addBRC(rbrc4);
-ruta_4.addBRC(rbrc4);
-conductor4.addBRC(rbrc4);
-
-bus5.addBRC(rbrc5);
-ruta_5.addBRC(rbrc5);
-conductor5.addBRC(rbrc5);
-
 RelacionBusRutaConductor rbrc6 = new RelacionBusRutaConductor(bus6, ruta_6, conductor6);
 RelacionBusRutaConductor rbrc7 = new RelacionBusRutaConductor(bus7, ruta_7, conductor7);
 RelacionBusRutaConductor rbrc8 = new RelacionBusRutaConductor(bus8, ruta_8, conductor8);
 RelacionBusRutaConductor rbrc9 = new RelacionBusRutaConductor(bus9, ruta_A52, conductor9);
 RelacionBusRutaConductor rbrc10 = new RelacionBusRutaConductor(bus10, ruta_A60, conductor10);
 
-bus6.addBRC(rbrc6);
-ruta_6.addBRC(rbrc6);
-conductor6.addBRC(rbrc6);
-
-bus7.addBRC(rbrc7);
-ruta_7.addBRC(rbrc7);
-conductor7.addBRC(rbrc7);
-
-bus8.addBRC(rbrc8);
-ruta_8.addBRC(rbrc8);
-conductor8.addBRC(rbrc8);
-
-bus9.addBRC(rbrc9);
-ruta_A52.addBRC(rbrc9);
-conductor9.addBRC(rbrc9);
-
-bus10.addBRC(rbrc10);
-ruta_A60.addBRC(rbrc10);
-conductor10.addBRC(rbrc10);
-
 RelacionBusRutaConductor rbrc11 = new RelacionBusRutaConductor(bus11, ruta_A61, conductor11);
 RelacionBusRutaConductor rbrc12 = new RelacionBusRutaConductor(bus12, ruta_B10, conductor12);
 RelacionBusRutaConductor rbrc13 = new RelacionBusRutaConductor(bus13, ruta_B11, conductor13);
 RelacionBusRutaConductor rbrc14 = new RelacionBusRutaConductor(bus14, ruta_B12, conductor14);
 RelacionBusRutaConductor rbrc15 = new RelacionBusRutaConductor(bus15, ruta_B13, conductor15);
-
-bus11.addBRC(rbrc11);
-ruta_A61.addBRC(rbrc11);
-conductor11.addBRC(rbrc11);
-
-bus12.addBRC(rbrc12);
-ruta_B10.addBRC(rbrc12);
-conductor12.addBRC(rbrc12);
-
-bus13.addBRC(rbrc13);
-ruta_B11.addBRC(rbrc13);
-conductor13.addBRC(rbrc13);
-
-bus14.addBRC(rbrc14);
-ruta_B12.addBRC(rbrc14);
-conductor14.addBRC(rbrc14);
-
-bus15.addBRC(rbrc15);
-ruta_B13.addBRC(rbrc15);
-conductor15.addBRC(rbrc15);
 
 RelacionBusRutaConductor rbrc16 = new RelacionBusRutaConductor(bus16, ruta_B16, conductor16);
 RelacionBusRutaConductor rbrc17 = new RelacionBusRutaConductor(bus17, ruta_B18, conductor17);
@@ -1831,200 +1794,6 @@ RelacionBusRutaConductor rbrc63 = new RelacionBusRutaConductor(bus63, ruta_G52, 
 RelacionBusRutaConductor rbrc64 = new RelacionBusRutaConductor(bus64, ruta_H13, conductor64);
 RelacionBusRutaConductor rbrc65 = new RelacionBusRutaConductor(bus65, ruta_H15, conductor65);
 
-bus16.addBRC(rbrc16);
-ruta_B16.addBRC(rbrc16);
-conductor16.addBRC(rbrc16);
-
-bus17.addBRC(rbrc17);
-ruta_B18.addBRC(rbrc17);
-conductor17.addBRC(rbrc17);
-
-// Continuación de las relaciones con la adición a las listas correspondientes
-
-bus20.addBRC(rbrc20);
-ruta_B27.addBRC(rbrc20);
-conductor20.addBRC(rbrc20);
-
-bus21.addBRC(rbrc21);
-ruta_B28.addBRC(rbrc21);
-conductor21.addBRC(rbrc21);
-
-bus22.addBRC(rbrc22);
-ruta_B46.addBRC(rbrc22);
-conductor22.addBRC(rbrc22);
-
-bus23.addBRC(rbrc23);
-ruta_B50.addBRC(rbrc23);
-conductor23.addBRC(rbrc23);
-
-bus24.addBRC(rbrc24);
-ruta_B55.addBRC(rbrc24);
-conductor24.addBRC(rbrc24);
-
-bus25.addBRC(rbrc25);
-ruta_B72.addBRC(rbrc25);
-conductor25.addBRC(rbrc25);
-
-bus26.addBRC(rbrc26);
-ruta_B74.addBRC(rbrc26);
-conductor26.addBRC(rbrc26);
-
-bus27.addBRC(rbrc27);
-ruta_B75.addBRC(rbrc27);
-conductor27.addBRC(rbrc27);
-
-bus28.addBRC(rbrc28);
-ruta_C15.addBRC(rbrc28);
-conductor28.addBRC(rbrc28);
-
-bus29.addBRC(rbrc29);
-ruta_C17.addBRC(rbrc29);
-conductor29.addBRC(rbrc29);
-
-bus30.addBRC(rbrc30);
-ruta_C19.addBRC(rbrc30);
-conductor30.addBRC(rbrc30);
-
-bus31.addBRC(rbrc31);
-ruta_C25.addBRC(rbrc31);
-conductor31.addBRC(rbrc31);
-
-bus32.addBRC(rbrc32);
-ruta_C30.addBRC(rbrc32);
-conductor32.addBRC(rbrc32);
-
-bus33.addBRC(rbrc33);
-ruta_C50.addBRC(rbrc33);
-conductor33.addBRC(rbrc33);
-
-bus34.addBRC(rbrc34);
-ruta_C73.addBRC(rbrc34);
-conductor34.addBRC(rbrc34);
-
-bus35.addBRC(rbrc35);
-ruta_C84.addBRC(rbrc35);
-conductor35.addBRC(rbrc35);
-
-bus36.addBRC(rbrc36);
-ruta_D10.addBRC(rbrc36);
-conductor36.addBRC(rbrc36);
-
-bus37.addBRC(rbrc37);
-ruta_D21.addBRC(rbrc37);
-conductor37.addBRC(rbrc37);
-
-bus38.addBRC(rbrc38);
-ruta_D22.addBRC(rbrc38);
-conductor38.addBRC(rbrc38);
-
-bus39.addBRC(rbrc39);
-ruta_D24.addBRC(rbrc39);
-conductor39.addBRC(rbrc39);
-
-bus40.addBRC(rbrc40);
-ruta_D55.addBRC(rbrc40);
-conductor40.addBRC(rbrc40);
-
-bus41.addBRC(rbrc41);
-ruta_D81.addBRC(rbrc41);
-conductor41.addBRC(rbrc41);
-
-bus42.addBRC(rbrc42);
-ruta_E32.addBRC(rbrc42);
-conductor42.addBRC(rbrc42);
-
-bus43.addBRC(rbrc43);
-ruta_E42.addBRC(rbrc43);
-conductor43.addBRC(rbrc43);
-
-bus44.addBRC(rbrc44);
-ruta_F19.addBRC(rbrc44);
-conductor44.addBRC(rbrc44);
-
-bus45.addBRC(rbrc45);
-ruta_F23.addBRC(rbrc45);
-conductor45.addBRC(rbrc45);
-
-bus46.addBRC(rbrc46);
-ruta_F26.addBRC(rbrc46);
-conductor46.addBRC(rbrc46);
-
-bus47.addBRC(rbrc47);
-ruta_F28.addBRC(rbrc47);
-conductor47.addBRC(rbrc47);
-
-bus48.addBRC(rbrc48);
-ruta_F32.addBRC(rbrc48);
-conductor48.addBRC(rbrc48);
-
-bus49.addBRC(rbrc49);
-ruta_F51.addBRC(rbrc49);
-conductor49.addBRC(rbrc49);
-
-bus50.addBRC(rbrc50);
-ruta_F60.addBRC(rbrc50);
-conductor50.addBRC(rbrc50);
-
-bus51.addBRC(rbrc51);
-ruta_F61.addBRC(rbrc51);
-conductor51.addBRC(rbrc51);
-
-bus52.addBRC(rbrc52);
-ruta_G11.addBRC(rbrc52);
-conductor52.addBRC(rbrc52);
-
-bus53.addBRC(rbrc53);
-ruta_G12.addBRC(rbrc53);
-conductor53.addBRC(rbrc53);
-
-bus54.addBRC(rbrc54);
-ruta_G15.addBRC(rbrc54);
-conductor54.addBRC(rbrc54);
-
-bus55.addBRC(rbrc55);
-ruta_G22.addBRC(rbrc55);
-conductor55.addBRC(rbrc55);
-
-bus56.addBRC(rbrc56);
-ruta_G30.addBRC(rbrc56);
-conductor56.addBRC(rbrc56);
-
-bus57.addBRC(rbrc57);
-ruta_G41.addBRC(rbrc57);
-conductor57.addBRC(rbrc57);
-
-bus58.addBRC(rbrc58);
-ruta_G42.addBRC(rbrc58);
-conductor58.addBRC(rbrc58);
-
-bus59.addBRC(rbrc59);
-ruta_G43.addBRC(rbrc59);
-conductor59.addBRC(rbrc59);
-
-bus60.addBRC(rbrc60);
-ruta_G45.addBRC(rbrc60);
-conductor60.addBRC(rbrc60);
-
-bus61.addBRC(rbrc61);
-ruta_G46.addBRC(rbrc61);
-conductor61.addBRC(rbrc61);
-
-bus62.addBRC(rbrc62);
-ruta_G47.addBRC(rbrc62);
-conductor62.addBRC(rbrc62);
-
-bus63.addBRC(rbrc63);
-ruta_G52.addBRC(rbrc63);
-conductor63.addBRC(rbrc63);
-
-bus64.addBRC(rbrc64);
-ruta_H13.addBRC(rbrc64);
-conductor64.addBRC(rbrc64);
-
-bus65.addBRC(rbrc65);
-ruta_H15.addBRC(rbrc65);
-conductor65.addBRC(rbrc65);
-
 RelacionBusRutaConductor rbrc66 = new RelacionBusRutaConductor(bus66, ruta_H17, conductor66);
 RelacionBusRutaConductor rbrc67 = new RelacionBusRutaConductor(bus67, ruta_H20, conductor67);
 RelacionBusRutaConductor rbrc68 = new RelacionBusRutaConductor(bus68, ruta_H21, conductor68);
@@ -2067,155 +1836,11 @@ RelacionBusRutaConductor rbrc98 = new RelacionBusRutaConductor(bus98, ruta_A52, 
 RelacionBusRutaConductor rbrc99 = new RelacionBusRutaConductor(bus99, ruta_A60, conductor99);
 RelacionBusRutaConductor rbrc100 = new RelacionBusRutaConductor(bus100, ruta_A61, conductor100);
 
-bus66.addBRC(rbrc66);
-ruta_H17.addBRC(rbrc66);
-conductor66.addBRC(rbrc66);
-
-bus67.addBRC(rbrc67);
-ruta_H20.addBRC(rbrc67);
-conductor67.addBRC(rbrc67);
-
-bus68.addBRC(rbrc68);
-ruta_H21.addBRC(rbrc68);
-conductor68.addBRC(rbrc68);
-
-bus69.addBRC(rbrc69);
-ruta_H27.addBRC(rbrc69);
-conductor69.addBRC(rbrc69);
-
-bus70.addBRC(rbrc70);
-ruta_H54.addBRC(rbrc70);
-conductor70.addBRC(rbrc70);
-
-bus71.addBRC(rbrc71);
-ruta_H72.addBRC(rbrc71);
-conductor71.addBRC(rbrc71);
-
-bus72.addBRC(rbrc72);
-ruta_H73.addBRC(rbrc72);
-conductor72.addBRC(rbrc72);
-
-bus73.addBRC(rbrc73);
-ruta_H75.addBRC(rbrc73);
-conductor73.addBRC(rbrc73);
-
-bus74.addBRC(rbrc74);
-ruta_H76.addBRC(rbrc74);
-conductor74.addBRC(rbrc74);
-
-bus75.addBRC(rbrc75);
-ruta_H83.addBRC(rbrc75);
-conductor75.addBRC(rbrc75);
-
-bus76.addBRC(rbrc76);
-ruta_J23.addBRC(rbrc76);
-conductor76.addBRC(rbrc76);
-
-bus77.addBRC(rbrc77);
-ruta_J24.addBRC(rbrc77);
-conductor77.addBRC(rbrc77);
-
-bus78.addBRC(rbrc78);
-ruta_J70.addBRC(rbrc78);
-conductor78.addBRC(rbrc78);
-
-bus79.addBRC(rbrc79);
-ruta_J73.addBRC(rbrc79);
-conductor79.addBRC(rbrc79);
-
-bus80.addBRC(rbrc80);
-ruta_J74.addBRC(rbrc80);
-conductor80.addBRC(rbrc80);
-
-bus81.addBRC(rbrc81);
-ruta_J76.addBRC(rbrc81);
-conductor81.addBRC(rbrc81);
-
-bus82.addBRC(rbrc82);
-ruta_K10.addBRC(rbrc82);
-conductor82.addBRC(rbrc82);
-
-bus83.addBRC(rbrc83);
-ruta_K16.addBRC(rbrc83);
-conductor83.addBRC(rbrc83);
-
-bus84.addBRC(rbrc84);
-ruta_K23.addBRC(rbrc84);
-conductor84.addBRC(rbrc84);
-
-bus85.addBRC(rbrc85);
-ruta_K43.addBRC(rbrc85);
-conductor85.addBRC(rbrc85);
-
-bus86.addBRC(rbrc86);
-ruta_K54.addBRC(rbrc86);
-conductor86.addBRC(rbrc86);
-
-bus87.addBRC(rbrc87);
-ruta_K86.addBRC(rbrc87);
-conductor87.addBRC(rbrc87);
-
-bus88.addBRC(rbrc88);
-ruta_L10.addBRC(rbrc88);
-conductor88.addBRC(rbrc88);
-
-bus89.addBRC(rbrc89);
-ruta_L18.addBRC(rbrc89);
-conductor89.addBRC(rbrc89);
-
-bus90.addBRC(rbrc90);
-ruta_L25.addBRC(rbrc90);
-conductor90.addBRC(rbrc90);
-
-bus91.addBRC(rbrc91);
-ruta_L41.addBRC(rbrc91);
-conductor91.addBRC(rbrc91);
-
-bus92.addBRC(rbrc92);
-ruta_L81.addBRC(rbrc92);
-conductor92.addBRC(rbrc92);
-
-bus93.addBRC(rbrc93);
-ruta_L82.addBRC(rbrc93);
-conductor93.addBRC(rbrc93);
-
-bus94.addBRC(rbrc94);
-ruta_M47.addBRC(rbrc94);
-conductor94.addBRC(rbrc94);
-
-bus95.addBRC(rbrc95);
-ruta_M51.addBRC(rbrc95);
-conductor95.addBRC(rbrc95);
-
-bus96.addBRC(rbrc96);
-ruta_M82.addBRC(rbrc96);
-conductor96.addBRC(rbrc96);
-
-bus97.addBRC(rbrc97);
-ruta_M83.addBRC(rbrc97);
-conductor97.addBRC(rbrc97);
-
-bus98.addBRC(rbrc98);
-ruta_A52.addBRC(rbrc98);
-conductor98.addBRC(rbrc98);
-
-bus99.addBRC(rbrc99);
-ruta_A60.addBRC(rbrc99);
-conductor99.addBRC(rbrc99);
-
-bus100.addBRC(rbrc100);
-ruta_A61.addBRC(rbrc100);
-conductor100.addBRC(rbrc100);
-
         //Init Rel
 
-        List<Bus> buses = new ArrayList<>();
-        List<Conductor> conductores = new ArrayList<>();
-        List<Estacion> estaciones = new ArrayList<>();
-        List<Ruta> rutas = new ArrayList<>();
-        List<RelacionBusRutaConductor> relaciones = new ArrayList<>();
+        
 
-        buses.add(bus1);
+buses.add(bus1);
 buses.add(bus2);
 buses.add(bus3);
 buses.add(bus4);
@@ -2794,11 +2419,51 @@ relaciones.add(rbrc98);
 relaciones.add(rbrc99);
 relaciones.add(rbrc100);
 
-        busRepository.saveAll(buses);
-        conductorRepository.saveAll(conductores);
-        estacionRepository.saveAll(estaciones);
-        rutaRepository.saveAll(rutas);
-        relacionBusRutaConductorRepository.saveAll(relaciones);
 
+for (Estacion estacion : estaciones) {
+    if (estacion == null || estacion.getNombre() == null) {
+        throw new IllegalArgumentException("Estacion is invalid: " + estacion);
     }
+}
+
+for (Ruta ruta : rutas) {
+    if (ruta == null || ruta.getEstaciones() == null || ruta.getEstaciones().isEmpty()) {
+        throw new IllegalArgumentException("Ruta or its Estacion is invalid: " + ruta.getNombre_ruta());
+    }
+}
+
+for (RelacionBusRutaConductor relacion : relaciones) {
+    if (relacion == null || relacion.getBusRel() == null || 
+        relacion.getRutaRel() == null || relacion.getConductorRel() == null) {
+        throw new IllegalArgumentException("Relacion or its dependencies are invalid: " + relacion);
+    }
+}
+
+System.out.println("TRANSACCION");
+saveAllEntities();
+
+// saveAllEntities();
+
+}
+
+@Transactional
+public void saveAllEntities() {
+    try {
+        
+        relacionBusRutaConductorRepository.saveAll(relaciones);
+    } catch (Exception e) {
+        throw new RuntimeException("Failed to save entities", e);
+    }
+}
+
+@Transactional
+public void saveAllEntitiesInBatch() {
+    estacionRepository.saveAll(estaciones);
+    rutaRepository.saveAll(rutas);
+    busRepository.saveAll(buses);
+    conductorRepository.saveAll(conductores);
+    relacionBusRutaConductorRepository.saveAll(relaciones);
+}
+
+
 }

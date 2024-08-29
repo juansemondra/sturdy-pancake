@@ -1,11 +1,8 @@
 package puj.desarrolloweb.proyecto.model;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import jakarta.persistence.*;
-//import jakarta.validation.constraints.Email;
-//import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Bus {
@@ -14,7 +11,7 @@ public class Bus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "busRel")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "busRel", cascade = CascadeType.ALL)
     private List<RelacionBusRutaConductor> relacionBusRutaConductorLista;
 
     @Column(name = "placa", nullable = false, unique = true)
@@ -24,13 +21,13 @@ public class Bus {
     private String modelo;
 
     public Bus() {
-        // Constructor vacío necesario para JPA
+        this.relacionBusRutaConductorLista = new ArrayList<>();
     }
 
     public Bus(String placa, String modelo) {
+        this();
         this.placa = placa;
         this.modelo = modelo;
-        this.relacionBusRutaConductorLista = new ArrayList<>();
     }
 
     public Long getId() {

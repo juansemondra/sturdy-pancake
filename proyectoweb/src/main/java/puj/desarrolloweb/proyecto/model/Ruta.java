@@ -14,10 +14,15 @@ public class Ruta {
     @Column(name = "nombre_ruta", nullable = false)
     private String nombre_ruta;
 
-    @OneToMany(mappedBy = "rutaRel")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "rutaRel", cascade = CascadeType.ALL)
     private List<RelacionBusRutaConductor> relacionBusRutaConductorLista;
 
-    @ManyToMany(mappedBy = "rutas")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "Relacion_Estacion_Ruta",
+        joinColumns = @JoinColumn(name = "ruta_codigo"),
+        inverseJoinColumns = @JoinColumn(name = "estacion_codigo")
+    )
     private List<Estacion> estaciones;
 
     @Column(name = "horario_de_inicio", nullable = false)
@@ -30,16 +35,16 @@ public class Ruta {
     private String dias_disponibles;
 
     public Ruta() {
-        // Constructor vacío necesario para JPA
+        this.relacionBusRutaConductorLista = new ArrayList<>();
+        this.estaciones = new ArrayList<>();
     }
 
     public Ruta(String nombre_ruta, String dias) {
+        this();
         this.nombre_ruta = nombre_ruta;
         this.horario_de_inicio = 430;
         this.horario_de_final = 2300;
         this.dias_disponibles = dias;
-        this.relacionBusRutaConductorLista = new ArrayList<>();
-        this.estaciones = new ArrayList<>();
     }
 
     public Long getId() {
@@ -100,6 +105,7 @@ public class Ruta {
 
     public void addEstacion(Estacion estacion) {
         this.estaciones.add(estacion);
+        estacion.addRuta(this);
     }
 
     public void addBRC(RelacionBusRutaConductor BRC) {

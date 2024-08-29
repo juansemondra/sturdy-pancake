@@ -9,15 +9,15 @@ public class RelacionBusRutaConductor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "ruta_id")
     private Ruta rutaRel;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "bus_id")
     private Bus busRel;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "conductor_id")
     private Conductor conductorRel;
 
@@ -25,14 +25,17 @@ public class RelacionBusRutaConductor {
     private String fecha_disponible;
 
     public RelacionBusRutaConductor() {
-        // Constructor vacío necesario para JPA
     }
 
-    public RelacionBusRutaConductor (Bus bus, Ruta rut, Conductor con){
-        this.rutaRel = rut;
+    public RelacionBusRutaConductor(Bus bus, Ruta ruta, Conductor conductor) {
         this.busRel = bus;
-        this.conductorRel = con;
-        this.fecha_disponible = rut.getDias_disponibles();
+        this.rutaRel = ruta;
+        this.conductorRel = conductor;
+        this.fecha_disponible = ruta.getDias_disponibles();
+        
+        bus.addBRC(this);
+        ruta.addBRC(this);
+        conductor.addBRC(this);
     }
 
     public Long getId() {
@@ -74,5 +77,4 @@ public class RelacionBusRutaConductor {
     public void setFecha_disponible(String fecha_disponible) {
         this.fecha_disponible = fecha_disponible;
     }
-
 }
