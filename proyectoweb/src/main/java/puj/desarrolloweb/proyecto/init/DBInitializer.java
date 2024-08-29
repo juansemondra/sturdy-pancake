@@ -48,6 +48,7 @@ public class DBInitializer implements CommandLineRunner {
     public List<RelacionBusRutaConductor> relaciones = new ArrayList<>();
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
 
 
@@ -2420,28 +2421,26 @@ relaciones.add(rbrc99);
 relaciones.add(rbrc100);
 
 
-for (Estacion estacion : estaciones) {
-    if (estacion == null || estacion.getNombre() == null) {
-        throw new IllegalArgumentException("Estacion is invalid: " + estacion);
-    }
-}
-
-for (Ruta ruta : rutas) {
-    if (ruta == null || ruta.getEstaciones() == null || ruta.getEstaciones().isEmpty()) {
-        throw new IllegalArgumentException("Ruta or its Estacion is invalid: " + ruta.getNombre_ruta());
-    }
-}
-
-for (RelacionBusRutaConductor relacion : relaciones) {
-    if (relacion == null || relacion.getBusRel() == null || 
-        relacion.getRutaRel() == null || relacion.getConductorRel() == null) {
-        throw new IllegalArgumentException("Relacion or its dependencies are invalid: " + relacion);
-    }
-}
-
 System.out.println("TRANSACCION");
-saveAllEntities();
 
+for (Estacion estTemp : estaciones){
+    estacionRepository.save(estTemp);
+    System.out.println("Estacion salvada " + estTemp.getNombre());
+}
+for (Bus busTemp : buses) {
+    busRepository.save(busTemp);
+    System.out.println("Bus salvado " + busTemp.getPlaca());
+}
+for (Conductor conTemp : conductores){
+    conductorRepository.save(conTemp);
+    System.out.println("Conductor salvado " + conTemp.getNombre());
+}
+for (RelacionBusRutaConductor rbTemp : relaciones){
+    relacionBusRutaConductorRepository.save(rbTemp);
+    System.out.println("Datos " + rbTemp.getBusRel().getPlaca() + " " + rbTemp.getRutaRel().getNombre_ruta() + " " + rbTemp.getConductorRel().getNombre());
+}
+
+System.out.println("Agora sim?");
 // saveAllEntities();
 
 }

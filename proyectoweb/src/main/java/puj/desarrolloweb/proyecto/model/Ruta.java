@@ -1,6 +1,7 @@
 package puj.desarrolloweb.proyecto.model;
 
 import jakarta.persistence.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +27,10 @@ public class Ruta {
     private List<Estacion> estaciones;
 
     @Column(name = "horario_de_inicio", nullable = false)
-    private int horario_de_inicio;
+    private LocalTime horario_de_inicio;
 
     @Column(name = "horario_de_final", nullable = false)
-    private int horario_de_final;
+    private LocalTime horario_de_final;
 
     @Column(name = "dias_disponibles", nullable = false)
     private String dias_disponibles;
@@ -42,8 +43,8 @@ public class Ruta {
     public Ruta(String nombre_ruta, String dias) {
         this();
         this.nombre_ruta = nombre_ruta;
-        this.horario_de_inicio = 430;
-        this.horario_de_final = 2300;
+        this.horario_de_inicio = LocalTime.of(4, 30);
+        this.horario_de_final = LocalTime.of(23, 0);
         this.dias_disponibles = dias;
     }
 
@@ -79,19 +80,19 @@ public class Ruta {
         this.estaciones = estaciones;
     }
 
-    public int getHorario_de_inicio() {
+    public LocalTime getHorario_de_inicio() {
         return horario_de_inicio;
     }
 
-    public void setHorario_de_inicio(int horario_de_inicio) {
+    public void setHorario_de_inicio(LocalTime horario_de_inicio) {
         this.horario_de_inicio = horario_de_inicio;
     }
 
-    public int getHorario_de_final() {
+    public LocalTime getHorario_de_final() {
         return horario_de_final;
     }
 
-    public void setHorario_de_final(int horario_de_final) {
+    public void setHorario_de_final(LocalTime horario_de_final) {
         this.horario_de_final = horario_de_final;
     }
 

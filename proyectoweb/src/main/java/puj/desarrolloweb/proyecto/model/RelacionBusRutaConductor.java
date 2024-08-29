@@ -32,7 +32,7 @@ public class RelacionBusRutaConductor {
         this.rutaRel = ruta;
         this.conductorRel = conductor;
         this.fecha_disponible = ruta.getDias_disponibles();
-        
+
         bus.addBRC(this);
         ruta.addBRC(this);
         conductor.addBRC(this);
