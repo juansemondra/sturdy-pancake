@@ -17,20 +17,18 @@ public class Estacion {
     @Column(name = "zona", nullable = false)
     private String zona;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
         name = "Relacion_Estacion_Ruta",
         joinColumns = @JoinColumn(name = "estacion_codigo"),
         inverseJoinColumns = @JoinColumn(name = "ruta_codigo")
     )
-    private List<Ruta> rutas;
+    private List<Ruta> rutas = new ArrayList<>();
 
     public Estacion() {
-        this.rutas = new ArrayList<>();
     }
 
     public Estacion(String nombre, String zona) {
-        this();
         this.nombre = nombre;
         this.zona = zona;
     }
@@ -69,5 +67,6 @@ public class Estacion {
 
     public void addRuta(Ruta ruta) {
         this.rutas.add(ruta);
+        ruta.getEstaciones().add(this); // Ensure bidirectional relationship is maintained
     }
 }

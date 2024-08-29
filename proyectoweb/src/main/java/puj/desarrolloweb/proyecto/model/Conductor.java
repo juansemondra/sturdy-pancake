@@ -39,6 +39,7 @@ public class Conductor {
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.buses_asignados = 0; // Initialize buses_asignados
     }
 
     public Long getId() {
@@ -99,5 +100,7 @@ public class Conductor {
 
     public void addBRC(RelacionBusRutaConductor relacion) {
         this.relacionBusRutaConductorLista.add(relacion);
+        this.buses_asignados++; // Increment buses_asignados when a new relation is added
+        relacion.setConductorRel(this); // Ensure bidirectional relationship is maintained
     }
 }

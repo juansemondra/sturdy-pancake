@@ -9,15 +9,15 @@ public class RelacionBusRutaConductor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ruta_id")
     private Ruta rutaRel;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bus_id")
     private Bus busRel;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "conductor_id")
     private Conductor conductorRel;
 
@@ -32,10 +32,9 @@ public class RelacionBusRutaConductor {
         this.rutaRel = ruta;
         this.conductorRel = conductor;
         this.fecha_disponible = ruta.getDias_disponibles();
-
         bus.addBRC(this);
-        ruta.addBRC(this);
         conductor.addBRC(this);
+        ruta.addBRC(this);
     }
 
     public Long getId() {

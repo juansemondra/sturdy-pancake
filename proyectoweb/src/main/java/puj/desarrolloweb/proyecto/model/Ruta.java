@@ -16,15 +16,15 @@ public class Ruta {
     private String nombre_ruta;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "rutaRel", cascade = CascadeType.ALL)
-    private List<RelacionBusRutaConductor> relacionBusRutaConductorLista;
+    private List<RelacionBusRutaConductor> relacionBusRutaConductorLista = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
         name = "Relacion_Estacion_Ruta",
         joinColumns = @JoinColumn(name = "ruta_codigo"),
         inverseJoinColumns = @JoinColumn(name = "estacion_codigo")
     )
-    private List<Estacion> estaciones;
+    private List<Estacion> estaciones = new ArrayList<>();
 
     @Column(name = "horario_de_inicio", nullable = false)
     private LocalTime horario_de_inicio;
@@ -36,18 +36,16 @@ public class Ruta {
     private String dias_disponibles;
 
     public Ruta() {
-        this.relacionBusRutaConductorLista = new ArrayList<>();
-        this.estaciones = new ArrayList<>();
     }
 
     public Ruta(String nombre_ruta, String dias) {
-        this();
         this.nombre_ruta = nombre_ruta;
         this.horario_de_inicio = LocalTime.of(4, 30);
         this.horario_de_final = LocalTime.of(23, 0);
         this.dias_disponibles = dias;
     }
 
+    // getters and setters
     public Long getId() {
         return id;
     }
@@ -106,10 +104,11 @@ public class Ruta {
 
     public void addEstacion(Estacion estacion) {
         this.estaciones.add(estacion);
-        estacion.addRuta(this);
+        estacion.getRutas().add(this); // Ensure bidirectional relationship is maintained
     }
 
     public void addBRC(RelacionBusRutaConductor BRC) {
         this.relacionBusRutaConductorLista.add(BRC);
+        BRC.setRutaRel(this); // Ensure bidirectional relationship is maintained
     }
 }

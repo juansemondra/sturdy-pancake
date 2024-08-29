@@ -30,6 +30,7 @@ public class Bus {
         this.modelo = modelo;
     }
 
+    // getters and setters
     public Long getId() {
         return id;
     }
@@ -64,5 +65,6 @@ public class Bus {
 
     public void addBRC(RelacionBusRutaConductor BRC) {
         this.relacionBusRutaConductorLista.add(BRC);
+        BRC.setBusRel(this); // Ensure bidirectional relationship is maintained
     }
 }
