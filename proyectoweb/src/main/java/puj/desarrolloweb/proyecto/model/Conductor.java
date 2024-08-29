@@ -31,6 +31,7 @@ public class Conductor {
 
     public Conductor() {
         this.relacionBusRutaConductorLista = new ArrayList<>();
+        this.buses_asignados = 0;
     }
 
     public Conductor(Long cedula, String nombre, Long telefono, String direccion) {
@@ -99,5 +100,6 @@ public class Conductor {
 
     public void addBRC(RelacionBusRutaConductor relacion) {
         this.relacionBusRutaConductorLista.add(relacion);
+        this.buses_asignados = this.relacionBusRutaConductorLista.size(); // Increment buses_asignados when adding a relationship
     }
 }

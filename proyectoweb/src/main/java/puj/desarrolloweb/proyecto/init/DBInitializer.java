@@ -2426,18 +2426,34 @@ System.out.println("TRANSACCION");
 for (Estacion estTemp : estaciones){
     estacionRepository.save(estTemp);
     System.out.println("Estacion salvada " + estTemp.getNombre());
+    //contador que dice en que index va y cuantas faltan
+    System.out.println("Index: " + estaciones.indexOf(estTemp) + " Faltan: " + (estaciones.size() - estaciones.indexOf(estTemp)));
 }
 for (Bus busTemp : buses) {
     busRepository.save(busTemp);
     System.out.println("Bus salvado " + busTemp.getPlaca());
+    //contador que dice en que index va y cuantas faltan
+    System.out.println("Index: " + buses.indexOf(busTemp) + " Faltan: " + (buses.size() - buses.indexOf(busTemp)));
+
 }
 for (Conductor conTemp : conductores){
     conductorRepository.save(conTemp);
     System.out.println("Conductor salvado " + conTemp.getNombre());
+    //contador que dice en que index va y cuantas faltan
+    System.out.println("Index: " + conductores.indexOf(conTemp) + " Faltan: " + (conductores.size() - conductores.indexOf(conTemp)));
+}
+System.out.println("ultimo for");
+//esperar 3 segundos
+try {
+    Thread.sleep(3000);
+} catch (InterruptedException e) {
+    e.printStackTrace();
 }
 for (RelacionBusRutaConductor rbTemp : relaciones){
     relacionBusRutaConductorRepository.save(rbTemp);
     System.out.println("Datos " + rbTemp.getBusRel().getPlaca() + " " + rbTemp.getRutaRel().getNombre_ruta() + " " + rbTemp.getConductorRel().getNombre());
+    //contador que dice en que index va y cuantas faltan
+    System.out.println("Index: " + relaciones.indexOf(rbTemp) + " Faltan: " + (relaciones.size() - relaciones.indexOf(rbTemp)));
 }
 
 System.out.println("Agora sim?");
@@ -2449,7 +2465,9 @@ System.out.println("Agora sim?");
 public void saveAllEntities() {
     try {
         
-        relacionBusRutaConductorRepository.saveAll(relaciones);
+     relacionBusRutaConductorRepository.saveAll(relaciones);
+
+        System.out.println("Relaciones guardadas");
     } catch (Exception e) {
         throw new RuntimeException("Failed to save entities", e);
     }
@@ -2457,11 +2475,44 @@ public void saveAllEntities() {
 
 @Transactional
 public void saveAllEntitiesInBatch() {
+    //print
+    System.out.println("Saving entities in batch");
+    //wait 30 seconds
+    try {
+        Thread.sleep(30000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     estacionRepository.saveAll(estaciones);
+    System.out.println("Estaciones saved");
+     //wait 30 seconds
+     try {
+        Thread.sleep(30000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     rutaRepository.saveAll(rutas);
+    System.out.println("Rutas saved");
+    //wait 30 seconds
+    try {
+        Thread.sleep(30000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     busRepository.saveAll(buses);
+    System.out.println("Buses saved");
+     //wait 30 seconds
+     try {
+        Thread.sleep(30000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     conductorRepository.saveAll(conductores);
+    System.out.println("Conductores saved");
     relacionBusRutaConductorRepository.saveAll(relaciones);
+
+    //print
+    System.out.println("Entities saved in batch");
 }
 
 
