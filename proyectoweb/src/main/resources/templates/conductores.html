@@ -3,49 +3,326 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <title>Conductores</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+    <title>Driver Management</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
   <body>
-    <h1>Lista de Conductores</h1>
-    <div>
-      <a href="/conductores/nuevo">Crear nuevo conductor</a>
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+      style="font-family: Inter, 'Noto Sans', sans-serif"
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col w-80">
+            <div
+              class="flex h-full min-h-[700px] flex-col justify-between bg-white p-4"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-center gap-3 px-3 py-2">
+                    <div
+                      class="text-[#111418]"
+                      data-icon="House"
+                      data-size="24px"
+                      data-weight="regular"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24px"
+                        height="24px"
+                        fill="currentColor"
+                        viewBox="0 0 256 256"
+                      >
+                        <path
+                          d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <p
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                    >
+                      Dashboard
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-3 px-3 py-2">
+                    <div
+                      class="text-[#111418]"
+                      data-icon="Bus"
+                      data-size="24px"
+                      data-weight="regular"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24px"
+                        height="24px"
+                        fill="currentColor"
+                        viewBox="0 0 256 256"
+                      >
+                        <path
+                          d="M184,32H72A32,32,0,0,0,40,64V208a16,16,0,0,0,16,16H80a16,16,0,0,0,16-16V192h64v16a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V64A32,32,0,0,0,184,32ZM56,176V120H200v56Zm0-96H200v24H56ZM72,48H184a16,16,0,0,1,16,16H56A16,16,0,0,1,72,48Zm8,160H56V192H80Zm96,0V192h24v16Zm-72-60a12,12,0,1,1-12-12A12,12,0,0,1,104,148Zm72,0a12,12,0,1,1-12-12A12,12,0,0,1,176,148Zm72-68v24a8,8,0,0,1-16,0V80a8,8,0,0,1,16,0ZM24,80v24a8,8,0,0,1-16,0V80a8,8,0,0,1,16,0Z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <p
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                    >
+                      Bus Management
+                    </p>
+                  </div>
+                  <div
+                    class="flex items-center gap-3 px-3 py-2 rounded-xl bg-[#f0f2f4]"
+                  >
+                    <div
+                      class="text-[#111418]"
+                      data-icon="User"
+                      data-size="24px"
+                      data-weight="fill"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24px"
+                        height="24px"
+                        fill="currentColor"
+                        viewBox="0 0 256 256"
+                      >
+                        <path
+                          d="M230.93,220a8,8,0,0,1-6.93,4H32a8,8,0,0,1-6.92-12c15.23-26.33,38.7-45.21,66.09-54.16a72,72,0,1,1,73.66,0c27.39,8.95,50.86,27.83,66.09,54.16A8,8,0,0,1,230.93,220Z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <p
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                    >
+                      Driver Management
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-3 px-3 py-2">
+                    <div
+                      class="text-[#111418]"
+                      data-icon="MapTrifold"
+                      data-size="24px"
+                      data-weight="regular"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24px"
+                        height="24px"
+                        fill="currentColor"
+                        viewBox="0 0 256 256"
+                      >
+                        <path
+                          d="M228.92,49.69a8,8,0,0,0-6.86-1.45L160.93,63.52,99.58,32.84a8,8,0,0,0-5.52-.6l-64,16A8,8,0,0,0,24,56V200a8,8,0,0,0,9.94,7.76l61.13-15.28,61.35,30.68A8.15,8.15,0,0,0,160,224a8,8,0,0,0,1.94-.24l64-16A8,8,0,0,0,232,200V56A8,8,0,0,0,228.92,49.69ZM104,52.94l48,24V203.06l-48-24ZM40,62.25l48-12v127.5l-48,12Zm176,131.5-48,12V78.25l48-12Z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <p
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                    >
+                      Trip Management
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-3 px-3 py-2">
+                    <div
+                      class="text-[#111418]"
+                      data-icon="ChatText"
+                      data-size="24px"
+                      data-weight="regular"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24px"
+                        height="24px"
+                        fill="currentColor"
+                        viewBox="0 0 256 256"
+                      >
+                        <path
+                          d="M216,48H40A16,16,0,0,0,24,64V224a15.85,15.85,0,0,0,9.24,14.5A16.13,16.13,0,0,0,40,240a15.89,15.89,0,0,0,10.25-3.78.69.69,0,0,0,.13-.11L82.5,208H216a16,16,0,0,0,16-16V64A16,16,0,0,0,216,48ZM40,224h0ZM216,192H82.5a16,16,0,0,0-10.3,3.75l-.12.11L40,224V64H216ZM88,112a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H96A8,8,0,0,1,88,112Zm0,32a8,8,0,0,1,8-8h64a8,8,0,1,1,0,16H96A8,8,0,0,1,88,144Z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <p
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                    >
+                      Feedback
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="layout-content-container flex flex-col max-w-[960px] flex-1"
+          >
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p
+                class="text-[#111418] tracking-light text-[32px] font-bold leading-tight min-w-72"
+              >
+                Driver Management
+              </p>
+              <a href="/conductores/nuevo">
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal"
+                >
+                  <span class="truncate">Add Driver</span>
+                </button>
+              </a>
+            </div>
+            <div class="px-4 py-3">
+              <label class="flex flex-col min-w-40 h-12 w-full">
+                <div class="flex w-full flex-1 items-stretch rounded-xl h-full">
+                  <div
+                    class="text-[#637588] flex border-none bg-[#f0f2f4] items-center justify-center pl-4 rounded-l-xl border-r-0"
+                    data-icon="MagnifyingGlass"
+                    data-size="24px"
+                    data-weight="regular"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24px"
+                      height="24px"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <input
+                    placeholder="Search by name or phone number"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f4] focus:border-none h-full placeholder:text-[#637588] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                    value=""
+                  />
+                </div>
+              </label>
+            </div>
+            <div class="px-4 py-3 @container">
+              <div
+                class="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white"
+              >
+                <table class="flex-1">
+                  <thead>
+                    <tr class="bg-white">
+                      <th
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-56 px-4 py-3 text-left text-[#111418] w-14 text-sm font-medium leading-normal"
+                      ></th>
+                      <th
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-176 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal"
+                      >
+                        Name
+                      </th>
+                      <th
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-296 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal"
+                      >
+                        Phone Number
+                      </th>
+                      <th
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-416 px-4 py-3 text-left text-[#111418] w-60 text-sm font-medium leading-normal"
+                      >
+                        Status
+                      </th>
+                      <th
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-536 px-4 py-3 text-left text-[#111418] w-60 text-[#637588] text-sm font-medium leading-normal"
+                      ></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      th:each="conductor : ${conductores}"
+                      class="border-t border-t-[#dce0e5]"
+                    >
+                      <td
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-56 h-[72px] px-4 py-2 w-14 text-sm font-normal leading-normal"
+                      >
+                        <div
+                          class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10"
+                          style="
+                            background-image: url('https://cdn.usegalileo.ai/stability/0935f046-8d93-40b3-93f4-9bfeff4c6478.png');
+                          "
+                        ></div>
+                      </td>
+                      <td
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-176 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal"
+                        th:text="${conductor.nombre}"
+                      ></td>
+                      <td
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-296 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal"
+                        th:text="${conductor.telefono}"
+                      ></td>
+                      <td
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-416 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal"
+                      >
+                        <a
+                          th:href="@{/conductores/editar/{id}(id=${conductor.id})}"
+                        >
+                          <button
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
+                          >
+                            <span class="truncate">Edit</span>
+                          </button>
+                        </a>
+                      </td>
+                      <td
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-536 h-[72px] px-4 py-2 w-60 text-[#637588] text-sm font-bold leading-normal tracking-[0.015em]"
+                      >
+                        <form
+                          th:action="@{/conductores/eliminar/{id}(id=${conductor.id})}"
+                          method="post"
+                          style="display: inline"
+                        >
+                          <input type="hidden" name="_method" value="delete" />
+                          <button
+                            class="text-[#637588] text-sm font-bold leading-normal"
+                            type="submit"
+                          >
+                            View Details
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                    <!-- Repeat above block for other conductors with rotating image URLs -->
+                  </tbody>
+                </table>
+              </div>
+              <style>
+                @container (max-width:56px) {
+                  .table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-56 {
+                    display: none;
+                  }
+                }
+                @container (max-width:176px) {
+                  .table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-176 {
+                    display: none;
+                  }
+                }
+                @container (max-width:296px) {
+                  .table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-296 {
+                    display: none;
+                  }
+                }
+                @container (max-width:416px) {
+                  .table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-416 {
+                    display: none;
+                  }
+                }
+                @container (max-width:536px) {
+                  .table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-536 {
+                    display: none;
+                  }
+                }
+              </style>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Cédula</th>
-          <th>Teléfono</th>
-          <th>Dirección</th>
-          <th>Buses Asignados</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="conductor : ${conductores}">
-          <td th:text="${conductor.id}"></td>
-          <td th:text="${conductor.nombre}"></td>
-          <td th:text="${conductor.cedula}"></td>
-          <td th:text="${conductor.telefono}"></td>
-          <td th:text="${conductor.direccion}"></td>
-          <td th:text="${conductor.buses_asignados}"></td>
-          <td>
-            <a th:href="@{/conductores/editar/{id}(id=${conductor.id})}"
-              >Editar</a
-            >
-            <form
-              th:action="@{/conductores/eliminar/{id}(id=${conductor.id})}"
-              method="post"
-              style="display: inline"
-            >
-              <input type="hidden" name="_method" value="delete" />
-              <button type="submit">Eliminar</button>
-            </form>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </body>
 </html>

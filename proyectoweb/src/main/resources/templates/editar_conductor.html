@@ -3,54 +3,130 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
     <title>Editar Conductor</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
   <body>
-    <h1>Editar Conductor</h1>
-    <form
-      th:action="@{/conductores/actualizar/{id}(id=${conductor.id})}"
-      method="post"
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+      style="font-family: Inter, 'Noto Sans', sans-serif"
     >
-      <div>
-        <label for="nombre">Nombre:</label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          th:value="${conductor.nombre}"
-        />
+      <div class="layout-container flex h-full grow flex-col">
+        <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col w-80">
+            <div
+              class="flex h-full min-h-[700px] flex-col justify-between bg-white p-4"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-center gap-3 px-3 py-2">
+                    <div
+                      class="text-[#111418]"
+                      data-icon="User"
+                      data-size="24px"
+                      data-weight="fill"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24px"
+                        height="24px"
+                        fill="currentColor"
+                        viewBox="0 0 256 256"
+                      >
+                        <path
+                          d="M230.93,220a8,8,0,0,1-6.93,4H32a8,8,0,0,1-6.92-12c15.23-26.33,38.7-45.21,66.09-54.16a72,72,0,1,1,73.66,0c27.39,8.95,50.86,27.83,66.09,54.16A8,8,0,0,1,230.93,220Z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <p
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                    >
+                      Editar Conductor
+                    </p>
+                  </div>
+                </div>
+                <form
+                  th:action="@{/conductores/actualizar/{id}(id=${conductor.id})}"
+                  method="post"
+                  class="flex flex-col gap-4"
+                >
+                  <div class="flex flex-col gap-2">
+                    <label
+                      for="nombre"
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                      >Nombre:</label
+                    >
+                    <input
+                      type="text"
+                      id="nombre"
+                      name="nombre"
+                      th:value="${conductor.nombre}"
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f4] focus:border-none h-full placeholder:text-[#637588] px-4 text-base font-normal leading-normal"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label
+                      for="cedula"
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                      >Cédula:</label
+                    >
+                    <input
+                      type="text"
+                      id="cedula"
+                      name="cedula"
+                      th:value="${conductor.cedula}"
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f4] focus:border-none h-full placeholder:text-[#637588] px-4 text-base font-normal leading-normal"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label
+                      for="telefono"
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                      >Teléfono:</label
+                    >
+                    <input
+                      type="text"
+                      id="telefono"
+                      name="telefono"
+                      th:value="${conductor.telefono}"
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f4] focus:border-none h-full placeholder:text-[#637588] px-4 text-base font-normal leading-normal"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label
+                      for="direccion"
+                      class="text-[#111418] text-sm font-medium leading-normal"
+                      >Dirección:</label
+                    >
+                    <input
+                      type="text"
+                      id="direccion"
+                      name="direccion"
+                      th:value="${conductor.direccion}"
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f4] focus:border-none h-full placeholder:text-[#637588] px-4 text-base font-normal leading-normal"
+                    />
+                  </div>
+                  <div class="flex justify-end">
+                    <button
+                      type="submit"
+                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal"
+                    >
+                      Guardar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label for="cedula">Cédula:</label>
-        <input
-          type="text"
-          id="cedula"
-          name="cedula"
-          th:value="${conductor.cedula}"
-        />
-      </div>
-      <div>
-        <label for="telefono">Teléfono:</label>
-        <input
-          type="text"
-          id="telefono"
-          name="telefono"
-          th:value="${conductor.telefono}"
-        />
-      </div>
-      <div>
-        <label for="direccion">Dirección:</label>
-        <input
-          type="text"
-          id="direccion"
-          name="direccion"
-          th:value="${conductor.direccion}"
-        />
-      </div>
-      <div>
-        <button type="submit">Guardar</button>
-      </div>
-    </form>
+    </div>
   </body>
 </html>
