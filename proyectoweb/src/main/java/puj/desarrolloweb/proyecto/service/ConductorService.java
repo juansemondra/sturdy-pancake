@@ -11,7 +11,7 @@ import puj.desarrolloweb.proyecto.repository.BusRepository;
 import puj.desarrolloweb.proyecto.repository.ConductorRepository;
 import puj.desarrolloweb.proyecto.repository.RelacionBusRutaConductorRepository;
 
-import main.java.puj.desarrolloweb.proyecto.exceptions.BusAlreadyAssignedException;
+import puj.desarrolloweb.proyecto.exceptions.BusAlreadyAssignedException;
 
 import java.util.List;
 import java.util.Optional;
