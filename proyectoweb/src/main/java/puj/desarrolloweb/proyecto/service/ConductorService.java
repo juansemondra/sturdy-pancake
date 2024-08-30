@@ -3,12 +3,15 @@ package puj.desarrolloweb.proyecto.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import puj.desarrolloweb.proyecto.model.Bus;
 import puj.desarrolloweb.proyecto.model.Conductor;
 import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
 import puj.desarrolloweb.proyecto.repository.BusRepository;
 import puj.desarrolloweb.proyecto.repository.ConductorRepository;
 import puj.desarrolloweb.proyecto.repository.RelacionBusRutaConductorRepository;
+
+import main.java.puj.desarrolloweb.proyecto.exceptions.BusAlreadyAssignedException;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +26,7 @@ public class ConductorService {
     private BusRepository busRepository;
 
     @Autowired
-    private RelacionBusRutaConductorRepository relacionRepository;
+    private RelacionBusRutaConductorRepository relacionBusRutaConductorRepository;
 
     // CRUD básico para conductores
     public List<Conductor> findAll() {
@@ -48,17 +51,39 @@ public class ConductorService {
         Conductor conductor = conductorRepository.findById(conductorId).orElseThrow();
         Bus bus = busRepository.findById(busId).orElseThrow();
 
+        // Verificar si el bus ya está asignado al conductor
+        for (RelacionBusRutaConductor relacion : conductor.getRelacionBusRutaConductorLista()) {
+            if (relacion.getBusRel().getId().equals(busId)) {
+                throw new BusAlreadyAssignedException("El bus ya está asignado a este conductor.");
+            }
+        }
+
         RelacionBusRutaConductor relacion = new RelacionBusRutaConductor();
         relacion.setConductorRel(conductor);
         relacion.setBusRel(bus);
         relacion.setFecha_disponible(diasAsignados);
 
-        relacionRepository.save(relacion);
-
+        relacionBusRutaConductorRepository.save(relacion);
         conductor.addBRC(relacion);
         bus.addBRC(relacion);
 
         return conductorRepository.save(conductor);
+    }
+
+    public void actualizarDiasAsignados(Long conductorId, Long busId, String diasAsignados) {
+        RelacionBusRutaConductor relacion = relacionBusRutaConductorRepository.findByConductorRelIdAndBusRelId(conductorId, busId);
+        if (relacion != null) {
+            relacion.setFecha_disponible(diasAsignados);
+            relacionBusRutaConductorRepository.save(relacion);
+        }
+    }
+
+    // Método para desasignar bus
+    public void desasignarBus(Long conductorId, Long busId) {
+        RelacionBusRutaConductor relacion = relacionBusRutaConductorRepository.findByConductorRelIdAndBusRelId(conductorId, busId);
+        if (relacion != null) {
+            relacionBusRutaConductorRepository.delete(relacion);
+        }
     }
 
     // Método para obtener todos los buses, rutas y horarios basados en un conductor

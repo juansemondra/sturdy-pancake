@@ -7,7 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import puj.desarrolloweb.proyecto.model.Conductor;
 import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
+import puj.desarrolloweb.proyecto.service.BusService;
+import org.slf4j.Logger;  
+import org.slf4j.LoggerFactory;  
 import puj.desarrolloweb.proyecto.service.ConductorService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import main.java.puj.desarrolloweb.proyecto.exceptions.BusAlreadyAssignedException;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +25,66 @@ public class ConductorController {
     @Autowired
     private ConductorService conductorService;
 
+    @Autowired
+    private BusService busService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ConductorController.class);  
+    // Mostrar formulario para asignar bus a conductor  
+    @GetMapping("/{id}/asignar-bus")  
+    public String showAssignBusForm(@PathVariable Long id, Model model) {  
+        Optional<Conductor> conductorOpt = conductorService.findById(id);  
+        if (conductorOpt.isPresent()) {  
+            Conductor conductor = conductorOpt.get();  
+            model.addAttribute("conductor", conductor);  
+            model.addAttribute("buses", busService.findAll());  
+            model.addAttribute("busesAsignados", conductorService.findBusesRutasHorariosByConductor(id));  
+            return "asignar_bus";  
+        } else {  
+            return "redirect:/conductores";  
+        }  
+    }  
+
+    // Asignar bus al conductor  
+    @PostMapping("/{id}/asignar-bus")  
+    public String assignBusToDriver(@PathVariable Long id, @RequestParam Long busId, @RequestParam String diasAsignados, RedirectAttributes redirectAttributes) {  
+        try {  
+            conductorService.asignarBus(id, busId, diasAsignados);  
+        } catch (BusAlreadyAssignedException e) {  
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());  
+            return "redirect:/conductores/" + id + "/asignar-bus";  
+        }  
+        return "redirect:/conductores";  
+    }  
+    
+    // Actualizar días asignados de un bus  
+    @PostMapping("/{id}/actualizar-bus")  
+    public String updateBusDays(@PathVariable Long id, @RequestParam Long busId, @RequestParam String diasAsignados, RedirectAttributes redirectAttributes) {  
+        try {  
+            conductorService.actualizarDiasAsignados(id, busId, diasAsignados);  
+        } catch (Exception e) {  
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());  
+            return "redirect:/conductores/" + id + "/asignar-bus";  
+        }  
+        return "redirect:/conductores/" + id + "/asignar-bus";  
+    }  
+
+    // Desasignar bus del conductor  
+    @GetMapping("/{id}/desasignar-bus")  
+    public String unassignBusFromDriver(@PathVariable Long id, @RequestParam Long busId, RedirectAttributes redirectAttributes) {  
+        try {  
+            conductorService.desasignarBus(id, busId);  
+        } catch (Exception e) {  
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());  
+            return "redirect:/conductores/" + id + "/asignar-bus";  
+        }  
+        return "redirect:/conductores/" + id + "/asignar-bus";  
+    }  
+
+    @ExceptionHandler(BusAlreadyAssignedException.class)  
+    public String handleBusAlreadyAssignedException(BusAlreadyAssignedException e, Model model) {  
+        model.addAttribute("errorMessage", e.getMessage());  
+        return "asignar_bus";  
+    }  
     // Métodos para manejar vistas
     @GetMapping
     public String getAllConductores(Model model) {

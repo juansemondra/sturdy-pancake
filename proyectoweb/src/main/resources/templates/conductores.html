@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -287,8 +287,22 @@
                           </button>
                         </form>
                       </td>
+                      <td
+                        class="table-c1fa4a1e-bee3-476b-ac75-d9a0a984d3d9-column-536 h-[72px] px-4 py-2 w-60 text-[#637588] text-sm font-bold leading-normal tracking-[0.015em]"
+                      >
+                        <a
+                          th:href="@{/conductores/{id}/asignar-bus(id=${conductor.id})}"
+                        >
+                          <button
+                            class="text-[#637588] text-sm font-bold leading-normal"
+                            type="button"
+                          >
+                            Asignar Bus
+                          </button>
+                        </a>
+                      </td>
                     </tr>
-                    <!-- Repeat above block for other conductors with rotating image URLs -->
+                    <!-- Repite el bloque anterior para otros conductores -->
                   </tbody>
                 </table>
               </div>
