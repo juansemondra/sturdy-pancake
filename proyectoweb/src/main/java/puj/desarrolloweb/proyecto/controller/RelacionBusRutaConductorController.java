@@ -1,13 +1,26 @@
 package puj.desarrolloweb.proyecto.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
-import puj.desarrolloweb.proyecto.service.RelacionBusRutaConductorService;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import puj.desarrolloweb.proyecto.dto.RelacionBusRutaConductorDTO;
+import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
+import puj.desarrolloweb.proyecto.service.BusService;
+import puj.desarrolloweb.proyecto.service.ConductorService;
+import puj.desarrolloweb.proyecto.service.RelacionBusRutaConductorService;
+import puj.desarrolloweb.proyecto.service.RutaService;
 
 @RestController
 @RequestMapping("/api/relaciones")
@@ -16,34 +29,63 @@ public class RelacionBusRutaConductorController {
     @Autowired
     private RelacionBusRutaConductorService relacionService;
 
-    // Obtener todas las relaciones
+    @Autowired
+    private BusService busService;
+
+    @Autowired
+    private RutaService rutaService;
+
+    @Autowired
+    private ConductorService conductorService;
+
+    private RelacionBusRutaConductor convertToEntity(RelacionBusRutaConductorDTO dto) {
+        RelacionBusRutaConductor relacion = new RelacionBusRutaConductor();
+        relacion.setId(dto.getId());
+        relacion.setBusRel(busService.findById(dto.getBusId()).orElse(null));
+        relacion.setRutaRel(rutaService.findById(dto.getRutaId()).orElse(null));
+        relacion.setConductorRel(conductorService.findById(dto.getConductorId()).orElse(null));
+        relacion.setFecha_disponible(dto.getFechaDisponible());
+        return relacion;
+    }
+
+    private RelacionBusRutaConductorDTO convertToDTO(RelacionBusRutaConductor relacion) {
+        RelacionBusRutaConductorDTO dto = new RelacionBusRutaConductorDTO();
+        dto.setId(relacion.getId());
+        dto.setBusId(relacion.getBusRel().getId());
+        dto.setRutaId(relacion.getRutaRel().getId());
+        dto.setConductorId(relacion.getConductorRel().getId());
+        dto.setFechaDisponible(relacion.getFecha_disponible());
+        return dto;
+    }
+
     @GetMapping
-    public List<RelacionBusRutaConductor> getAllRelaciones() {
-        return relacionService.findAll();
+    public List<RelacionBusRutaConductorDTO> getAllRelaciones() {
+        return relacionService.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    // Obtener una relación por ID
     @GetMapping("/{id}")
-    public ResponseEntity<RelacionBusRutaConductor> getRelacionById(@PathVariable Long id) {
+    public ResponseEntity<RelacionBusRutaConductorDTO> getRelacionById(@PathVariable Long id) {
         Optional<RelacionBusRutaConductor> relacionOpt = relacionService.findById(id);
-        return relacionOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return relacionOpt.map(relacion -> ResponseEntity.ok(convertToDTO(relacion)))
+                          .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Crear una nueva relación
     @PostMapping
-    public RelacionBusRutaConductor createRelacion(@RequestBody RelacionBusRutaConductor relacion) {
-        return relacionService.save(relacion);
+    public RelacionBusRutaConductorDTO createRelacion(@RequestBody RelacionBusRutaConductorDTO relacionDTO) {
+        RelacionBusRutaConductor relacion = convertToEntity(relacionDTO);
+        return convertToDTO(relacionService.save(relacion));
     }
 
-    // Actualizar una relación existente
     @PutMapping("/{id}")
-    public ResponseEntity<RelacionBusRutaConductor> updateRelacion(@PathVariable Long id, @RequestBody RelacionBusRutaConductor relacion) {
-        relacion.setId(id);
+    public ResponseEntity<RelacionBusRutaConductorDTO> updateRelacion(@PathVariable Long id, @RequestBody RelacionBusRutaConductorDTO relacionDTO) {
+        RelacionBusRutaConductor relacion = convertToEntity(relacionDTO);
+        relacion.setId(id); // Asegurarse de que se actualiza la relación correcta
         RelacionBusRutaConductor updatedRelacion = relacionService.save(relacion);
-        return ResponseEntity.ok(updatedRelacion);
+        return ResponseEntity.ok(convertToDTO(updatedRelacion));
     }
 
-    // Eliminar una relación
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRelacion(@PathVariable Long id) {
         relacionService.deleteById(id);

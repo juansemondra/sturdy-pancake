@@ -1,13 +1,24 @@
 package puj.desarrolloweb.proyecto.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import puj.desarrolloweb.proyecto.model.Bus;
-import puj.desarrolloweb.proyecto.service.BusService;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import puj.desarrolloweb.proyecto.dto.BusDTO;
+import puj.desarrolloweb.proyecto.model.Bus;
+import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
+import puj.desarrolloweb.proyecto.service.BusService;
 
 @RestController
 @RequestMapping("/api/buses")
@@ -16,34 +27,55 @@ public class BusController {
     @Autowired
     private BusService busService;
 
-    // Obtener todos los buses
+    private Bus convertToEntity(BusDTO dto) {
+        Bus bus = new Bus();
+        bus.setId(dto.getId());
+        bus.setPlaca(dto.getPlaca());
+        bus.setModelo(dto.getModelo());
+        return bus;
+    }
+
+    private BusDTO convertToDTO(Bus bus) {
+        BusDTO dto = new BusDTO();
+        dto.setId(bus.getId());
+        dto.setPlaca(bus.getPlaca());
+        dto.setModelo(bus.getModelo());
+        dto.setRelacionBusRutaConductorIds(
+            bus.getRelacionBusRutaConductorLista().stream()
+                .map(RelacionBusRutaConductor::getId)
+                .collect(Collectors.toList())
+        );
+        return dto;
+    }
+
     @GetMapping
-    public List<Bus> getAllBuses() {
-        return busService.findAll();
+    public List<BusDTO> getAllBuses() {
+        return busService.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    // Obtener un bus por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Bus> getBusById(@PathVariable Long id) {
+    public ResponseEntity<BusDTO> getBusById(@PathVariable Long id) {
         Optional<Bus> busOpt = busService.findById(id);
-        return busOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return busOpt.map(bus -> ResponseEntity.ok(convertToDTO(bus)))
+                     .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Crear un nuevo bus
     @PostMapping
-    public Bus createBus(@RequestBody Bus bus) {
-        return busService.save(bus);
+    public BusDTO createBus(@RequestBody BusDTO busDTO) {
+        Bus bus = convertToEntity(busDTO);
+        return convertToDTO(busService.save(bus));
     }
 
-    // Actualizar un bus existente
     @PutMapping("/{id}")
-    public ResponseEntity<Bus> updateBus(@PathVariable Long id, @RequestBody Bus bus) {
-        bus.setId(id);
+    public ResponseEntity<BusDTO> updateBus(@PathVariable Long id, @RequestBody BusDTO busDTO) {
+        Bus bus = convertToEntity(busDTO);
+        bus.setId(id);  
         Bus updatedBus = busService.save(bus);
-        return ResponseEntity.ok(updatedBus);
+        return ResponseEntity.ok(convertToDTO(updatedBus));
     }
 
-    // Eliminar un bus
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBus(@PathVariable Long id) {
         busService.deleteById(id);

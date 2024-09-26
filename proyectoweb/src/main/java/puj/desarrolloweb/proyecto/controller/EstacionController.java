@@ -1,13 +1,24 @@
 package puj.desarrolloweb.proyecto.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import puj.desarrolloweb.proyecto.model.Estacion;
-import puj.desarrolloweb.proyecto.service.EstacionService;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import puj.desarrolloweb.proyecto.dto.EstacionDTO;
+import puj.desarrolloweb.proyecto.model.Estacion;
+import puj.desarrolloweb.proyecto.model.Ruta;
+import puj.desarrolloweb.proyecto.service.EstacionService;
 
 @RestController
 @RequestMapping("/api/estaciones")
@@ -16,34 +27,55 @@ public class EstacionController {
     @Autowired
     private EstacionService estacionService;
 
-    // Obtener todas las estaciones
+    private Estacion convertToEntity(EstacionDTO dto) {
+        Estacion estacion = new Estacion();
+        estacion.setId(dto.getId());
+        estacion.setNombre(dto.getNombre());
+        estacion.setZona(dto.getZona());
+        return estacion;
+    }
+
+    private EstacionDTO convertToDTO(Estacion estacion) {
+        EstacionDTO dto = new EstacionDTO();
+        dto.setId(estacion.getId());
+        dto.setNombre(estacion.getNombre());
+        dto.setZona(estacion.getZona());
+        dto.setRutaIds(
+            estacion.getRutas().stream()
+                .map(Ruta::getId)
+                .collect(Collectors.toList())
+        );
+        return dto;
+    }
+
     @GetMapping
-    public List<Estacion> getAllEstaciones() {
-        return estacionService.findAll();
+    public List<EstacionDTO> getAllEstaciones() {
+        return estacionService.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    // Obtener una estación por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Estacion> getEstacionById(@PathVariable Long id) {
+    public ResponseEntity<EstacionDTO> getEstacionById(@PathVariable Long id) {
         Optional<Estacion> estacionOpt = estacionService.findById(id);
-        return estacionOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return estacionOpt.map(estacion -> ResponseEntity.ok(convertToDTO(estacion)))
+                          .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Crear una nueva estación
     @PostMapping
-    public Estacion createEstacion(@RequestBody Estacion estacion) {
-        return estacionService.save(estacion);
+    public EstacionDTO createEstacion(@RequestBody EstacionDTO estacionDTO) {
+        Estacion estacion = convertToEntity(estacionDTO);
+        return convertToDTO(estacionService.save(estacion));
     }
 
-    // Actualizar una estación existente
     @PutMapping("/{id}")
-    public ResponseEntity<Estacion> updateEstacion(@PathVariable Long id, @RequestBody Estacion estacion) {
+    public ResponseEntity<EstacionDTO> updateEstacion(@PathVariable Long id, @RequestBody EstacionDTO estacionDTO) {
+        Estacion estacion = convertToEntity(estacionDTO);
         estacion.setId(id);
         Estacion updatedEstacion = estacionService.save(estacion);
-        return ResponseEntity.ok(updatedEstacion);
+        return ResponseEntity.ok(convertToDTO(updatedEstacion));
     }
 
-    // Eliminar una estación
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEstacion(@PathVariable Long id) {
         estacionService.deleteById(id);

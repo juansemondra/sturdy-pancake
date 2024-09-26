@@ -1,13 +1,25 @@
 package puj.desarrolloweb.proyecto.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import puj.desarrolloweb.proyecto.model.Ruta;
-import puj.desarrolloweb.proyecto.service.RutaService;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import puj.desarrolloweb.proyecto.dto.RutaDTO;
+import puj.desarrolloweb.proyecto.model.Estacion;
+import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
+import puj.desarrolloweb.proyecto.model.Ruta;
+import puj.desarrolloweb.proyecto.service.RutaService;
 
 @RestController
 @RequestMapping("/api/rutas")
@@ -16,34 +28,63 @@ public class RutaController {
     @Autowired
     private RutaService rutaService;
 
-    // Obtener todas las rutas
+    private Ruta convertToEntity(RutaDTO dto) {
+        Ruta ruta = new Ruta();
+        ruta.setId(dto.getId());
+        ruta.setNombre_ruta(dto.getNombreRuta());
+        ruta.setHorario_de_inicio(dto.getHorarioDeInicio());
+        ruta.setHorario_de_final(dto.getHorarioDeFinal());
+        ruta.setDias_disponibles(dto.getDiasDisponibles());
+        return ruta;
+    }
+
+    private RutaDTO convertToDTO(Ruta ruta) {
+        RutaDTO dto = new RutaDTO();
+        dto.setId(ruta.getId());
+        dto.setNombreRuta(ruta.getNombre_ruta());
+        dto.setHorarioDeInicio(ruta.getHorario_de_inicio());
+        dto.setHorarioDeFinal(ruta.getHorario_de_final());
+        dto.setDiasDisponibles(ruta.getDias_disponibles());
+
+        dto.setEstacionIds(ruta.getEstaciones().stream()
+            .map(Estacion::getId)
+            .collect(Collectors.toList()));
+
+        dto.setRelacionBusRutaConductorIds(ruta.getRelacionBusRutaConductorLista().stream()
+            .map(RelacionBusRutaConductor::getId)
+            .collect(Collectors.toList()));
+
+        return dto;
+    }
+
     @GetMapping
-    public List<Ruta> getAllRutas() {
-        return rutaService.findAll();
+    public List<RutaDTO> getAllRutas() {
+        return rutaService.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    // Obtener una ruta por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Ruta> getRutaById(@PathVariable Long id) {
+    public ResponseEntity<RutaDTO> getRutaById(@PathVariable Long id) {
         Optional<Ruta> rutaOpt = rutaService.findById(id);
-        return rutaOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return rutaOpt.map(ruta -> ResponseEntity.ok(convertToDTO(ruta)))
+                      .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Crear una nueva ruta
     @PostMapping
-    public Ruta createRuta(@RequestBody Ruta ruta) {
-        return rutaService.save(ruta);
+    public RutaDTO createRuta(@RequestBody RutaDTO rutaDTO) {
+        Ruta ruta = convertToEntity(rutaDTO);
+        return convertToDTO(rutaService.save(ruta));
     }
 
-    // Actualizar una ruta existente
     @PutMapping("/{id}")
-    public ResponseEntity<Ruta> updateRuta(@PathVariable Long id, @RequestBody Ruta ruta) {
+    public ResponseEntity<RutaDTO> updateRuta(@PathVariable Long id, @RequestBody RutaDTO rutaDTO) {
+        Ruta ruta = convertToEntity(rutaDTO);
         ruta.setId(id);
         Ruta updatedRuta = rutaService.save(ruta);
-        return ResponseEntity.ok(updatedRuta);
+        return ResponseEntity.ok(convertToDTO(updatedRuta));
     }
 
-    // Eliminar una ruta
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRuta(@PathVariable Long id) {
         rutaService.deleteById(id);
