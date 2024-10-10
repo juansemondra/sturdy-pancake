@@ -83,7 +83,7 @@ public class RelacionBusRutaConductorController {
     @PutMapping("/{id}")
     public ResponseEntity<RelacionBusRutaConductorDTO> updateRelacion(@PathVariable Long id, @RequestBody RelacionBusRutaConductorDTO relacionDTO) {
         RelacionBusRutaConductor relacion = convertToEntity(relacionDTO);
-        relacion.setId(id); // Asegurarse de que se actualiza la relación correcta
+        relacion.setId(id); 
         RelacionBusRutaConductor updatedRelacion = relacionService.save(relacion);
         return ResponseEntity.ok(convertToDTO(updatedRelacion));
     }
