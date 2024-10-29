@@ -21,11 +21,14 @@ import puj.desarrolloweb.proyecto.repository.BusRepository;;;
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class BusControllerIntegrationTest {
     
+    @SuppressWarnings("unused")
     private final String SERVER_URL;
 
+    @SuppressWarnings("unused")
     @Autowired
     private WebTestClient webTestClient;
 
+    @SuppressWarnings("unused")
     @Autowired
     private BusRepository busRepository;
 
@@ -34,6 +37,7 @@ public class BusControllerIntegrationTest {
     }
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void init(){
         
     }

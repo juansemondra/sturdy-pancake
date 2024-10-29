@@ -3,13 +3,10 @@ package puj.desarrolloweb.proyecto.init;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-
 import org.springframework.stereotype.Component;
-
 import org.springframework.transaction.annotation.Transactional;
 
 import puj.desarrolloweb.proyecto.model.Bus;
@@ -17,7 +14,6 @@ import puj.desarrolloweb.proyecto.model.Conductor;
 import puj.desarrolloweb.proyecto.model.Estacion;
 import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
 import puj.desarrolloweb.proyecto.model.Ruta;
-
 import puj.desarrolloweb.proyecto.repository.BusRepository;
 import puj.desarrolloweb.proyecto.repository.ConductorRepository;
 import puj.desarrolloweb.proyecto.repository.EstacionRepository;
@@ -27,6 +23,7 @@ import puj.desarrolloweb.proyecto.repository.RutaRepository;
 @Component
 public class DBInitializer implements CommandLineRunner {
  
+    @SuppressWarnings("unused")
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -49,6 +46,7 @@ public class DBInitializer implements CommandLineRunner {
 
     @Override
     @Transactional
+    @SuppressWarnings("CallToPrintStackTrace")
     public void run(String... args) throws Exception {
 
 
@@ -2474,6 +2472,7 @@ public void saveAllEntities() {
 }
 
 @Transactional
+    @SuppressWarnings("CallToPrintStackTrace")
 public void saveAllEntitiesInBatch() {
     //print
     System.out.println("Saving entities in batch");
