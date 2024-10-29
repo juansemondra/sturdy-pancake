@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +14,15 @@ import puj.desarrolloweb.proyecto.model.Bus;
 import puj.desarrolloweb.proyecto.model.Conductor;
 import puj.desarrolloweb.proyecto.model.Estacion;
 import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
+import puj.desarrolloweb.proyecto.model.Role;
 import puj.desarrolloweb.proyecto.model.Ruta;
+import puj.desarrolloweb.proyecto.model.User;
 import puj.desarrolloweb.proyecto.repository.BusRepository;
 import puj.desarrolloweb.proyecto.repository.ConductorRepository;
 import puj.desarrolloweb.proyecto.repository.EstacionRepository;
 import puj.desarrolloweb.proyecto.repository.RelacionBusRutaConductorRepository;
 import puj.desarrolloweb.proyecto.repository.RutaRepository;
+import puj.desarrolloweb.proyecto.repository.UserRepository;
 
 @Component
 public class DBInitializer implements CommandLineRunner {
@@ -37,7 +41,12 @@ public class DBInitializer implements CommandLineRunner {
     private RelacionBusRutaConductorRepository relacionBusRutaConductorRepository;
     @Autowired
     private RutaRepository rutaRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
+    public List<User> users = new ArrayList<>();
     public List<Bus> buses = new ArrayList<>();
     public List<Conductor> conductores = new ArrayList<>();
     public List<Estacion> estaciones = new ArrayList<>();
@@ -50,6 +59,27 @@ public class DBInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
+        //Init Users
+        User user1 = new User("Juan", "Sanabria", "jsanabria@javeriana.edu.co", passwordEncoder.encode("sanabria123"), Role.USER);
+        User user2 = new User("Maria", "Rodriguez", "mrodriguez@javeriana.edu.co", passwordEncoder.encode("mrodriguez123"), Role.USER);
+        User user3 = new User("Carlos", "Gomez", "cgomez@javeriana.edu.co", passwordEncoder.encode("carlosgomez123"), Role.USER);
+        User user4 = new User("Ana", "Martinez", "amartinez@javeriana.edu.co", passwordEncoder.encode("anamartinez123"), Role.USER);
+        User user5 = new User("Pedro", "Lopez", "plopez@javeriana.edu.co", passwordEncoder.encode("pedrolopez123"), Role.USER);
+        User user6 = new User("Laura", "Ramirez", "lramirez@javeriana.edu.co", passwordEncoder.encode("lauraramirez123"), Role.USER);
+        User user7 = new User("Diego", "Sanchez", "dsanchez@javeriana.edu.co", passwordEncoder.encode("diegosanchez123"), Role.USER);
+        User user8 = new User("Camila", "Torres", "ctorres@javeriana.edu.co", passwordEncoder.encode("camilatorres123"), Role.USER);
+        User user9 = new User("Andres", "Gonzalez", "agonzalez@javeriana.edu.co", passwordEncoder.encode("andresgonzalez123"), Role.ADMIN);
+        User user10 = new User("Sandra", "Perez", "sperez@javeriana.edu.co", passwordEncoder.encode("sandraperez123"), Role.ADMIN);
+        User user11 = new User("Lucia", "Morales", "lmorales@javeriana.edu.co", passwordEncoder.encode("luciamorales123"), Role.USER);
+        User user12 = new User("Miguel", "Cortes", "mcortes@javeriana.edu.co", passwordEncoder.encode("miguelcortes123"), Role.USER);
+        User user13 = new User("Diana", "Herrera", "dherrera@javeriana.edu.co", passwordEncoder.encode("dianaherrera123"), Role.USER);
+        User user14 = new User("Rafael", "Jimenez", "rjimenez@javeriana.edu.co", passwordEncoder.encode("rafaeljimenez123"), Role.USER);
+        User user15 = new User("Isabel", "Ortiz", "iortiz@javeriana.edu.co", passwordEncoder.encode("isabelortiz123"), Role.USER);
+        User user16 = new User("Oscar", "Fernandez", "ofernandez@javeriana.edu.co", passwordEncoder.encode("oscarfernandez123"), Role.USER);
+        User user17 = new User("Paola", "Diaz", "pdiaz@javeriana.edu.co", passwordEncoder.encode("paoladiaz123"), Role.USER);
+        User user18 = new User("Santiago", "Vargas", "svargas@javeriana.edu.co", passwordEncoder.encode("santiagovargas123"), Role.ADMIN);
+        User user19 = new User("Monica", "Castillo", "mcastillo@javeriana.edu.co", passwordEncoder.encode("monicacastillo123"), Role.ADMIN);
+        User user20 = new User("Javier", "Rojas", "jrojas@javeriana.edu.co", passwordEncoder.encode("javierrojas123"), Role.ADMIN);
         //Init Rutas
         Ruta ruta_1 = new Ruta("1", "LMXJVSD");
         Ruta ruta_2 = new Ruta("2", "LMXJVSD");
@@ -1837,7 +1867,27 @@ RelacionBusRutaConductor rbrc100 = new RelacionBusRutaConductor(bus100, ruta_A61
 
         //Init Rel
 
-        
+users.add(user1);
+users.add(user2);
+users.add(user3);
+users.add(user4);
+users.add(user5);
+users.add(user6);
+users.add(user7);
+users.add(user8);
+users.add(user9);
+users.add(user10);
+users.add(user1);
+users.add(user11);
+users.add(user12);
+users.add(user13);
+users.add(user14);
+users.add(user15);
+users.add(user16);
+users.add(user17);
+users.add(user18);
+users.add(user19);
+users.add(user20);
 
 buses.add(bus1);
 buses.add(bus2);
@@ -2421,27 +2471,28 @@ relaciones.add(rbrc100);
 
 System.out.println("TRANSACCION");
 
+for (User userTemp : users){
+    userRepository.save(userTemp);
+    System.out.println("Usuario salvado " + userTemp.getEmail());
+    System.out.println("Index: " + users.indexOf(userTemp) + " Faltan: " + (users.size() - users.indexOf(userTemp)));
+}
 for (Estacion estTemp : estaciones){
     estacionRepository.save(estTemp);
     System.out.println("Estacion salvada " + estTemp.getNombre());
-    //contador que dice en que index va y cuantas faltan
     System.out.println("Index: " + estaciones.indexOf(estTemp) + " Faltan: " + (estaciones.size() - estaciones.indexOf(estTemp)));
 }
 for (Bus busTemp : buses) {
     busRepository.save(busTemp);
     System.out.println("Bus salvado " + busTemp.getPlaca());
-    //contador que dice en que index va y cuantas faltan
     System.out.println("Index: " + buses.indexOf(busTemp) + " Faltan: " + (buses.size() - buses.indexOf(busTemp)));
 
 }
 for (Conductor conTemp : conductores){
     conductorRepository.save(conTemp);
     System.out.println("Conductor salvado " + conTemp.getNombre());
-    //contador que dice en que index va y cuantas faltan
     System.out.println("Index: " + conductores.indexOf(conTemp) + " Faltan: " + (conductores.size() - conductores.indexOf(conTemp)));
 }
 System.out.println("ultimo for");
-//esperar 3 segundos
 try {
     Thread.sleep(3000);
 } catch (InterruptedException e) {
