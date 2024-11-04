@@ -1,3 +1,4 @@
+// mvn spring-boot:run
 package puj.desarrolloweb.proyecto;
 
 import org.springframework.boot.SpringApplication;
