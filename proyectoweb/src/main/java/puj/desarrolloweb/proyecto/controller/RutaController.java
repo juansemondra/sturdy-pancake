@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,6 +61,7 @@ public class RutaController {
     }
 
     @GetMapping
+    @Secured({ "ADMIN_RUTAS", "PASAJERO" })
     public List<RutaDTO> getAllRutas() {
         return rutaService.findAll().stream()
                 .map(this::convertToDTO)
@@ -67,6 +69,7 @@ public class RutaController {
     }
 
     @GetMapping("/{id}")
+    @Secured({ "ADMIN_RUTAS", "PASAJERO" })
     public ResponseEntity<RutaDTO> getRutaById(@PathVariable Long id) {
         Optional<Ruta> rutaOpt = rutaService.findById(id);
         return rutaOpt.map(ruta -> ResponseEntity.ok(convertToDTO(ruta)))
@@ -74,12 +77,14 @@ public class RutaController {
     }
 
     @PostMapping
+    @Secured({ "ADMIN_RUTAS" })
     public RutaDTO createRuta(@RequestBody RutaDTO rutaDTO) {
         Ruta ruta = convertToEntity(rutaDTO);
         return convertToDTO(rutaService.save(ruta));
     }
 
     @PutMapping("/{id}")
+    @Secured({ "ADMIN_RUTAS" })
     public ResponseEntity<RutaDTO> updateRuta(@PathVariable Long id, @RequestBody RutaDTO rutaDTO) {
         Ruta ruta = convertToEntity(rutaDTO);
         ruta.setId(id);
@@ -88,6 +93,7 @@ public class RutaController {
     }
 
     @DeleteMapping("/{id}")
+    @Secured({ "ADMIN_RUTAS" })
     public ResponseEntity<Void> deleteRuta(@PathVariable Long id) {
         rutaService.deleteById(id);
         return ResponseEntity.noContent().build();
