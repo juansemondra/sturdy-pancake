@@ -36,7 +36,7 @@ public class AuthenticationService {
                 request.getLastName(),
                 request.getEmail(),
                 passwordEncoder.encode(request.getPassword()),
-                Role.USER);
+                Role.ADMIN_RUTAS);
 
         userRepository.save(user);
         String jwt = jwtService.generateToken(user);
