@@ -60,26 +60,26 @@ public class DBInitializer implements CommandLineRunner {
 
 
         //Init Users
-        User user1 = new User("Juan", "Sanabria", "jsanabria@javeriana.edu.co", passwordEncoder.encode("sanabria123"), Role.USER);
-        User user2 = new User("Maria", "Rodriguez", "mrodriguez@javeriana.edu.co", passwordEncoder.encode("mrodriguez123"), Role.USER);
-        User user3 = new User("Carlos", "Gomez", "cgomez@javeriana.edu.co", passwordEncoder.encode("carlosgomez123"), Role.USER);
-        User user4 = new User("Ana", "Martinez", "amartinez@javeriana.edu.co", passwordEncoder.encode("anamartinez123"), Role.USER);
-        User user5 = new User("Pedro", "Lopez", "plopez@javeriana.edu.co", passwordEncoder.encode("pedrolopez123"), Role.USER);
-        User user6 = new User("Laura", "Ramirez", "lramirez@javeriana.edu.co", passwordEncoder.encode("lauraramirez123"), Role.USER);
-        User user7 = new User("Diego", "Sanchez", "dsanchez@javeriana.edu.co", passwordEncoder.encode("diegosanchez123"), Role.USER);
-        User user8 = new User("Camila", "Torres", "ctorres@javeriana.edu.co", passwordEncoder.encode("camilatorres123"), Role.USER);
-        User user9 = new User("Andres", "Gonzalez", "agonzalez@javeriana.edu.co", passwordEncoder.encode("andresgonzalez123"), Role.ADMIN);
-        User user10 = new User("Sandra", "Perez", "sperez@javeriana.edu.co", passwordEncoder.encode("sandraperez123"), Role.ADMIN);
-        User user11 = new User("Lucia", "Morales", "lmorales@javeriana.edu.co", passwordEncoder.encode("luciamorales123"), Role.USER);
-        User user12 = new User("Miguel", "Cortes", "mcortes@javeriana.edu.co", passwordEncoder.encode("miguelcortes123"), Role.USER);
-        User user13 = new User("Diana", "Herrera", "dherrera@javeriana.edu.co", passwordEncoder.encode("dianaherrera123"), Role.USER);
-        User user14 = new User("Rafael", "Jimenez", "rjimenez@javeriana.edu.co", passwordEncoder.encode("rafaeljimenez123"), Role.USER);
-        User user15 = new User("Isabel", "Ortiz", "iortiz@javeriana.edu.co", passwordEncoder.encode("isabelortiz123"), Role.USER);
-        User user16 = new User("Oscar", "Fernandez", "ofernandez@javeriana.edu.co", passwordEncoder.encode("oscarfernandez123"), Role.USER);
-        User user17 = new User("Paola", "Diaz", "pdiaz@javeriana.edu.co", passwordEncoder.encode("paoladiaz123"), Role.USER);
-        User user18 = new User("Santiago", "Vargas", "svargas@javeriana.edu.co", passwordEncoder.encode("santiagovargas123"), Role.ADMIN);
-        User user19 = new User("Monica", "Castillo", "mcastillo@javeriana.edu.co", passwordEncoder.encode("monicacastillo123"), Role.ADMIN);
-        User user20 = new User("Javier", "Rojas", "jrojas@javeriana.edu.co", passwordEncoder.encode("javierrojas123"), Role.ADMIN);
+        User user1 = new User("Juan", "Sanabria", "jsanabria@javeriana.edu.co", passwordEncoder.encode("sanabria123"), Role.COORDINADOR);
+        User user2 = new User("Maria", "Rodriguez", "mrodriguez@javeriana.edu.co", passwordEncoder.encode("mrodriguez123"), Role.ADMIN_RUTAS);
+        User user3 = new User("Carlos", "Gomez", "cgomez@javeriana.edu.co", passwordEncoder.encode("carlosgomez123"), Role.PASAJERO);
+        User user4 = new User("Ana", "Martinez", "amartinez@javeriana.edu.co", passwordEncoder.encode("anamartinez123"), Role.COORDINADOR);
+        User user5 = new User("Pedro", "Lopez", "plopez@javeriana.edu.co", passwordEncoder.encode("pedrolopez123"), Role.ADMIN_RUTAS);
+        User user6 = new User("Laura", "Ramirez", "lramirez@javeriana.edu.co", passwordEncoder.encode("lauraramirez123"), Role.PASAJERO);
+        User user7 = new User("Diego", "Sanchez", "dsanchez@javeriana.edu.co", passwordEncoder.encode("diegosanchez123"), Role.COORDINADOR);
+        User user8 = new User("Camila", "Torres", "ctorres@javeriana.edu.co", passwordEncoder.encode("camilatorres123"), Role.ADMIN_RUTAS);
+        User user9 = new User("Andres", "Gonzalez", "agonzalez@javeriana.edu.co", passwordEncoder.encode("andresgonzalez123"), Role.PASAJERO);
+        User user10 = new User("Sandra", "Perez", "sperez@javeriana.edu.co", passwordEncoder.encode("sandraperez123"), Role.COORDINADOR);
+        User user11 = new User("Lucia", "Morales", "lmorales@javeriana.edu.co", passwordEncoder.encode("luciamorales123"), Role.ADMIN_RUTAS);
+        User user12 = new User("Miguel", "Cortes", "mcortes@javeriana.edu.co", passwordEncoder.encode("miguelcortes123"), Role.PASAJERO);
+        User user13 = new User("Diana", "Herrera", "dherrera@javeriana.edu.co", passwordEncoder.encode("dianaherrera123"), Role.COORDINADOR);
+        User user14 = new User("Rafael", "Jimenez", "rjimenez@javeriana.edu.co", passwordEncoder.encode("rafaeljimenez123"), Role.ADMIN_RUTAS);
+        User user15 = new User("Isabel", "Ortiz", "iortiz@javeriana.edu.co", passwordEncoder.encode("isabelortiz123"), Role.PASAJERO);
+        User user16 = new User("Oscar", "Fernandez", "ofernandez@javeriana.edu.co", passwordEncoder.encode("oscarfernandez123"), Role.COORDINADOR);
+        User user17 = new User("Paola", "Diaz", "pdiaz@javeriana.edu.co", passwordEncoder.encode("paoladiaz123"), Role.ADMIN_RUTAS);
+        User user18 = new User("Santiago", "Vargas", "svargas@javeriana.edu.co", passwordEncoder.encode("santiagovargas123"), Role.PASAJERO);
+        User user19 = new User("Monica", "Castillo", "mcastillo@javeriana.edu.co", passwordEncoder.encode("monicacastillo123"), Role.COORDINADOR);
+        User user20 = new User("Javier", "Rojas", "jrojas@javeriana.edu.co", passwordEncoder.encode("javierrojas123"), Role.ADMIN_RUTAS);
         //Init Rutas
         Ruta ruta_1 = new Ruta("1", "LMXJVSD");
         Ruta ruta_2 = new Ruta("2", "LMXJVSD");
