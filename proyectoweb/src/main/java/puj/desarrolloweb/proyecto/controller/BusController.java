@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,7 @@ public class BusController {
     }
 
     @GetMapping
+    @Secured({ "COORDINADOR" })
     public List<BusDTO> getAllBuses() {
         return busService.findAll().stream()
                 .map(this::convertToDTO)
@@ -58,6 +60,7 @@ public class BusController {
     }
 
     @GetMapping("/{id}")
+    @Secured({ "COORDINADOR" })
     public ResponseEntity<BusDTO> getBusById(@PathVariable Long id) {
         Optional<Bus> busOpt = busService.findById(id);
         return busOpt.map(bus -> ResponseEntity.ok(convertToDTO(bus)))
@@ -65,12 +68,14 @@ public class BusController {
     }
 
     @PostMapping
+    @Secured({ "COORDINADOR" })
     public BusDTO createBus(@RequestBody BusDTO busDTO) {
         Bus bus = convertToEntity(busDTO);
         return convertToDTO(busService.save(bus));
     }
 
     @PutMapping("/{id}")
+    @Secured({ "COORDINADOR" })
     public ResponseEntity<BusDTO> updateBus(@PathVariable Long id, @RequestBody BusDTO busDTO) {
         Bus bus = convertToEntity(busDTO);
         bus.setId(id);  
@@ -79,6 +84,7 @@ public class BusController {
     }
 
     @DeleteMapping("/{id}")
+    @Secured({ "COORDINADOR" })
     public ResponseEntity<Void> deleteBus(@PathVariable Long id) {
         busService.deleteById(id);
         return ResponseEntity.noContent().build();

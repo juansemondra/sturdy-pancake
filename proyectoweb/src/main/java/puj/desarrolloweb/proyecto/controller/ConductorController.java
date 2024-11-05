@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,6 +59,7 @@ public class ConductorController {
     }
 
     @GetMapping
+    @Secured({ "COORDINADOR" })
     public List<ConductorDTO> getAllConductores() {
         return conductorService.findAll().stream()
                 .map(this::convertToDTO)
@@ -65,6 +67,7 @@ public class ConductorController {
     }
 
     @GetMapping("/{id}")
+    @Secured({ "COORDINADOR" })
     public ResponseEntity<ConductorDTO> getConductorById(@PathVariable Long id) {
         Optional<Conductor> conductorOpt = conductorService.findById(id);
         return conductorOpt.map(conductor -> ResponseEntity.ok(convertToDTO(conductor)))
@@ -72,12 +75,14 @@ public class ConductorController {
     }
 
     @PostMapping
+    @Secured({ "COORDINADOR" })
     public ConductorDTO createConductor(@RequestBody ConductorDTO conductorDTO) {
         Conductor conductor = convertToEntity(conductorDTO);
         return convertToDTO(conductorService.save(conductor));
     }
 
     @PutMapping("/{id}")
+    @Secured({ "COORDINADOR" })
     public ResponseEntity<ConductorDTO> updateConductor(@PathVariable Long id, @RequestBody ConductorDTO conductorDTO) {
         Conductor conductor = convertToEntity(conductorDTO);
         conductor.setId(id);
@@ -86,18 +91,21 @@ public class ConductorController {
     }
 
     @DeleteMapping("/{id}")
+    @Secured({ "COORDINADOR" })
     public ResponseEntity<Void> deleteConductor(@PathVariable Long id) {
         conductorService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}/asignar-bus")
+    @Secured({ "COORDINADOR" })
     public ResponseEntity<ConductorDTO> asignarBus(@PathVariable Long id, @RequestParam Long busId, @RequestParam String diasAsignados) {
         Conductor conductor = conductorService.asignarBus(id, busId, diasAsignados);
         return ResponseEntity.ok(convertToDTO(conductor));
     }
 
     @GetMapping("/{id}/buses-rutas-horarios")
+    @Secured({ "COORDINADOR" })
     public List<RelacionBusRutaConductor> getBusesRutasHorarios(@PathVariable Long id) {
         return conductorService.findBusesRutasHorariosByConductor(id);
     }
