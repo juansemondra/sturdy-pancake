@@ -75,12 +75,14 @@ public class RelacionBusRutaConductorController {
     }
 
     @PostMapping
+    @Secured({ "COORDINADOR" })
     public RelacionBusRutaConductorDTO createRelacion(@RequestBody RelacionBusRutaConductorDTO relacionDTO) {
         RelacionBusRutaConductor relacion = convertToEntity(relacionDTO);
         return convertToDTO(relacionService.save(relacion));
     }
 
     @PutMapping("/{id}")
+    @Secured({ "COORDINADOR" })
     public ResponseEntity<RelacionBusRutaConductorDTO> updateRelacion(@PathVariable Long id, @RequestBody RelacionBusRutaConductorDTO relacionDTO) {
         RelacionBusRutaConductor relacion = convertToEntity(relacionDTO);
         relacion.setId(id); 
@@ -89,6 +91,7 @@ public class RelacionBusRutaConductorController {
     }
 
     @DeleteMapping("/{id}")
+    @Secured({ "COORDINADOR" })
     public ResponseEntity<Void> deleteRelacion(@PathVariable Long id) {
         relacionService.deleteById(id);
         return ResponseEntity.noContent().build();
