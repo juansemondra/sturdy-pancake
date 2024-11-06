@@ -2485,13 +2485,13 @@ for (Bus busTemp : buses) {
     busRepository.save(busTemp);
     System.out.println("Bus salvado " + busTemp.getPlaca());
     System.out.println("Index: " + buses.indexOf(busTemp) + " Faltan: " + (buses.size() - buses.indexOf(busTemp)));
-
 }
 for (Conductor conTemp : conductores){
     conductorRepository.save(conTemp);
     System.out.println("Conductor salvado " + conTemp.getNombre());
     System.out.println("Index: " + conductores.indexOf(conTemp) + " Faltan: " + (conductores.size() - conductores.indexOf(conTemp)));
 }
+
 System.out.println("ultimo for");
 try {
     Thread.sleep(3000);
