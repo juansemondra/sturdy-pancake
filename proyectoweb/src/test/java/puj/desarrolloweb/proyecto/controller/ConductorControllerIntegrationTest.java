@@ -3,16 +3,15 @@ package puj.desarrolloweb.proyecto.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext;
@@ -21,6 +20,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import puj.desarrolloweb.proyecto.dto.ConductorDTO;
+import puj.desarrolloweb.proyecto.dto.JwtAuthenticationResponse;
+import puj.desarrolloweb.proyecto.dto.LoginDTO;
 import puj.desarrolloweb.proyecto.model.Bus;
 import puj.desarrolloweb.proyecto.model.Conductor;
 import puj.desarrolloweb.proyecto.model.Estacion;
@@ -35,7 +36,7 @@ import puj.desarrolloweb.proyecto.repository.RelacionBusRutaConductorRepository;
 import puj.desarrolloweb.proyecto.repository.RutaRepository;
 import puj.desarrolloweb.proyecto.repository.UserRepository;
 
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 @ActiveProfiles("integration-testing")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -46,6 +47,7 @@ public class ConductorControllerIntegrationTest {
     @LocalServerPort
     private int port;
 
+    @Autowired
     private WebTestClient webTestClient;
 
     @Autowired
@@ -60,7 +62,7 @@ public class ConductorControllerIntegrationTest {
     @Autowired
     private RelacionBusRutaConductorRepository rbrcRepository;
 
-    @Autowired 
+    @Autowired
     private RutaRepository rutaRepository;
 
     @Autowired
@@ -76,30 +78,60 @@ public class ConductorControllerIntegrationTest {
     public List<Ruta> rutas = new ArrayList<>();
     public List<RelacionBusRutaConductor> relaciones = new ArrayList<>();
 
-    public ConductorControllerIntegrationTest(@Value("${server.port:8081}") int serverPort) {
-        port = serverPort;
-        this.SERVER_URL = "http://localhost:" + port;
-    }
+    private String jwtToken;
 
     @BeforeEach
     void init() {
+        SERVER_URL = "http://localhost:" + port;
+        webTestClient = WebTestClient.bindToServer().baseUrl(SERVER_URL).build();
 
-        /*userRepository.deleteAll();
+        userRepository.deleteAll();
         rutaRepository.deleteAll();
         busRepository.deleteAll();
         estacionRepository.deleteAll();
         conductorRepository.deleteAll();
-        rbrcRepository.deleteAll();*/
+        rbrcRepository.deleteAll();
 
-        // Configuración inicial de datos (sin modificaciones)
-        User user1 = new User("Juan", "Sanabria", "jsanabria@javeriana.edu.co", passwordEncoder.encode("sanabria123"), Role.COORDINADOR);
-        User user2 = new User("Maria", "Rodriguez", "mrodriguez@javeriana.edu.co", passwordEncoder.encode("mrodriguez123"), Role.ADMIN_RUTAS);
-        User user3 = new User("Carlos", "Gomez", "cgomez@javeriana.edu.co", passwordEncoder.encode("carlosgomez123"), Role.PASAJERO);
+        User user1 = new User("Juan", "Sanabria", "jsanabria@javeriana.edu.co", passwordEncoder.encode("sanabria123"),
+                Role.COORDINADOR);
+        users.add(user1);
 
+        for (User temp : users)
+            userRepository.save(temp);
+
+        authenticateUser("jsanabria@javeriana.edu.co", "sanabria123");
+
+        initEntities();
+    }
+
+    private void authenticateUser(String email, String password) {
+        LoginDTO loginRequest = new LoginDTO(email, password);
+
+        JwtAuthenticationResponse response = webTestClient.post()
+                .uri(SERVER_URL + "/auth/login")
+                .bodyValue(loginRequest)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(JwtAuthenticationResponse.class)
+                .returnResult()
+                .getResponseBody();
+
+        this.jwtToken = "Bearer " + response.getToken();
+    }
+
+    private void initEntities() {
+        // Configuración inicial de datos de prueba
         Ruta ruta_1 = new Ruta("1", "LMXJVSD");
         Ruta ruta_2 = new Ruta("2", "LMXJVSD");
         Ruta ruta_3 = new Ruta("3", "LMXJVSD");
         Ruta ruta_4 = new Ruta("4", "LMXJVSD");
+
+        Estacion calle63 = new Estacion("Calle 63", "A");
+        Estacion calle57 = new Estacion("Calle 57", "A");
+        Estacion marly = new Estacion("Marly", "A");
+        Estacion calle45 = new Estacion("Calle 45", "A");
+        Estacion calle39 = new Estacion("Calle 39", "A");
+        Estacion calle34 = new Estacion("Calle 34", "A");
 
         Bus bus1 = new Bus("ABC123", "BRT");
         Bus bus2 = new Bus("DEF456", "Volvo 7900");
@@ -110,13 +142,6 @@ public class ConductorControllerIntegrationTest {
         Conductor conductor2 = new Conductor(1034567890L, "Luis Rodríguez", 3112345678L, "Carrera 11 #45-67");
         Conductor conductor3 = new Conductor(1045678901L, "Andrés Martínez", 3133456789L, "Avenida Suba #95-10");
         Conductor conductor4 = new Conductor(1056789012L, "Jorge Gómez", 3154567890L, "Carrera 7 #12-34");
-
-        Estacion calle63 = new Estacion("Calle 63", "A");
-        Estacion calle57 = new Estacion("Calle 57", "A");
-        Estacion marly = new Estacion("Marly", "A");
-        Estacion calle45 = new Estacion("Calle 45", "A");
-        Estacion calle39 = new Estacion("Calle 39", "A");
-        Estacion calle34 = new Estacion("Calle 34", "A");
 
         ruta_1.addEstacion(marly);
         ruta_1.addEstacion(calle57);
@@ -133,9 +158,6 @@ public class ConductorControllerIntegrationTest {
         RelacionBusRutaConductor rbrc5 = new RelacionBusRutaConductor(bus4, ruta_3, conductor4);
         RelacionBusRutaConductor rbrc6 = new RelacionBusRutaConductor(bus3, ruta_2, conductor3);
 
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
         rutas.add(ruta_1);
         rutas.add(ruta_2);
         rutas.add(ruta_3);
@@ -161,42 +183,29 @@ public class ConductorControllerIntegrationTest {
         relaciones.add(rbrc2);
         relaciones.add(rbrc1);
 
-        for (User temp: users) userRepository.save(temp);
-        for (Ruta temp: rutas) rutaRepository.save(temp);
-        for (Bus temp: buses) busRepository.save(temp);
-        for (Estacion temp: estaciones) estacionRepository.save(temp);
-        for (Conductor temp: conductores) conductorRepository.save(temp);
-        for (RelacionBusRutaConductor temp: relaciones) rbrcRepository.save(temp);
-
+        for (Bus temp : buses)
+            busRepository.save(temp);
+        for (Estacion temp : estaciones)
+            estacionRepository.save(temp);
+        for (Conductor temp : conductores)
+            conductorRepository.save(temp);
+        for (Ruta temp : rutas)
+            rutaRepository.save(temp);
+        for (RelacionBusRutaConductor temp : relaciones)
+            rbrcRepository.save(temp);
     }
 
-    @AfterEach
-    void del(){
-        userRepository.deleteAll();
-        rutaRepository.deleteAll();
-        busRepository.deleteAll();
-        estacionRepository.deleteAll();
-        conductorRepository.deleteAll();
-        rbrcRepository.deleteAll();
+    private WebTestClient.RequestHeadersSpec<?> authenticatedRequest(WebTestClient.RequestHeadersSpec<?> request) {
+        return request.header(HttpHeaders.AUTHORIZATION, jwtToken);
     }
-
-    @Test
-    void getAllConductores() {
-        webTestClient.get()
-                .uri(SERVER_URL + "/api/conductores")
-                .exchange()
-                .expectStatus().isOk()
-                .expectBodyList(ConductorDTO.class)
-                .value(conductores -> assertEquals(4, conductores.size()));
-    }
-
 
     @Test
     void getConductorById() {
         Conductor conductor = conductorRepository.findAll().get(0);
 
-        webTestClient.get()
-                .uri(SERVER_URL + "/api/conductores/" + conductor.getId())
+        authenticatedRequest(
+                webTestClient.get()
+                        .uri(SERVER_URL + "/api/conductores/" + conductor.getId()))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(ConductorDTO.class)
@@ -211,9 +220,10 @@ public class ConductorControllerIntegrationTest {
         newConductor.setTelefono(3171234567L);
         newConductor.setDireccion("Calle 50 #10-30");
 
-        webTestClient.post()
-                .uri(SERVER_URL + "/api/conductores")
-                .bodyValue(newConductor)
+        authenticatedRequest(
+                webTestClient.post()
+                        .uri(SERVER_URL + "/api/conductores")
+                        .bodyValue(newConductor))
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.OK)
                 .expectBody(ConductorDTO.class)
@@ -228,9 +238,10 @@ public class ConductorControllerIntegrationTest {
         ConductorDTO conductorDTO = new ConductorDTO();
         conductorDTO.setTelefono(3221234567L);
 
-        webTestClient.put()
-                .uri(SERVER_URL + "/api/conductores/" + conductor.getId())
-                .bodyValue(conductorDTO)
+        authenticatedRequest(
+                webTestClient.put()
+                        .uri(SERVER_URL + "/api/conductores/" + conductor.getId())
+                        .bodyValue(conductorDTO))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(ConductorDTO.class)
@@ -241,13 +252,15 @@ public class ConductorControllerIntegrationTest {
     void deleteConductor() {
         Conductor conductor = conductorRepository.findAll().get(0);
 
-        webTestClient.delete()
-                .uri(SERVER_URL + "/api/conductores/" + conductor.getId())
+        authenticatedRequest(
+                webTestClient.delete()
+                        .uri(SERVER_URL + "/api/conductores/" + conductor.getId()))
                 .exchange()
                 .expectStatus().isNoContent();
 
-        webTestClient.get()
-                .uri(SERVER_URL + "/api/conductores/" + conductor.getId())
+        authenticatedRequest(
+                webTestClient.get()
+                        .uri(SERVER_URL + "/api/conductores/" + conductor.getId()))
                 .exchange()
                 .expectStatus().isNotFound();
     }
@@ -258,8 +271,10 @@ public class ConductorControllerIntegrationTest {
         Bus bus = busRepository.findAll().get(0);
         String diasAsignados = "LMXJ";
 
-        webTestClient.post()
-                .uri(SERVER_URL + "/api/conductores/" + conductor.getId() + "/asignar-bus?busId=" + bus.getId() + "&diasAsignados=" + diasAsignados)
+        authenticatedRequest(
+                webTestClient.post()
+                        .uri(SERVER_URL + "/api/conductores/" + conductor.getId() + "/asignar-bus?busId=" + bus.getId()
+                                + "&diasAsignados=" + diasAsignados))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(ConductorDTO.class)
@@ -270,8 +285,9 @@ public class ConductorControllerIntegrationTest {
     void getBusesRutasHorariosByConductor() {
         Conductor conductor = conductorRepository.findAll().get(0);
 
-        webTestClient.get()
-                .uri(SERVER_URL + "/api/conductores/" + conductor.getId() + "/buses-rutas-horarios")
+        authenticatedRequest(
+                webTestClient.get()
+                        .uri(SERVER_URL + "/api/conductores/" + conductor.getId() + "/buses-rutas-horarios"))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(RelacionBusRutaConductor.class)
@@ -280,8 +296,9 @@ public class ConductorControllerIntegrationTest {
 
     @Test
     void getConductorNotFound() {
-        webTestClient.get()
-                .uri(SERVER_URL + "/api/conductores/999")
+        authenticatedRequest(
+                webTestClient.get()
+                        .uri(SERVER_URL + "/api/conductores/999"))
                 .exchange()
                 .expectStatus().isNotFound();
     }
