@@ -31,6 +31,7 @@ import puj.desarrolloweb.proyecto.repository.UserRepository;
  @Profile("default")
     @Transactional
 public class DBInitializer implements ApplicationRunner {
+
  
     @SuppressWarnings("unused")
     @Autowired
