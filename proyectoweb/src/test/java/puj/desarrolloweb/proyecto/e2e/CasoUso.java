@@ -61,10 +61,18 @@ public class CasoUso {
         WebElement btnDriverManagement = driver.findElement(By.xpath("//html//body//app-root//div//app-navbar//nav//div[4]"));//no existe en html
         btnDriverManagement.click();
      
-
+         
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnCreatebus")));
         WebElement btnCreate = driver.findElement(By.id("btnCreatebus"));
         btnCreate.click();
+        
+        driver.get("http://localhost:4200/conductores");
+
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnCreateConductor")));
+        WebElement btnCreateConductor = driver.findElement(By.id("btnCreateConductor"));
+        btnCreateConductor.click();
+
 
         WebElement nombre = driver.findElement(By.id("nombre"));
         nombre.sendKeys("Harry");
@@ -77,13 +85,21 @@ public class CasoUso {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnGuardar")));
         WebElement btnGuardar = driver.findElement(By.id("btnGuardar"));
         btnGuardar.click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//html//body//app-root//div//div//app-conductor//div//app-list//table//tbody//tr[101]//td[2]")));
         WebElement  nombreassert =driver.findElement(By.xpath("//html//body//app-root//div//div//app-conductor//div//app-list//table//tbody//tr[101]//td[2]"));
         Assertions.assertThat(nombreassert.getText()).isEqualTo("Harry");
         WebElement  cedulaassert =driver.findElement(By.xpath("//html//body//app-root//div//div//app-conductor//div//app-list//table//tbody//tr[101]//td[3]"));
-        Assertions.assertThat(cedulaassert.getText()).isEqualTo("45451");
+        Assertions.assertThat(cedulaassert.getText()).isEqualTo("11515");
         WebElement  direccionassert =driver.findElement(By.xpath("//html//body//app-root//div//div//app-conductor//div//app-list//table//tbody//tr[101]//td[4]"));
         Assertions.assertThat(direccionassert.getText()).isEqualTo("Calle 123");
 
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//html//body//app-root//div//div//app-conductor//div//app-list//table//tbody//tr[101]/td[5]//button")));
+        WebElement btnAsignar = driver.findElement(By.xpath("//html//body//app-root//div//div//app-conductor//div//app-list//table//tbody//tr[101]/td[5]//button"));
+        btnAsignar.click();
+        
+
+        
 
         
         
