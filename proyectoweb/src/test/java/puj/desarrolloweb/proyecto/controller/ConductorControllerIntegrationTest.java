@@ -81,16 +81,17 @@ public class ConductorControllerIntegrationTest {
     private String jwtToken;
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void init() {
         SERVER_URL = "http://localhost:" + port;
         webTestClient = WebTestClient.bindToServer().baseUrl(SERVER_URL).build();
 
-        userRepository.deleteAll();
-        rutaRepository.deleteAll();
-        busRepository.deleteAll();
-        estacionRepository.deleteAll();
-        conductorRepository.deleteAll();
-        rbrcRepository.deleteAll();
+        // userRepository.deleteAll();
+        // rutaRepository.deleteAll();
+        // busRepository.deleteAll();
+        // estacionRepository.deleteAll();
+        // conductorRepository.deleteAll();
+        // rbrcRepository.deleteAll();
 
         User user1 = new User("Juan", "Sanabria", "jsanabria@javeriana.edu.co", passwordEncoder.encode("sanabria123"),
                 Role.COORDINADOR);
@@ -104,7 +105,8 @@ public class ConductorControllerIntegrationTest {
         initEntities();
     }
 
-    private void authenticateUser(String email, String password) {
+@SuppressWarnings("null")
+private void authenticateUser(String email, String password) {
         LoginDTO loginRequest = new LoginDTO(email, password);
 
         JwtAuthenticationResponse response = webTestClient.post()
@@ -119,29 +121,20 @@ public class ConductorControllerIntegrationTest {
         this.jwtToken = "Bearer " + response.getToken();
     }
 
-    private void initEntities() {
+@SuppressWarnings("unused")
+private void initEntities() {
         // Configuración inicial de datos de prueba
-        Ruta ruta_1 = new Ruta("1", "LMXJVSD");
-        Ruta ruta_2 = new Ruta("2", "LMXJVSD");
-        Ruta ruta_3 = new Ruta("3", "LMXJVSD");
-        Ruta ruta_4 = new Ruta("4", "LMXJVSD");
+        Ruta ruta_2 = rutaRepository.save(new Ruta("2", "LMXJVSD"));
+        Ruta ruta_1 = rutaRepository.save(new Ruta("1", "LMXJVSD"));
+        Ruta ruta_3 = rutaRepository.save(new Ruta("3", "LMXJVSD"));
+        Ruta ruta_4 = rutaRepository.save(new Ruta("4", "LMXJVSD"));
 
-        Estacion calle63 = new Estacion("Calle 63", "A");
-        Estacion calle57 = new Estacion("Calle 57", "A");
-        Estacion marly = new Estacion("Marly", "A");
-        Estacion calle45 = new Estacion("Calle 45", "A");
-        Estacion calle39 = new Estacion("Calle 39", "A");
-        Estacion calle34 = new Estacion("Calle 34", "A");
-
-        Bus bus1 = new Bus("ABC123", "BRT");
-        Bus bus2 = new Bus("DEF456", "Volvo 7900");
-        Bus bus3 = new Bus("GHI789", "Scania K320");
-        Bus bus4 = new Bus("JKL012", "Mercedes-Benz O500");
-
-        Conductor conductor1 = new Conductor(1023456789L, "Carlos Pérez", 3101234567L, "Calle 100 #15-20");
-        Conductor conductor2 = new Conductor(1034567890L, "Luis Rodríguez", 3112345678L, "Carrera 11 #45-67");
-        Conductor conductor3 = new Conductor(1045678901L, "Andrés Martínez", 3133456789L, "Avenida Suba #95-10");
-        Conductor conductor4 = new Conductor(1056789012L, "Jorge Gómez", 3154567890L, "Carrera 7 #12-34");
+        Estacion calle63 = estacionRepository.save(new Estacion("Calle 63", "A"));
+        Estacion calle57 = estacionRepository.save(new Estacion("Calle 57", "A"));
+        Estacion marly = estacionRepository.save(new Estacion("Marly", "A"));
+        Estacion calle45 = estacionRepository.save(new Estacion("Calle 45", "A"));
+        Estacion calle39 = estacionRepository.save(new Estacion("Calle 39", "A"));
+        Estacion calle34 = estacionRepository.save(new Estacion("Calle 34", "A"));
 
         ruta_1.addEstacion(marly);
         ruta_1.addEstacion(calle57);
@@ -151,48 +144,28 @@ public class ConductorControllerIntegrationTest {
         ruta_3.addEstacion(calle39);
         ruta_3.addEstacion(calle34);
 
-        RelacionBusRutaConductor rbrc1 = new RelacionBusRutaConductor(bus1, ruta_1, conductor1);
-        RelacionBusRutaConductor rbrc4 = new RelacionBusRutaConductor(bus1, ruta_1, conductor2);
-        RelacionBusRutaConductor rbrc2 = new RelacionBusRutaConductor(bus2, ruta_2, conductor1);
-        RelacionBusRutaConductor rbrc3 = new RelacionBusRutaConductor(bus2, ruta_3, conductor2);
-        RelacionBusRutaConductor rbrc5 = new RelacionBusRutaConductor(bus4, ruta_3, conductor4);
-        RelacionBusRutaConductor rbrc6 = new RelacionBusRutaConductor(bus3, ruta_2, conductor3);
+        Bus bus1 = busRepository.save(new Bus("ABC123", "BRT"));
+        Bus bus2 = busRepository.save(new Bus("DEF456", "Volvo 7900"));
+        Bus bus3 = busRepository.save(new Bus("GHI789", "Scania K320"));
+        Bus bus4 = busRepository.save(new Bus("JKL012", "Mercedes-Benz O500"));
 
-        rutas.add(ruta_1);
-        rutas.add(ruta_2);
-        rutas.add(ruta_3);
-        rutas.add(ruta_4);
-        buses.add(bus1);
-        buses.add(bus2);
-        buses.add(bus3);
-        buses.add(bus4);
-        conductores.add(conductor1);
-        conductores.add(conductor2);
-        conductores.add(conductor3);
-        conductores.add(conductor4);
-        estaciones.add(calle63);
-        estaciones.add(calle57);
-        estaciones.add(marly);
-        estaciones.add(calle45);
-        estaciones.add(calle39);
-        estaciones.add(calle34);
-        relaciones.add(rbrc6);
-        relaciones.add(rbrc5);
-        relaciones.add(rbrc4);
-        relaciones.add(rbrc3);
-        relaciones.add(rbrc2);
-        relaciones.add(rbrc1);
+        Conductor conductor1 
+                = conductorRepository.save(new Conductor(1023456789L, "Carlos Pérez", 3101234567L, "Calle 100 #15-20"));
+        Conductor conductor2 
+                = conductorRepository.save(new Conductor(1034567890L, "Luis Rodríguez", 3112345678L, "Carrera 11 #45-67"));
+        Conductor conductor3 
+                = conductorRepository.save(new Conductor(1045678901L, "Andrés Martínez", 3133456789L, "Avenida Suba #95-10"));
+        Conductor conductor4 
+                = conductorRepository.save(new Conductor(1056789012L, "Jorge Gómez", 3154567890L, "Carrera 7 #12-34"));
 
-        for (Bus temp : buses)
-            busRepository.save(temp);
-        for (Estacion temp : estaciones)
-            estacionRepository.save(temp);
-        for (Conductor temp : conductores)
-            conductorRepository.save(temp);
-        for (Ruta temp : rutas)
-            rutaRepository.save(temp);
-        for (RelacionBusRutaConductor temp : relaciones)
-            rbrcRepository.save(temp);
+
+        RelacionBusRutaConductor rbrc1 = rbrcRepository.save(new RelacionBusRutaConductor(bus1, ruta_1, conductor1));
+        RelacionBusRutaConductor rbrc4 = rbrcRepository.save(new RelacionBusRutaConductor(bus1, ruta_1, conductor2));
+        RelacionBusRutaConductor rbrc2 = rbrcRepository.save(new RelacionBusRutaConductor(bus2, ruta_2, conductor1));
+        RelacionBusRutaConductor rbrc3 = rbrcRepository.save(new RelacionBusRutaConductor(bus2, ruta_3, conductor2));
+        RelacionBusRutaConductor rbrc5 = rbrcRepository.save(new RelacionBusRutaConductor(bus4, ruta_3, conductor4));
+        RelacionBusRutaConductor rbrc6 = rbrcRepository.save(new RelacionBusRutaConductor(bus3, ruta_2, conductor3));
+
     }
 
     private WebTestClient.RequestHeadersSpec<?> authenticatedRequest(WebTestClient.RequestHeadersSpec<?> request) {
