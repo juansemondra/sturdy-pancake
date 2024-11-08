@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +28,10 @@ import puj.desarrolloweb.proyecto.repository.RutaRepository;
 import puj.desarrolloweb.proyecto.repository.UserRepository;
 
 @Component
-@Profile({"default"})
-public class DBInitializer implements CommandLineRunner {
+ @Profile("default")
+    @Transactional
+public class DBInitializer implements ApplicationRunner {
+
  
     @SuppressWarnings("unused")
     @Autowired
@@ -56,9 +60,7 @@ public class DBInitializer implements CommandLineRunner {
     public List<RelacionBusRutaConductor> relaciones = new ArrayList<>();
 
     @Override
-    @Transactional
-    @SuppressWarnings("CallToPrintStackTrace")
-    public void run(String... args) throws Exception {
+    public void run(ApplicationArguments args) throws Exception {
 
 
         //Init Users
