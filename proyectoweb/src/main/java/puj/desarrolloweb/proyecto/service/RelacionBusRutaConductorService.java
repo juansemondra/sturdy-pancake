@@ -30,4 +30,9 @@ public class RelacionBusRutaConductorService {
     public void deleteById(Long id) {
         relacionRepository.deleteById(id);
     }
+
+    public Optional<RelacionBusRutaConductor> findByConductorAndBus(Long conductorId, Long busId) {
+        RelacionBusRutaConductor relacion = relacionRepository.findByConductorRelIdAndBusRelId(conductorId, busId);
+        return Optional.ofNullable(relacion);
+    }
 }

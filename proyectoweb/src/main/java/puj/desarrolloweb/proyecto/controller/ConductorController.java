@@ -32,6 +32,13 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import main.java.puj.desarrolloweb.proyecto.dto.ErrorResponse;
+
+import org.springframework.http.HttpStatus;
+
+import puj.desarrolloweb.proyecto.service.RelacionBusRutaConductorService;
+import puj.desarrolloweb.proyecto.service.BusService;
+
 @RestController
 @RequestMapping("/api/conductores")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -41,6 +48,12 @@ public class ConductorController {
 
     @Autowired
     private ConductorService conductorService;
+
+    @Autowired
+    private RelacionBusRutaConductorService relacionService;
+
+    @Autowired
+    private BusService busService;
 
     private Conductor convertToEntity(ConductorDTO dto) {
         Conductor conductor = new Conductor();
@@ -120,26 +133,65 @@ public class ConductorController {
         return ResponseEntity.noContent().build();
     }
 
+    private boolean validarDiasAsignados(String dias) {
+        if (dias == null || dias.isEmpty()) {
+            return false;
+        }
+        // Verifica que solo contenga los caracteres LMXJVSD
+        return dias.matches("^[LMXJVSD]+$");
+    }
+
     @PostMapping("/{id}/asignar-bus")
     @Secured({ "COORDINADOR" })
-    public ResponseEntity<ConductorDTO> asignarBus(@PathVariable Long id, @RequestParam Long busId, @RequestParam String diasAsignados) {
+    public ResponseEntity<?> asignarBus(@PathVariable Long id, 
+            @RequestParam Long busId, 
+            @RequestParam String diasAsignados) {
         try {
+            // 1. Validación de existencia
             Optional<Conductor> conductorOpt = conductorService.findById(id);
             if (!conductorOpt.isPresent()) {
-                return ResponseEntity.notFound().build();
+                logger.warn("Conductor no encontrado con ID: {}", id);
+                return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse("Conductor no encontrado"));
             }
-            
-            Conductor conductor = conductorService.asignarBus(id, busId, diasAsignados);
-            if (conductor == null) {
-                conductor = conductorOpt.get(); // Use existing conductor if no changes
+
+            // 2. Validación de formato de días
+            if (!validarDiasAsignados(diasAsignados)) {
+                logger.warn("Días asignados inválidos: {}", diasAsignados);
+                return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorResponse("Formato de días inválido. Use solo LMXJVSD"));
             }
+
+            // 3. Validar existencia del bus
+            if (!busService.findById(busId).isPresent()) {
+                logger.warn("Bus no encontrado con ID: {}", busId);
+                return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse("Bus no encontrado"));
+            }
+
+            // 4. Crear o actualizar la relación
+            RelacionBusRutaConductor relacion = relacionService
+                .findByConductorAndBus(id, busId)
+                .orElse(new RelacionBusRutaConductor());
+                
+            relacion.setConductorRel(conductorOpt.get());
+            relacion.setBusRel(busService.findById(busId).get());
+            relacion.setFecha_disponible(diasAsignados);
+
+            relacionService.save(relacion);
             
-            ConductorDTO dto = convertToDTO(conductor);
-            return ResponseEntity.ok(dto);
+            // 5. Retornar éxito
+            Conductor conductor = conductorService.findById(id).get();
+            return ResponseEntity.ok(convertToDTO(conductor));
+
         } catch (Exception e) {
             logger.error("Error al asignar bus: ", e);
-            // Return the current state of the conductor
-            return ResponseEntity.ok(convertToDTO(conductorService.findById(id).get()));
+            return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorResponse("Error interno: " + e.getMessage()));
         }
     }
 
