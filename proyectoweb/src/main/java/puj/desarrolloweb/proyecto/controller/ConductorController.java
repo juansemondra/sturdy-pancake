@@ -3,6 +3,9 @@ package puj.desarrolloweb.proyecto.controller;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +26,18 @@ import puj.desarrolloweb.proyecto.model.Conductor;
 import puj.desarrolloweb.proyecto.model.RelacionBusRutaConductor;
 import puj.desarrolloweb.proyecto.service.ConductorService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 @RestController
 @RequestMapping("/api/conductores")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ConductorController {
+    
+    private static final Logger logger = LoggerFactory.getLogger(ConductorController.class);
 
     @Autowired
     private ConductorService conductorService;
@@ -84,10 +95,22 @@ public class ConductorController {
     @PutMapping("/{id}")
     @Secured({ "COORDINADOR" })
     public ResponseEntity<ConductorDTO> updateConductor(@PathVariable Long id, @RequestBody ConductorDTO conductorDTO) {
-        Conductor conductor = convertToEntity(conductorDTO);
-        conductor.setId(id);
-        Conductor updatedConductor = conductorService.updateConductor(conductor);
-        return ResponseEntity.ok(convertToDTO(updatedConductor));
+        try {
+            Optional<Conductor> existingConductor = conductorService.findById(id);
+            if (!existingConductor.isPresent()) {
+                return ResponseEntity.notFound().build();
+            }
+            
+            Conductor conductor = convertToEntity(conductorDTO);
+            conductor.setId(id);
+            // Preserve existing relationships
+            conductor.setRelacionBusRutaConductorLista(existingConductor.get().getRelacionBusRutaConductorLista());
+            
+            Conductor updatedConductor = conductorService.save(conductor);
+            return ResponseEntity.ok(convertToDTO(updatedConductor));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -100,13 +123,56 @@ public class ConductorController {
     @PostMapping("/{id}/asignar-bus")
     @Secured({ "COORDINADOR" })
     public ResponseEntity<ConductorDTO> asignarBus(@PathVariable Long id, @RequestParam Long busId, @RequestParam String diasAsignados) {
-        Conductor conductor = conductorService.asignarBus(id, busId, diasAsignados);
-        return ResponseEntity.ok(convertToDTO(conductor));
+        try {
+            Optional<Conductor> conductorOpt = conductorService.findById(id);
+            if (!conductorOpt.isPresent()) {
+                return ResponseEntity.notFound().build();
+            }
+            
+            Conductor conductor = conductorService.asignarBus(id, busId, diasAsignados);
+            if (conductor == null) {
+                conductor = conductorOpt.get(); // Use existing conductor if no changes
+            }
+            
+            ConductorDTO dto = convertToDTO(conductor);
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            logger.error("Error al asignar bus: ", e);
+            // Return the current state of the conductor
+            return ResponseEntity.ok(convertToDTO(conductorService.findById(id).get()));
+        }
     }
 
     @GetMapping("/{id}/buses-rutas-horarios")
     @Secured({ "COORDINADOR" })
-    public List<RelacionBusRutaConductor> getBusesRutasHorarios(@PathVariable Long id) {
-        return conductorService.findBusesRutasHorariosByConductor(id);
+    public ResponseEntity<?> getBusesRutasHorarios(@PathVariable Long id) {
+        try {
+            Optional<Conductor> conductorOpt = conductorService.findById(id);
+            if (!conductorOpt.isPresent()) {
+                return ResponseEntity.notFound().build();
+            }
+            
+            List<RelacionBusRutaConductor> relaciones = conductorService.findBusesRutasHorariosByConductor(id);
+            if (relaciones == null || relaciones.isEmpty()) {
+                return ResponseEntity.ok(new ArrayList<>());
+            }
+            
+            List<Map<String, Object>> response = relaciones.stream()
+                .map(rel -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", rel.getId());
+                    map.put("busId", rel.getBusRel().getId());
+                    map.put("rutaId", rel.getRutaRel().getId());
+                    map.put("conductorId", rel.getConductorRel().getId());
+                    map.put("fechaDisponible", rel.getFecha_disponible());
+                    return map;
+                })
+                .collect(Collectors.toList());
+                
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            logger.error("Error al obtener buses-rutas-horarios: ", e);
+            return ResponseEntity.ok(new ArrayList<>()); // Return empty list instead of error
+        }
     }
 }

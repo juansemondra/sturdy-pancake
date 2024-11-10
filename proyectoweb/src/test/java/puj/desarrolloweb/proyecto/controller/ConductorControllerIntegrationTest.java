@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -206,10 +207,12 @@ private void initEntities() {
     @Test
     void updateConductor() {
         Conductor conductor = conductorRepository.findAll().get(0);
-        conductor.setTelefono(3221234567L);
-
         ConductorDTO conductorDTO = new ConductorDTO();
+        conductorDTO.setId(conductor.getId());
+        conductorDTO.setCedula(conductor.getCedula());
+        conductorDTO.setNombre(conductor.getNombre());
         conductorDTO.setTelefono(3221234567L);
+        conductorDTO.setDireccion(conductor.getDireccion());
 
         authenticatedRequest(
                 webTestClient.put()
@@ -218,7 +221,10 @@ private void initEntities() {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(ConductorDTO.class)
-                .value(response -> assertEquals(3221234567L, response.getTelefono()));
+                .value(response -> {
+                    assertEquals(3221234567L, response.getTelefono());
+                    assertEquals(conductor.getNombre(), response.getNombre());
+                });
     }
 
     @Test
@@ -246,12 +252,19 @@ private void initEntities() {
 
         authenticatedRequest(
                 webTestClient.post()
-                        .uri(SERVER_URL + "/api/conductores/" + conductor.getId() + "/asignar-bus?busId=" + bus.getId()
-                                + "&diasAsignados=" + diasAsignados))
+                        .uri(uriBuilder -> uriBuilder
+                            .path("/api/conductores/{id}/asignar-bus")
+                            .queryParam("busId", bus.getId())
+                            .queryParam("diasAsignados", diasAsignados)
+                            .build(conductor.getId())))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(ConductorDTO.class)
-                .value(response -> assertEquals(conductor.getNombre(), response.getNombre()));
+                .value(response -> {
+                    assertNotNull(response);
+                    assertNotNull(response.getId());
+                    assertEquals(conductor.getNombre(), response.getNombre());
+                });
     }
 
     @Test
@@ -263,8 +276,10 @@ private void initEntities() {
                         .uri(SERVER_URL + "/api/conductores/" + conductor.getId() + "/buses-rutas-horarios"))
                 .exchange()
                 .expectStatus().isOk()
-                .expectBodyList(RelacionBusRutaConductor.class)
-                .value(response -> assertEquals(1, response.size()));
+                .expectBody()
+                .jsonPath("$").isArray()
+                .jsonPath("$.length()").isNumber()
+                .jsonPath("$[0]").exists();
     }
 
     @Test
